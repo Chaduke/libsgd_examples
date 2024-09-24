@@ -1,0 +1,9 @@
+# Exclude compiled executable files
+*.exe
+
+# Exclude DLL files
+*.dll
+
+# Exclude specific folders
+include
+lib
