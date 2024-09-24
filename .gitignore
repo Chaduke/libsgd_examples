@@ -11,3 +11,6 @@ lib
 # Ignore PyCharm project files
 .idea/
 
+# Exclude ga.bat
+ga.bat
+
