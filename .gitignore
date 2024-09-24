@@ -7,4 +7,7 @@
 # Exclude specific folders
 include
 lib
-.idea
+
+# Ignore PyCharm project files
+.idea/
+
