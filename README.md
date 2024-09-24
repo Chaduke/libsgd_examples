@@ -20,10 +20,8 @@ This repository contains C and Python code examples demonstrating the functional
    cd libsgd_examples
    ```
 
-2. Install dependencies:  
-
-	**For C:**   
-	
+2. Install dependencies:
+	**For C:**  	
 	Get the latest distribution of LibSGD here:      
 	https://patreon.com/LibSGD  	
 	- Copy the "include" folder and the "lib" folder from the zip file into the libsgd_examples folder.
@@ -35,7 +33,24 @@ This repository contains C and Python code examples demonstrating the functional
 	The repository is located here :     
 	https://www.github.com/blitz-research/libsgd  
 	
-3. Running the examples:   	
+	**For Python:** 	
+	Install Python 3.12 or higher, will probably work with older versions but I've only tested so far with 3.12.5, then do this:
+	```sh
+	pip install libsgd
+	```
+	then just type: 
+	```sh
+	python ex001.py 
+	```
+	or whatever example you want to run.  	
+	
+	The C examples are way more heavily commented so I suggest studying those regardless of whether you intend on using Python primarily or not.
+	
+	PyCharm Community Edition from JetBrains is free and works really well if you need a good Python IDE.    
+	Setting up "virtual environments" takes a little getting used to if you are not familiar with Python.    
+	I will probably create a video soon explaining that.  
+	
+3. Running the C examples:   	
 	- **Install a C compiler.**     
 	For Windows I suggest https://www.msys2.org/ to use gcc, or Visual Studio 2022 will work with a little configuration.
 	
@@ -54,25 +69,7 @@ This repository contains C and Python code examples demonstrating the functional
 	set file=exXXX
 	```
 	where XXX is the example number you want to compile and run, 001, 002, etc.. 	
-	I will soon make youtube videos at https://youtube.com/chaddore that will cover all of this in better detail.    
-	
-	**For Python:** 	
-	
-	Install Python 3.12 or higher, will probably work with older versions but I've only tested so far with 3.12.5, then do this:
-	```sh
-	pip install libsgd
-	```
-	then just type: 
-	```sh
-	python ex001.py 
-	```
-	or whatever example you want to run.  	
-	
-	The C examples are way more heavily commented so I suggest studying those regardless of whether you intend on using Python primarily or not.
-	
-	PyCharm Community Edition from JetBrains is free and works really well if you need a good Python IDE.    
-	Setting up "virtual environments" takes a little getting used to if you are not familiar with Python.    
-	I will probably create a video soon explaining that.  
+	I will soon make youtube videos at https://youtube.com/chaddore that will cover all of this in better detail. 
 
 4. Contributing:
 	If you would like to contribute to this project find me at the forums here :
