@@ -2,7 +2,7 @@
 
 This repository contains C and Python code examples demonstrating the functionality of the LibSGD game library which is currently in development.
 
-!Example screenshot
+!images/screenshot.png
 
 ## Table of Contents
 
@@ -22,7 +22,8 @@ This repository contains C and Python code examples demonstrating the functional
 
 2. Install dependencies:
 
-	###For C : 
+	##For C: 
+	
 	Get the latest distribution of LibSGD here: 
 	https://patreon.com/LibSGD	
 	- Copy the "include" folder and the "lib" folder from the zip file into the libsgd_examples folder.
@@ -54,7 +55,8 @@ This repository contains C and Python code examples demonstrating the functional
 	
 	I will soon make youtube videos at https://youtube.com/chaddore that will cover all of this in better detail. 
 	
-	###For Python: 	
+	##For Python: 	
+	
 	Install Python 3.12 or higher, will probably work with older versions but I've only tested so far with 3.12.5, then do this:
 	```sh
 	pip install libsgd
