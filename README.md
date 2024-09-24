@@ -7,10 +7,9 @@ This repository contains C and Python code examples demonstrating the functional
 ## Table of Contents
 
 - Installation
-- Usage
-- Examples
 - Contributing
 - License
+- Links
 
 ## Installation
 
@@ -71,7 +70,7 @@ This repository contains C and Python code examples demonstrating the functional
 	where XXX is the example number you want to compile and run, 001, 002, etc..      	
 	I will soon make youtube videos at https://youtube.com/chaddore that will cover all of this in better detail. 
 
-4. Contributing:  
+## Contributing:  
 	If you would like to contribute to this project find me (Chaduke) at the forums here :  
 	- https://skirmish-dev.net/forum/ 
 	- You can also email me at chaduke@gmail.com
@@ -81,10 +80,10 @@ This repository contains C and Python code examples demonstrating the functional
 	- Other smaller features can also be covered but I'd like to avoid too much repetition. 
 	- For more complete games / demos I plan on adding a seperate section for that later.	
 		
-5. License:     
+## License:     
 	I'm using Creative Commons 0, so you can do anything you want with the code, but it would be nice if you referenced LibSGD and this repository to help grow the community and the success of LibSGD.  
 	
-6. Links:
+## Links:
 	- Chaduke's Youtube - https://youtube.com/chaddore
 	- Get LibSGD (Patreon) - https://patreon.com/libsgd
 	- Blitz World forums - https://skirmish-dev.net/forum/
