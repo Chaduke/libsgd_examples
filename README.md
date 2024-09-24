@@ -64,16 +64,15 @@ This repository contains C and Python code examples demonstrating the functional
 	You will now have gcc installed.  Make sure your PATH environment variable is set to find :   
 	C:\msys64\ucrt64\bin, and modify if you installed it somewhere else.  
 	
-	Now you should be able to run the example files by using the included build.bat file in the libsgd_examples folder.  
-	Make sure you edit this file first to reflect where you cloned the libsgd_examples folder, then you just need to change this part:  
+	Now you should be able to run the example files by using the included build.bat file in the libsgd_examples folder. Make sure you edit this file first to reflect where you cloned the libsgd_examples folder, then you just need to change this part:  
 	```code
 	set file=exXXX
 	```
-	where XXX is the example number you want to compile and run, 001, 002, etc..   	
+	where XXX is the example number you want to compile and run, 001, 002, etc..      	
 	I will soon make youtube videos at https://youtube.com/chaddore that will cover all of this in better detail. 
 
 4. Contributing:  
-	If you would like to contribute to this project find me at the forums here :
+	If you would like to contribute to this project find me (Chaduke) at the forums here :  
 	- https://skirmish-dev.net/forum/ 
 	- You can also email me at chaduke@gmail.com
 	
