@@ -71,20 +71,23 @@ This repository contains C and Python code examples demonstrating the functional
 	I will soon make youtube videos at https://youtube.com/chaddore that will cover all of this in better detail. 
 
 ## Contributing:  
-	If you would like to contribute to this project find me (Chaduke) at the forums here :  
-	- https://skirmish-dev.net/forum/ 
-	- You can also email me at chaduke@gmail.com
-	
-	- I'd be more than happy to add examples or take suggestions, as long as they adhere to the format I'm using here.
-	- I want to make the examples short and self-contained, and individually covering one primary feature/function of LibSGD.	
-	- Other smaller features can also be covered but I'd like to avoid too much repetition. 
-	- For more complete games / demos I plan on adding a seperate section for that later.	
+
+If you would like to contribute to this project find me (Chaduke) at the forums here :  
+- https://skirmish-dev.net/forum/ 
+- You can also email me at chaduke@gmail.com
+
+I'd be more than happy to add examples or take suggestions, as long as they adhere to the format I'm using here.  
+I want to make the examples short and self-contained, and individually covering one primary feature/function of LibSGD.  	
+Other smaller features can also be covered but I'd like to avoid too much repetition.   
+For more complete games / demos I plan on adding a seperate section for that later.  	
 		
 ## License:     
-	I'm using Creative Commons 0, so you can do anything you want with the code, but it would be nice if you referenced LibSGD and this repository to help grow the community and the success of LibSGD.  
+
+I'm using Creative Commons 0, so you can do anything you want with the code, but it would be nice if you referenced LibSGD and this repository to help grow the community and the success of LibSGD.     
 	
-## Links:
-	- Chaduke's Youtube - https://youtube.com/chaddore
-	- Get LibSGD (Patreon) - https://patreon.com/libsgd
-	- Blitz World forums - https://skirmish-dev.net/forum/
-	- LibSGD Documentation - https://skirmish-dev.net/libsgd/help/html/sgd_8h.html
+## Links: 
+ 
+- Chaduke's Youtube - https://youtube.com/chaddore  
+- Get LibSGD (Patreon) - https://patreon.com/libsgd  
+- Blitz World forums - https://skirmish-dev.net/forum/  
+- LibSGD Documentation - https://skirmish-dev.net/libsgd/help/html/sgd_8h.html  
