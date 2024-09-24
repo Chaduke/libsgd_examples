@@ -2,7 +2,7 @@
 
 This repository contains C and Python code examples demonstrating the functionality of the LibSGD game library which is currently in development.
 
-!Example Screenshot(https://github.com/Chaduke/libsgd_examples/blob/master/images/example.png)
+![Example Screenshot](https://github.com/Chaduke/libsgd_examples/blob/master/images/example.png)
 
 ## Table of Contents
 
