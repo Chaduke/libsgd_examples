@@ -22,40 +22,41 @@ This repository contains C and Python code examples demonstrating the functional
 
 2. Install dependencies:  
 
-	- For C:   
+	**For C:**   
 	
-	Get the latest distribution of LibSGD here: 
-	https://patreon.com/LibSGD	
+	Get the latest distribution of LibSGD here:      
+	https://patreon.com/LibSGD  	
 	- Copy the "include" folder and the "lib" folder from the zip file into the libsgd_examples folder.
 	- Move "sgd_dynamic.dll" from the "lib" folder into the main folder so it can be found by your compiled executables.	
  	
-	At this time the "distribution" of LibSGD only works with Windows.   	
-	You can alternatively build LibSGD yourself for Windows, Mac and Linux, but that involves much more than I have space for here.  
-	The repository is located here :   
+	At this time the "distribution" of LibSGD only works with Windows.     	
+	You can alternatively build LibSGD yourself for Windows, Mac and Linux, but that involves much more than I have space for here. 
+	
+	The repository is located here :     
 	https://www.github.com/blitz-research/libsgd  
 	
 3. Running the examples:   	
-	- Install a C compiler.     
+	- **Install a C compiler.**     
 	For Windows I suggest https://www.msys2.org/ to use gcc, or Visual Studio 2022 will work with a little configuration.
 	
-	(Note : If you are compiling LibSGD itself, use VS2022, you will run into issues with gcc, but for actually using the library gcc / msys works fine.)
-	Once msys2 is installed, use the UCRT64 configuration shortcut and do this:
+	(Note : If you are compiling LibSGD itself, use VS2022, you will run into issues with gcc, but for actually using the library gcc / msys works fine.)  
+	
+	Once msys2 is installed, use the UCRT64 configuration shortcut and do this:  
 	```sh 
 	pacman -S mingw-w64-ucrt-x86_64-gcc
 	```
-	You will now have gcc installed.  Make sure your PATH environment variable is set to find : 
-	C:\msys64\ucrt64\bin, and modify if you installed it somewhere else.
+	You will now have gcc installed.  Make sure your PATH environment variable is set to find :   
+	C:\msys64\ucrt64\bin, and modify if you installed it somewhere else.  
 	
-	- Now you should be able to run the example files by using the included build.bat file in the libsgd_examples folder
-	- Make sure you edit this file first to reflect where you cloned the libsgd_examples folder, then you just need to change this part:
+	Now you should be able to run the example files by using the included build.bat file in the libsgd_examples folder  
+	Make sure you edit this file first to reflect where you cloned the libsgd_examples folder, then you just need to change this part:  
 	```code
 	set file=exXXX
 	```
-	where XXX is the example number you want to compile and run, 001, 002, etc..  
+	where XXX is the example number you want to compile and run, 001, 002, etc.. 	
+	I will soon make youtube videos at https://youtube.com/chaddore that will cover all of this in better detail.    
 	
-	I will soon make youtube videos at https://youtube.com/chaddore that will cover all of this in better detail.   
-	
-	- For Python: 	
+	**For Python:** 	
 	
 	Install Python 3.12 or higher, will probably work with older versions but I've only tested so far with 3.12.5, then do this:
 	```sh
