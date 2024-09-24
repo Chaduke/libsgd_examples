@@ -7,3 +7,4 @@
 # Exclude specific folders
 include
 lib
+.idea

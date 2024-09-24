@@ -24,6 +24,8 @@
 
 // Chad Dore' -Chaduke-
 // 20240923
+// https://www.youtube.com/chaddore
+// https://www.github.com/chaduke
 
 #include <sgd/sgd.h>
 #include <stdio.h>

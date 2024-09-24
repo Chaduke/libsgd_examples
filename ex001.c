@@ -42,7 +42,7 @@ _\ \ | | | | | | |_) | |  __/ / /_\\ (_| | | | | | |  __/  / /_//  __/\ V /  __/
 // when the window is closed or Escape key is pressed
 
 // Notes :
-// This file is compatitible with LibSGD version 0.14.4
+// This file is compatible with LibSGD version 0.14.4
 // The latest distribution is available from Patreon link above
 // You only need to pay 2 bucks a month (minimum) to support this awesome project 
 // and I think it's well worth it! 
@@ -61,6 +61,8 @@ _\ \ | | | | | | |_) | |  __/ / /_\\ (_| | | | | | |  __/  / /_//  __/\ V /  __/
 
 // Chad Dore' -Chaduke-
 // 20240923
+// https://www.youtube.com/chaddore
+// https://www.github.com/chaduke
 
 // include the main LibSGD header file
 #include <sgd/sgd.h>
