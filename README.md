@@ -20,9 +20,9 @@ This repository contains C and Python code examples demonstrating the functional
    cd libsgd_examples
    ```
 
-2. Install dependencies:
-	**For C:**  	
-	Get the latest distribution of LibSGD here:      
+2. Install dependencies:  
+	**For C:**    	
+	Get the latest distribution of LibSGD here:        
 	https://patreon.com/LibSGD  	
 	- Copy the "include" folder and the "lib" folder from the zip file into the libsgd_examples folder.
 	- Move "sgd_dynamic.dll" from the "lib" folder into the main folder so it can be found by your compiled executables.	
@@ -52,7 +52,8 @@ This repository contains C and Python code examples demonstrating the functional
 	
 3. Running the C examples:   	
 	- **Install a C compiler.**     
-	For Windows I suggest https://www.msys2.org/ to use gcc, or Visual Studio 2022 will work with a little configuration.
+	For Windows I suggest https://www.msys2.org/ to use gcc,      
+	or Visual Studio 2022 will work with a little configuration.  
 	
 	(Note : If you are compiling LibSGD itself, use VS2022, you will run into issues with gcc, but for actually using the library gcc / msys works fine.)  
 	
@@ -63,15 +64,15 @@ This repository contains C and Python code examples demonstrating the functional
 	You will now have gcc installed.  Make sure your PATH environment variable is set to find :   
 	C:\msys64\ucrt64\bin, and modify if you installed it somewhere else.  
 	
-	Now you should be able to run the example files by using the included build.bat file in the libsgd_examples folder  
+	Now you should be able to run the example files by using the included build.bat file in the libsgd_examples folder.  
 	Make sure you edit this file first to reflect where you cloned the libsgd_examples folder, then you just need to change this part:  
 	```code
 	set file=exXXX
 	```
-	where XXX is the example number you want to compile and run, 001, 002, etc.. 	
+	where XXX is the example number you want to compile and run, 001, 002, etc..   	
 	I will soon make youtube videos at https://youtube.com/chaddore that will cover all of this in better detail. 
 
-4. Contributing:
+4. Contributing:  
 	If you would like to contribute to this project find me at the forums here :
 	- https://skirmish-dev.net/forum/ 
 	- You can also email me at chaduke@gmail.com
@@ -81,9 +82,8 @@ This repository contains C and Python code examples demonstrating the functional
 	- Other smaller features can also be covered but I'd like to avoid too much repetition. 
 	- For more complete games / demos I plan on adding a seperate section for that later.	
 		
-5. License: 
-	I'm using Creative Commons 0, so you can do anything you want with the code, but it would be nice if you referenced LibSGD  
-	and this repository to help grow the community and the success of LibSGD.    
+5. License:     
+	I'm using Creative Commons 0, so you can do anything you want with the code, but it would be nice if you referenced LibSGD and this repository to help grow the community and the success of LibSGD.  
 	
 6. Links:
 	- Chaduke's Youtube - https://youtube.com/chaddore
