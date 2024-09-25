@@ -60,7 +60,7 @@ This repository contains C and Python code examples demonstrating the functional
 	pacman -S mingw-w64-ucrt-x86_64-gcc
 	```
 	You will now have gcc installed.  Make sure your PATH environment variable is set to find :   
-	C:\msys64\ucrt64\bin, and modify if you installed it somewhere else.  
+	C:\msys64\ucrt64\bin, OR modify that path if you installed msys somewhere else.  
 	
 	Now you should be able to run the example files by using the included build.bat file in the libsgd_examples folder. Make sure you edit this file first to reflect where you cloned the libsgd_examples folder, then you just need to change this part:  
 	```code

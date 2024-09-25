@@ -18,6 +18,11 @@
 // to cast shadows upon.  We will also need a directional light 
 // to serve as the sun.
 
+// We will also add a few extra cubes to demonstrate mesh reuse
+// and also the ability to move the camera with the keyboard
+// We'll add a few "helper functions" that position text on different 
+// parts of the screen and make our code cleaner
+
 // Notes :
 // As before, if you see anything that is overly confusing,
 // consult the API docs, post on the forums or the Youtube 
@@ -138,12 +143,14 @@ int main() {
 		if (sgd_IsKeyDown(SGD_KEY_RIGHT)) spin_speed+=0.1;
 		
 		// move the camera around with WASD
+		// or you can alter this to your preferred keyboard layout
 		if (sgd_IsKeyDown(SGD_KEY_A)) sgd_MoveEntity(camera,-0.1,0,0);
 		if (sgd_IsKeyDown(SGD_KEY_D)) sgd_MoveEntity(camera,0.1,0,0);
 		if (sgd_IsKeyDown(SGD_KEY_W)) sgd_MoveEntity(camera,0,0,0.1);
 		if (sgd_IsKeyDown(SGD_KEY_S)) sgd_MoveEntity(camera,0,0,-0.1);		
 		
 		sgd_TurnEntity(cube,0,spin_speed,0);
+		// turn the left and right cubes at different speeds
 		sgd_TurnEntity(cube_left,0,spin_speed / 2,0);
 		sgd_TurnEntity(cube_right,0,spin_speed * 2,0);
 		
