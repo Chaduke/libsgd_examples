@@ -3,6 +3,7 @@
 
 # Exclude DLL files
 *.dll
+*.obj
 
 # Exclude specific folders
 include
