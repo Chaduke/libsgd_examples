@@ -62,7 +62,7 @@ _\ \ | | | | | | |_) | |  __/ / /_\\ (_| | | | | | |  __/  / /_//  __/\ V /  __/
 // Chad Dore' -Chaduke-
 // 20240923
 // https://www.youtube.com/chaddore
-// https://www.github.com/chaduke
+// https://www.github.com/chaduke/libsgd_examples
 
 // include the main LibSGD header file
 #include <sgd/sgd.h>
