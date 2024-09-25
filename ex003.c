@@ -38,6 +38,8 @@ int main() {
 	// we no longer need to set a clear color because our skybox will cover it
     // sgd_SetClearColor(0.2, 0.5, 0.9, 1.0);
 	SGD_Texture environment = sgd_LoadCubeTexture("sgd://envmaps/sunnysky-cube.png",4,18);
+	// enable the line below to see the difference an "environment texture" makes on our scene
+	// for this scene I think it looks better with out it
 	// sgd_SetEnvTexture(environment);
 	SGD_Skybox skybox = sgd_CreateSkybox(environment);
 	sgd_SetSkyboxRoughness(skybox,0.2);
@@ -51,7 +53,7 @@ int main() {
 	
 	// we need to do this to enable the light to cast shadows 
 	sgd_SetLightShadowsEnabled(sun,SGD_TRUE);
-	// we turn the light -45 degrees on both X and Y
+	// we turn the light -20 degrees on X and -45 on Y
 	// this will cause shadows to appear in the back right of objects
 	// if we are looking at them straight-on from a non rotated camera	
 	sgd_TurnEntity(sun,-20,-45,0);
@@ -104,7 +106,7 @@ int main() {
 		sgd_Clear2D();
 		// black text 
 		sgd_Set2DTextColor(0,0,0,1);
-		sgd_Draw2DText("Spinning cube on Sunny Day. by Chaduke -ESC to exit-",5,5);		
+		sgd_Draw2DText("Spinning Cube on Sunny Day. by Chaduke -ESC to exit-",5,5);		
 		
 		char buffer[30]; 
 		snprintf(buffer, sizeof buffer, "FPS : %f", sgd_GetFPS());

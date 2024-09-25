@@ -67,8 +67,9 @@ This repository contains C and Python code examples demonstrating the functional
 	```code
 	set file=exXXX
 	```
-	where XXX is the example number you want to compile and run, 001, 002, etc..      	
-	I will soon make youtube videos at https://youtube.com/chaddore that will cover all of this in better detail. 
+	where XXX is the example number you want to compile and run, 001, 002, etc..  
+	If you prefer to use the Microsoft Compiler / Linker and have Visual Studio 2022 installed, look in build.bat for details.   
+	I will soon make youtube videos at https://youtube.com/chaddore that will cover all of this in better detail.  	
 
 ## Contributing:  
 
