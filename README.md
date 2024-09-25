@@ -33,7 +33,7 @@ This repository contains C and Python code examples demonstrating the functional
 	https://www.github.com/blitz-research/libsgd  
 	
 	**For Python:** 	
-	Install Python 3.12 or higher, will probably work with older versions but I've only tested so far with 3.12.5, then do this:
+	Install Python 3.12 or higher. (will probably work with older versions but I've only tested so far with 3.12.5) then do this:  
 	```sh
 	pip install libsgd
 	```
@@ -43,11 +43,10 @@ This repository contains C and Python code examples demonstrating the functional
 	```
 	or whatever example you want to run.  	
 	
-	The C examples are way more heavily commented so I suggest studying those regardless of whether you intend on using Python primarily or not.
+	The C examples are way more heavily commented so I suggest studying those regardless of whether you intend on using Python primarily or not.  
 	
-	PyCharm Community Edition from JetBrains is free and works really well if you need a good Python IDE.    
-	Setting up "virtual environments" takes a little getting used to if you are not familiar with Python.    
-	I will probably create a video soon explaining that.  
+	PyCharm Community Edition from JetBrains is free and works really well if you need a good Python IDE.  Setting up "virtual environments" takes a little getting used to if you are not familiar with Python.  
+	I will probably create a video soon explaining that.    
 	
 3. Running the C examples:   	
 	- **Install a C compiler.**     
@@ -75,12 +74,13 @@ This repository contains C and Python code examples demonstrating the functional
 
 If you would like to contribute to this project find me (Chaduke) at the forums here :  
 - https://skirmish-dev.net/forum/ 
-- You can also email me at chaduke@gmail.com
+- You can also email me at chaduke@gmail.com  
 
-I'd be more than happy to add examples or take suggestions, as long as they adhere to the format I'm using here.  
-I want to make the examples short and self-contained, and individually covering one primary feature/function of LibSGD.  	
-Other smaller features can also be covered but I'd like to avoid too much repetition.   
-For more complete games / demos I plan on adding a seperate section for that later.  	
+I'd be more than happy to add examples or take suggestions, as long as they adhere to the format I'm using here.  I want to make the examples short and self-contained, and individually covering one primary feature/function of LibSGD.    
+   	
+Other smaller features can also be covered but I'd like to avoid too much repetition.  
+     
+For more complete games / demos I plan on adding a seperate section for that later.    	
 		
 ## License:     
 
@@ -91,4 +91,5 @@ I'm using Creative Commons 0, so you can do anything you want with the code, but
 - Chaduke's Youtube - https://youtube.com/chaddore  
 - Get LibSGD (Patreon) - https://patreon.com/libsgd  
 - Blitz World forums - https://skirmish-dev.net/forum/  
-- LibSGD Documentation - https://skirmish-dev.net/libsgd/help/html/sgd_8h.html  
+- LibSGD Documentation - https://skirmish-dev.net/libsgd/help/html/sgd_8h.html    
+- Chaduke's Creative Corner (Discord Invite) - https://discord.gg/Wenrjr8RcZ  
