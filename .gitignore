@@ -8,6 +8,7 @@
 # Exclude specific folders
 include
 lib
+video_scripts
 
 # Ignore PyCharm project files
 .idea/
