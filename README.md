@@ -53,7 +53,7 @@ This repository contains C and Python code examples demonstrating the functional
 	For Windows I suggest https://www.msys2.org/ to use gcc,      
 	or Visual Studio 2022 will work with a little configuration.  
 	
-	(Note : If you are compiling LibSGD itself, use VS2022, you will run into issues with gcc, but for actually using the library gcc / msys works fine.)  
+	(Note : If you are compiling LibSGD itself on Windows, use VS2022 because you will run into issues with gcc and dependencies at the present time, but for actually using the library gcc/msys2 works fine. For people that are new to C programming, I think its important to learn how to use the command line and see what complex IDEs like Visual Studio are doing behind the scenes.  Also by using gcc/msys2 you can gain some experience that will carry over into a Linux environment.)    
 	
 	Once msys2 is installed, use the UCRT64 configuration shortcut and do this:  
 	```sh 
