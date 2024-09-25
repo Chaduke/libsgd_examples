@@ -48,6 +48,8 @@ int main() {
 	// only the rotation, specifically on the X and Y axes
 	// will change how the light affects the scene
 	SGD_Light sun = sgd_CreateDirectionalLight();
+	
+	// we need to do this to enable the light to cast shadows 
 	sgd_SetLightShadowsEnabled(sun,SGD_TRUE);
 	// we turn the light -45 degrees on both X and Y
 	// this will cause shadows to appear in the back right of objects
@@ -60,18 +62,22 @@ int main() {
 	sgd_SetAmbientLightColor(1,1,1,0.1); 	
 	
     SGD_Material cube_material = sgd_LoadPBRMaterial("sgd://materials/Bricks076C_1K-JPG");    
-	SGD_Mesh cube_mesh = sgd_CreateBoxMesh(-0.5,-0.5,-0.5,0.5,0.5,0.5,cube_material);
+	SGD_Mesh cube_mesh = sgd_CreateBoxMesh(-0.5,-0.5,-0.5,0.5,0.5,0.5,cube_material);	
+	// enable the cube mesh to cast shadows on other objects
 	sgd_SetMeshShadowsEnabled(cube_mesh,SGD_TRUE);
 	SGD_Model cube = sgd_CreateModel(cube_mesh);	
 	sgd_MoveEntity(cube,0,0.5,3);
 	
 	// our next object, the ground, will consist of a cube mesh
-	// bet scaled outwards 20 units in the X and Y directions
+	// but scaled outwards 20 units in the X and Y directions
 	// on only 0.1 units on the Y axis 
 	// before we do this however, we need a ground material
 	// again we will consult the LibSGD asset libary and load one up
-	SGD_Material ground_material = sgd_LoadPBRMaterial("sgd://materials/PavingStones119_1K-JPG"); 		
+	SGD_Material ground_material = sgd_LoadPBRMaterial("sgd://materials/PavingStones119_1K-JPG"); 	
 	SGD_Mesh ground_mesh = sgd_CreateBoxMesh(-20,-0.1,-20,20,0,20,ground_material);	
+	
+	// this will reduce the scale of the ground material and make it look more realistic in our scene
+	// feel free to experiment with the values to see what happens
 	sgd_TFormMeshTexCoords(ground_mesh,20,20,0,0);
 	SGD_Model ground = sgd_CreateModel(ground_mesh);	
 	

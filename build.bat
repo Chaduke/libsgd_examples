@@ -14,7 +14,11 @@ set file=ex003
 REM the gcc command line to compile 
 gcc -Iinclude -Llib -DSGD_DYNAMIC=1 -o %file% %file%.c -lsgd_dynamic
 
-REM TODO : add a command to compile with Visual Studio
+REM If you have Visual Studio 2022 installed and want to use its compiler instead
+REM comment out the gcc command above, and uncomment the next 3 lines below 
+REM call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
+REM cl /I "include" /c "%file%.c"
+REM link /LIBPATH:"lib" "%file%.obj" sgd_dynamic.lib /OUT:"%file%.exe"
 
 REM report if there is a compilation Error
 if %errorlevel% == 1 echo Error in build!
