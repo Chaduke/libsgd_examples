@@ -38,6 +38,7 @@
 
 void DisplayTextCentered(const char* text,SGD_Font font,float yoffset)
 {	
+	sgd_Set2DFont(font);
 	// get our X-axis window center in pixels	
 	float center = sgd_GetWindowWidth() / 2;
 	// get the width of the text we are displaying and divide by two
@@ -49,7 +50,8 @@ void DisplayTextCentered(const char* text,SGD_Font font,float yoffset)
 
 void DisplayTextRight(const char* text,SGD_Font font,float yoffset)
 {	
-	float tw = sgd_GetTextWidth(font,text) + 5;
+	sgd_Set2DFont(font);
+	float tw = sgd_GetTextWidth(font,text) + 10;
 	float right = sgd_GetWindowWidth() - tw;
 	sgd_Draw2DText(text,right,yoffset);	
 }
@@ -126,9 +128,14 @@ int main() {
 	
 	float spin_speed = 1.0;	
 	
-	// let's load a different font from our Windows folder
+	// let's load some fonts from our Windows folder
+	// if for some reason this doesn't work for you check your 
+	// windows fonts folder and replace with something else 
+	// you have to right-click on the font and choose properties from 
+	// windows explorer in order to see the ".ttf" filename
+	// you can always fine a lot of .ttf font files on the net too
 	SGD_Font segoe_font = sgd_LoadFont("c:/Windows/Fonts/seguihis.ttf",22);
-	sgd_Set2DFont(segoe_font);
+	SGD_Font segoe_script_font = sgd_LoadFont("c:/Windows/Fonts/segoescb.ttf",30);
 	
 	// start main loop
     SGD_Bool loop = SGD_TRUE;	
@@ -139,15 +146,21 @@ int main() {
 		if (e==SGD_EVENT_MASK_CLOSE_CLICKED) loop = SGD_FALSE;
 		if (sgd_IsKeyHit(SGD_KEY_ESCAPE)) loop = SGD_FALSE;
 		
-		if (sgd_IsKeyDown(SGD_KEY_LEFT)) spin_speed-=0.1;
-		if (sgd_IsKeyDown(SGD_KEY_RIGHT)) spin_speed+=0.1;
+		// let's use up and down to change the spin speed now
+		// since it makes more sense to use left / right for the camera
+		if (sgd_IsKeyDown(SGD_KEY_DOWN)) spin_speed-=0.1;
+		if (sgd_IsKeyDown(SGD_KEY_UP)) spin_speed+=0.1;		
 		
 		// move the camera around with WASD
 		// or you can alter this to your preferred keyboard layout
 		if (sgd_IsKeyDown(SGD_KEY_A)) sgd_MoveEntity(camera,-0.1,0,0);
 		if (sgd_IsKeyDown(SGD_KEY_D)) sgd_MoveEntity(camera,0.1,0,0);
 		if (sgd_IsKeyDown(SGD_KEY_W)) sgd_MoveEntity(camera,0,0,0.1);
-		if (sgd_IsKeyDown(SGD_KEY_S)) sgd_MoveEntity(camera,0,0,-0.1);		
+		if (sgd_IsKeyDown(SGD_KEY_S)) sgd_MoveEntity(camera,0,0,-0.1);	
+
+		// we'll use left and right arrows to steer our camera now
+		if (sgd_IsKeyDown(SGD_KEY_LEFT)) sgd_TurnEntity(camera,0,2,0);
+		if (sgd_IsKeyDown(SGD_KEY_RIGHT)) sgd_TurnEntity(camera,0,-2,0);
 		
 		sgd_TurnEntity(cube,0,spin_speed,0);
 		// turn the left and right cubes at different speeds
@@ -167,8 +180,8 @@ int main() {
 		
 		// black text 
 		sgd_Set2DTextColor(0,0,0,1);
-		DisplayTextCentered("Spinning Cubes on Sunny Day",segoe_font,3);
-		DisplayTextCentered("by Chaduke",segoe_font,fh + 5);
+		DisplayTextCentered("Spinning Cubes on a Sunny Day",segoe_script_font,3);
+		DisplayTextCentered("by Chaduke",segoe_font,fh + 15);
 		
 		// grey text
 		sgd_Set2DTextColor(0.5,0.5,0.5,1); 
@@ -187,8 +200,10 @@ int main() {
 
 		// red text for the right side 
 		sgd_Set2DTextColor(1,0,0,1);
-		DisplayTextRight("Left and Right Arrows",segoe_font,3);
+		DisplayTextRight("Up and Down Arrows",segoe_font,3);
 		DisplayTextRight("Change Spin Speed",segoe_font,fh);
+		DisplayTextRight("Left and Right Arrows",segoe_font,fh * 2);
+		DisplayTextRight("Steer the Camera",segoe_font,fh * 3);
 		sgd_Present();
     }
 	sgd_Terminate();

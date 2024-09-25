@@ -2,9 +2,9 @@
 #**************************************************
 #*** LibSGD Examples 
 #*** for the Python Programming Language
-#*** https:##patreon.com/libsgd
-#*** https:##github.com/blitz-research/libsgd/ 
-#*** https:##skirmish-dev.net/forum/
+#*** https://patreon.com/libsgd
+#*** https://github.com/blitz-research/libsgd/ 
+#*** https://skirmish-dev.net/forum/
 #**************************************************/
 
 ## Example 002 - A Spinning Cube
