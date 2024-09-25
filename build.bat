@@ -1,4 +1,4 @@
-REM echo off
+echo off
 REM Set the drive letter just in case we are on a different one
 c:
 

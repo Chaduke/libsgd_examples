@@ -34,7 +34,7 @@
 int main() {
 	
 	sgd_Init(); 
-    sgd_CreateWindow(1280, 720, "Example 003", SGD_WINDOW_FLAGS_CENTERED);
+    sgd_CreateWindow(1920, 1080, "Example 003", SGD_WINDOW_FLAGS_FULLSCREEN);
 	// we no longer need to set a clear color because our skybox will cover it
     // sgd_SetClearColor(0.2, 0.5, 0.9, 1.0);
 	SGD_Texture environment = sgd_LoadCubeTexture("sgd://envmaps/sunnysky-cube.png",4,18);
@@ -92,18 +92,26 @@ int main() {
 		if (sgd_IsKeyDown(SGD_KEY_LEFT)) spin_speed-=0.1;
 		if (sgd_IsKeyDown(SGD_KEY_RIGHT)) spin_speed+=0.1;
 		
-		sgd_TurnEntity(cube,0,spin_speed,0);	
+		// move the camera around with WASD
+		if (sgd_IsKeyDown(SGD_KEY_A)) sgd_MoveEntity(camera,-0.1,0,0);
+		if (sgd_IsKeyDown(SGD_KEY_D)) sgd_MoveEntity(camera,0.1,0,0);
+		if (sgd_IsKeyDown(SGD_KEY_W)) sgd_MoveEntity(camera,0,0,0.1);
+		if (sgd_IsKeyDown(SGD_KEY_S)) sgd_MoveEntity(camera,0,0,-0.1);		
 		
-        sgd_RenderScene();
+		sgd_TurnEntity(cube,0,spin_speed,0);
+		
+		sgd_RenderScene();
 		sgd_Clear2D();
+		// black text 
 		sgd_Set2DTextColor(0,0,0,1);
-		sgd_Draw2DText("Spinning cube on Sunny Day, by Chaduke, ESC to exit",5,5);		
-
+		sgd_Draw2DText("Spinning cube on Sunny Day. by Chaduke -ESC to exit-",5,5);		
+		
 		char buffer[30]; 
 		snprintf(buffer, sizeof buffer, "FPS : %f", sgd_GetFPS());
+		sgd_Set2DTextColor(1,0,0,1); // red text
 		sgd_Draw2DText(buffer,5,sgd_GetWindowHeight() - 20);		
-		
-		snprintf(buffer, sizeof buffer, "Spin Speed : %f", spin_speed);
+		snprintf(buffer, sizeof buffer, "Spin Speed : %f", spin_speed);		
+		sgd_Set2DTextColor(0.5,0.5,0.5,1); // grey text
 		sgd_Draw2DText(buffer,5,25);
 		sgd_Present();
     }
