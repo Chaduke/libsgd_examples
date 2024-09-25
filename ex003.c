@@ -174,7 +174,7 @@ int main() {
 		
 		// get our font height in pixels + some padding
 		// we can subtract 
-		float fh = sgd_GetFontHeight(segoe_font) + 5;
+		float fh = sgd_GetFontHeight(segoe_font) + 10;
 		// setup our buffer for snprintf
 		char buffer[30];	
 		

@@ -94,7 +94,7 @@ sgd.MoveEntity(cube,0,0,3)
 spin_speed = 1.0
 	
 loop = True
-while(loop):
+while loop:
     e = sgd.PollEvents()
     if e==sgd.EVENT_MASK_CLOSE_CLICKED: loop = False
     if sgd.IsKeyHit(sgd.KEY_ESCAPE): loop = False
