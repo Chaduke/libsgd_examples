@@ -41,9 +41,7 @@ This repository contains C and Python code examples demonstrating the functional
 	```sh
 	python ex001.py 
 	```
-	or whatever example you want to run.  	
-	
-	The C examples are way more heavily commented so I suggest studying those regardless of whether you intend on using Python primarily or not.  
+	or whatever example you want to run.  
 	
 	PyCharm Community Edition from JetBrains is free and works really well if you need a good Python IDE.  Setting up "virtual environments" takes a little getting used to if you are not familiar with Python.  
 	I will probably create a video soon explaining that.    

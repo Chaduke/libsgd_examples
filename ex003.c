@@ -126,7 +126,7 @@ int main() {
 	sgd_TFormMeshTexCoords(ground_mesh,20,20,0,0);
 	SGD_Model ground = sgd_CreateModel(ground_mesh);	
 	
-	float spin_speed = 1.0;	
+	float spin_speed = 1.1;	
 	
 	// let's load some fonts from our Windows folder
 	// if for some reason this doesn't work for you check your 
