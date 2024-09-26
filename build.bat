@@ -12,7 +12,7 @@ REM Be careful not to add any spaces here or it will break
 set file=ex003
 
 REM the gcc command line to compile 
-gcc -Iinclude -Llib -DSGD_DYNAMIC=1 -o %file% %file%.c -lsgd_dynamic
+gcc -Iinclude -Llib -DSGD_DYNAMIC=1 -std=c99 -g -o %file% %file%.c -lsgd_dynamic
 
 REM If you have Visual Studio 2022 installed and want to use its compiler instead
 REM comment out the gcc command above, and uncomment the next 3 lines below 
