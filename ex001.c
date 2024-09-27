@@ -31,6 +31,7 @@ _\ \ | | | | | | |_) | |  __/ / /_\\ (_| | | | | | |  __/  / /_//  __/\ V /  __/
 /*** https://patreon.com/libsgd
 /*** https://github.com/blitz-research/libsgd/ 
 /*** https://skirmish-dev.net/forum/
+/*** https://skirmish-dev.net/libsgd/help/html/sgd_8h.html
 /**************************************************/
 
 // Example 001 - Hello World!

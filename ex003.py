@@ -2,9 +2,10 @@
 #**************************************************
 #*** LibSGD Examples 
 #*** for the Python Programming Language
-#*** https:#patreon.com/libsgd
-#*** https:#github.com/blitz-research/libsgd/ 
-#*** https:#skirmish-dev.net/forum/
+#*** https://patreon.com/libsgd
+#*** https://github.com/blitz-research/libsgd/ 
+#*** https://skirmish-dev.net/forum/
+#*** https://skirmish-dev.net/libsgd/help/html/sgd_8h.html
 #**************************************************/
 
 # Example 003 - Environment
