@@ -83,7 +83,7 @@ sgd.MoveEntity(camera,0,0.5,-2)
 sun = sgd.CreateDirectionalLight()
 
 # we need to do this to enable the light to cast shadows 
-sgd.SetLightShadowsEnabled(sun,sgd.TRUE)
+sgd.SetLightShadowsEnabled(sun,True)
 # we turn the light -20 degrees on X and -45 on Y
 # this will cause shadows to appear in the back right of objects
 # if we are looking at them straight-on from a non rotated camera	

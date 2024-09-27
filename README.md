@@ -18,7 +18,8 @@ This repository contains C and Python code examples demonstrating the functional
    git clone https://github.com/chaduke/libsgd_examples.git
    cd libsgd_examples
    ```
-
+   Video tutorial here - https://www.youtube.com/watch?v=5JAbEedk_Yw  
+      
 2. Install dependencies:  
 	**For C:**    	
 	Get the latest distribution of LibSGD here:        
