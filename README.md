@@ -13,14 +13,30 @@ This repository contains C and Python code examples demonstrating the functional
 
 ## Installation
 
+I created a basic tutorial here if you are unfamiliar with using git to clone a repository - https://youtu.be/71BPcdMyTrA   
+
 1. Clone the repository:  
    ```sh
    git clone https://github.com/chaduke/libsgd_examples.git
    cd libsgd_examples
    ```
-   I created a basic tutorial here if you are unfamiliar with using git to clone a repository - https://youtu.be/71BPcdMyTrA   
-      
+
 2. Install dependencies:  
+
+	**For Python: (quickest route to get started)**  
+   	
+	Install Python 3.12 or higher. (will probably work with older versions but I've only tested so far with 3.12.5) then do this:  
+	```sh
+	pip install libsgd
+	```
+	then just type: 
+	```sh
+	python ex001.py 
+	```
+	or whatever example you want to run.  
+	
+	PyCharm Community Edition from JetBrains is free and works really well if you need a good Python IDE.  Setting up "virtual environments" takes a little getting used to if you are not familiar with Python. I will probably create a video soon explaining that.      
+    
 	**For C:**    	
 	Get the latest distribution of LibSGD here:        
 	https://patreon.com/LibSGD  	
@@ -32,23 +48,7 @@ This repository contains C and Python code examples demonstrating the functional
 	At this time the "distribution" of LibSGD only works with Windows.     	
 	You can alternatively build LibSGD yourself for Windows, Mac and Linux, but that involves much more than I have space for here.    
 	I will create a video series on how to do this at some point, but it will take some time as it involves a lot of pre-requisite knowledge.  
-	
-	The repository is located here :     
-	https://www.github.com/blitz-research/libsgd  
-	
-	**For Python:** 	
-	Install Python 3.12 or higher. (will probably work with older versions but I've only tested so far with 3.12.5) then do this:  
-	```sh
-	pip install libsgd
-	```
-	then just type: 
-	```sh
-	python ex001.py 
-	```
-	or whatever example you want to run.  
-	
-	PyCharm Community Edition from JetBrains is free and works really well if you need a good Python IDE.  Setting up "virtual environments" takes a little getting used to if you are not familiar with Python.  
-	I will probably create a video soon explaining that.    
+	If you are interested in the LibSGD soruce code see the Links section at the bottom of this README.   
 	
 3. Running the C examples:   	
 	- **Install a C compiler.**     

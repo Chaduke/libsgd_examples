@@ -125,7 +125,7 @@ int main() {
 	
 	// this will reduce the scale of the ground material and make it look more realistic in our scene
 	// feel free to experiment with the values to see what happens
-	sgd_TFormMeshTexCoords(ground_mesh,20,20,0,0);
+	sgd_TransformTexCoords(ground_mesh,20,20,0,0);
 	SGD_Model ground = sgd_CreateModel(ground_mesh);	
 	
 	float spin_speed = 1.1;	

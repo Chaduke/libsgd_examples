@@ -52,7 +52,7 @@ def display_text_right(text,font,yoffset):
 	right = sgd.GetWindowWidth() - tw;
 	sgd.Draw2DText(text,right,yoffset)	
 
-sgd.Init() 
+sgd.init() 
 # let's do this in fullscreen HD mode now 
 sgd.CreateWindow(1920, 1080, "Example 003", sgd.WINDOW_FLAGS_FULLSCREEN)
 
@@ -117,7 +117,7 @@ ground_mesh = sgd.CreateBoxMesh(-20,-0.1,-20,20,0,20,ground_material)
 
 # this will reduce the scale of the ground material and make it look more realistic in our scene
 # feel free to experiment with the values to see what happens
-sgd.TFormMeshTexCoords(ground_mesh,20,20,0,0)
+sgd.TransformTexCoords(ground_mesh,20,20,0,0)
 ground = sgd.CreateModel(ground_mesh)	
 
 spin_speed = 1.0

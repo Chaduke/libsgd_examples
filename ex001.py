@@ -62,18 +62,18 @@
 
 from libsgd import sgd
 
-sgd.Init()
-sgd.CreateWindow(1280,720,"Example 001",sgd.WINDOW_FLAGS_CENTERED)
-sgd.SetClearColor(0.1,0.2,0.9,1.0)
+sgd.init()
+sgd.createWindow(1280,720,"Example 001",sgd.WINDOW_FLAGS_CENTERED)
+sgd.setClearColor(0.1,0.2,0.9,1.0)
 loop = True
 while loop:
-    e = sgd.PollEvents()
-    if e == sgd.EVENT_MASK_CLOSE_CLICKED or sgd.IsKeyHit(sgd.KEY_ESCAPE) : loop = False
+    e = sgd.pollEvents()
+    if e == sgd.EVENT_MASK_CLOSE_CLICKED or sgd.isKeyHit(sgd.KEY_ESCAPE) : loop = False
     # render 3D stuff
-    sgd.RenderScene()
+    sgd.renderScene()
     # render 2D stuff
-    sgd.Clear2D()
-    sgd.Draw2DText("Hello LibSGD! Press Escape to exit",5,5)
-    sgd.Draw2DText("FPS : " + str(sgd.GetFPS()), 5, sgd.GetWindowHeight() - 20)
-    sgd.Present() # swap buffers
-sgd.Terminate()
+    sgd.clear2D()
+    sgd.draw2DText("Hello LibSGD! Press Escape to exit",5,5)
+    sgd.draw2DText("FPS : " + str(sgd.getFPS()), 5, sgd.getWindowHeight() - 20)
+    sgd.present() # swap buffers
+sgd.terminate()
