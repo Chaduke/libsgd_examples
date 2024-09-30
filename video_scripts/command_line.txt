@@ -1,0 +1,5 @@
+Testing examples at the command line
+
+Now that we have a C compiler installed or python, or both.
+
+At this time I'd suggest watching my next video on installing and setting up Notepad++, because this is the text editor I'll be using for this video series.  It's lightweight, easy to use, and it will be easier for me to teach and you to learn without being distracted by the thousands of features available in a full fledged IDE like Visual Studio. I do plan on making videos on how to configure your environment for both VSCode and Visual Studio in the near future, as well as Python Community Edition if you choose the Python language path instead of or even better in addition to C.  

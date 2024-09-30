@@ -1,0 +1,33 @@
+Compiler setup for the C-Language MSYS2 and GCC
+
+In order to use the examples and get started with LibSGD you'll first need a compiler.  If you're using Python I have a different video covering that, but I still feel there's a lot of helpful information that can be acquired by also being familiar with C. If you have the time and patience for both I highly recommend it. 
+
+I'll cover the two most popular C-compilers available today, GCC and the Microsoft compiler.  
+In this video I'm covering GCC.  GCC is available on many different platforms including Windows, Mac and Linux.  I'm going to be covering the Windows installation in this video because at this time LibSGD is primarily being supported on the Windows platform.  This will likely change in the future as the project grows in popularity and more people get involved, but for now don't worry, everything you learn will be easily transferrable to different platforms and many different programing languages.
+
+In order to use GCC in Windows we need to install a compatiblity environment since GCC was originally developed for Unix-like operating systems. Fortunately cross platform development has come a long way and we have tools like MSYS2 that allow you to use the software and compiler toolchains than run natively on Linux in Windows.  This whole compatiblity layer is often referred to as POSIX compliance, and if you're interested in that sort of thing, there's plenty of information available online on that subject. This Wikipedia article would be a good start. The good news here is that a lot of the knowledge you gain here in a Windows environment will carry over to both Linux and MacOS.  
+
+That being said, let's move on. The first thing I want to show you is how to install MSYS2.  Go to MSY2.org and right on the first page you have an installer. If you choose to install it in a place other than the default location just keep that in mind because you'll need to refer to it in a later step.  Once the installation is complete we want to install the GCC compiler toolchain so we can compile our C programs, with minimal fuss, from the command line.  To do this you want to open up one of the environment shortcuts that the MSYS2 installer created.  For our purposes, the one called UCRT64 will work just fine.  What's cool about this command shell is that provides you with a Linux-like environment on Windows with an included package manager allowing you to install many popular Linux based tools.  This package manager is called pacman and is used in my favorite Linux distro called Arch.  We will use pacman to install the gcc compiler toolchain like this:
+
+pacman -S mingw-w64-ucrt-x86_64-gcc
+
+Once this is complete you now have a working cross-platform C compiler ready to go.  
+
+The next step is to make sure that your windows system can find the gcc compiler when used from the command line, and in order to do this we need to check our system PATH environment variable.  In Windows 10 or 11, the easiest way to do this is to go to your search window at the bottom or just press the Windows Key on your keyboard - Show Image -
+
+In the box type the first 3 letters of the word environment, the letters e n v, and then press Enter.  A System Properties Window should open up with the "Advanced" tab selected. Almost to the bottom of this window you'll see a button labled "Environment Variables.  You can click it or keyboard shortcut to it by pressing the "N" as in Nancy key.  
+
+With your Environment variables window open you'll see a top section for User variables, and a bottom section for System variables.  If you are the only person that uses your computer and no one else signs into it, you can safely choose the top section.  If more than one person uses this computer and you want them to also be able to access GCC from the command line, go ahead and make this change the to bottom section labled system variables, and this will make sure its enabled globally across all User Profiles. 
+
+In the list of variables find the one called Path.  Click on that row to highlight it, then click the button labeled "Edit".  Here you will see a list of paths to different folders that your windows system will search when you type something at the command line.  Just remember it searches these folders in the order that they are listed, so if you have executable programs with the same name in different folders, the operating system will choose first one it finds. What we want to do here is add the path to the gcc compiler executable file.  Hit new and then click the browse button, then navigate towards the path C:\msys64\ucrt64\bin, then click OK.  The path you selected will appear at the bottom of the list.  Since I do a lot of programming with different setups, just as a safety measure, I'll highlight this path and start clicking the button labled "Move Up" until it climbs to the top of the list.  This is just to make sure that if I have another copy of GCC somewhere in all these folders and it doesn't get picked up by accident because its higher up on the list.
+
+Hopefully this not too confusing for you, and if it is just be patient, all of this will sink in over time as you gain more programming experience.  Now all you have to do is click OK three times, once on the Edit Environment variable window, the on the Environment Variable(s) plural window, then on the system properties window.  We're now done and you are now ready to start using GCC.  
+
+My next video will be on running the examples from the command line to test out our installation, so I'll see you there.
+
+
+
+
+
+
+

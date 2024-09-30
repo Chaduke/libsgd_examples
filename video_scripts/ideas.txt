@@ -1,0 +1,28 @@
+Video Script Ideas *
+
+Introduction to the series *
+
+Go over MSYS2 / GCC install *
+Demonstrate to edit PATH environment variables *
+Go over Python Install
+
+Installing git and -
+Running examples from the command line
+
+Show how to setup Notepad++
+How to write batch files and then call them with NPP exec 
+How to install plugins
+How to change the theme colors
+
+How to install / configure Visual Studio 2022
+How to build LibSGD on different platforms
+
+How to setup VSCode for the examples
+
+How to Install Python
+How to Setup PyCharm
+
+
+
+
+

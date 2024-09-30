@@ -25,10 +25,13 @@ This repository contains C and Python code examples demonstrating the functional
 	Get the latest distribution of LibSGD here:        
 	https://patreon.com/LibSGD  	
 	- Copy the "include" folder and the "lib" folder from the zip file into the libsgd_examples folder.
-	- Move "sgd_dynamic.dll" from the "lib" folder into the main folder so it can be found by your compiled executables.	
- 	
+	- Move "sgd_dynamic.dll" from the "lib" folder into the main folder so it can be found by your compiled executables.  
+	
+ 	Tutorial video here - https://youtu.be/BiGKGD3OtmE
+	
 	At this time the "distribution" of LibSGD only works with Windows.     	
-	You can alternatively build LibSGD yourself for Windows, Mac and Linux, but that involves much more than I have space for here. 
+	You can alternatively build LibSGD yourself for Windows, Mac and Linux, but that involves much more than I have space for here.    
+	I will create a video series on how to do this at some point, but it will take some time as it involves a lot of pre-requisite knowledge.  
 	
 	The repository is located here :     
 	https://www.github.com/blitz-research/libsgd  
@@ -87,8 +90,20 @@ I'm using Creative Commons 0, so you can do anything you want with the code, but
 	
 ## Links: 
  
-- Chaduke's Youtube - https://youtube.com/chaddore  
-- Get LibSGD (Patreon) - https://patreon.com/libsgd  
-- Blitz World forums - https://skirmish-dev.net/forum/  
-- LibSGD Documentation - https://skirmish-dev.net/libsgd/help/html/sgd_8h.html    
+To get started with LibSGD, go to the LibsGD Examples Github Repository linked below.    
+Scroll down to the README area and follow the instructions step by step.    
+Links to each one of these videos will be in each area.    
+
+If you want get started quickly go the Python route as its a little easier to setup and free, but if you want a deeper learning experience go the C route or both.  
+
+Supporting LibSGD through Patreon will allow you to get a closer look at its development as well as report bugs, ask questions, and make suggestions directly to the developer (Mark Sibly).  You'll be getting a product worth so much more than the amount required to get involved.  I'll also be spending most of my free time working on these tutorials and videos, as well and other members of the community.    
+
+Links :   
+- LibSGD Examples Github Repository - https://github.com/chaduke/libsgd_examples  
+- LibSGD Tutorials Playlist - https://www.youtube.com/playlist?list=PLw0fDz0F4FPlvPNZYoop9puAC7sHdJl39  
+- Chaduke's Youtube - https://youtube.com/chaddore    
 - Chaduke's Creative Corner (Discord Invite) - https://discord.gg/Wenrjr8RcZ  
+- Get LibSGD (Patreon) - https://patreon.com/libsgd    
+- LibSGD Source Github Repository - https://github.com/blitz-research/libsgd  
+- Blitz World forums - https://skirmish-dev.net/forum/    
+- LibSGD Documentation - https://skirmish-dev.net/libsgd/help/html/sgd_8h.html    
