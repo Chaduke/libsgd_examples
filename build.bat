@@ -9,7 +9,7 @@ cd c:\users\chadu\onedrive\projects\libsgd_examples\
 REM Set file to equal whatever example you want to run 
 REM You can also use this if you make your examples
 REM Be careful not to add any spaces here or it will break 
-set file=ex003
+set file=ex001
 
 REM the gcc command line to compile 
 REM here you can choose to compile with debug info for use with gdb or not

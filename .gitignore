@@ -9,6 +9,7 @@
 include
 lib
 video_scripts
+reference
 
 # Ignore PyCharm project files
 .idea/

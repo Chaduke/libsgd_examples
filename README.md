@@ -18,7 +18,7 @@ This repository contains C and Python code examples demonstrating the functional
    git clone https://github.com/chaduke/libsgd_examples.git
    cd libsgd_examples
    ```
-   Video tutorial here - https://www.youtube.com/watch?v=5JAbEedk_Yw  
+   I created a basic tutorial here if you are unfamiliar with using git to clone a repository - https://youtu.be/71BPcdMyTrA   
       
 2. Install dependencies:  
 	**For C:**    	
