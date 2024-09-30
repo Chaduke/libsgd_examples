@@ -9,7 +9,7 @@ cd c:\users\chadu\onedrive\projects\libsgd_examples\
 REM Set file to equal whatever example you want to run 
 REM You can also use this if you make your examples
 REM Be careful not to add any spaces here or it will break 
-set file=ex001
+set file=ex003
 
 REM call the python example 
 python %file%.py

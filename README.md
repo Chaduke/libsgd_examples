@@ -48,7 +48,7 @@ I created a basic tutorial here if you are unfamiliar with using git to clone a 
 	At this time the "distribution" of LibSGD only works with Windows.     	
 	You can alternatively build LibSGD yourself for Windows, Mac and Linux, but that involves much more than I have space for here.    
 	I will create a video series on how to do this at some point, but it will take some time as it involves a lot of pre-requisite knowledge.  
-	If you are interested in the LibSGD soruce code see the Links section at the bottom of this README.   
+	If you are interested in the LibSGD source code see the Links section at the bottom of this README.   
 	
 3. Running the C examples:   	
 	- **Install a C compiler.**     
