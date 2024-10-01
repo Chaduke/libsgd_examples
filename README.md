@@ -106,4 +106,4 @@ Links :
 - Get LibSGD (Patreon) - https://patreon.com/libsgd    
 - LibSGD Source Github Repository - https://github.com/blitz-research/libsgd  
 - Blitz World forums - https://skirmish-dev.net/forum/    
-- LibSGD Documentation - https://skirmish-dev.net/libsgd/help/html/sgd_8h.html    
+- LibSGD Documentation - https://skirmish-dev.net/libsgd/help/html/index.html   
