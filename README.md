@@ -1,6 +1,15 @@
 # LibSGD Examples
 
-This repository contains C and Python code examples demonstrating the functionality of the LibSGD game library which is currently in development.
+This repository contains C and Python code examples demonstrating the functionality of the LibSGD game library which is currently in development.    
+ 
+To get started with LibSGD, follow the instructions listed here step by step.     
+Links to Youtube videos will be in each area to provide additional support.          
+Everything here is constantly being worked on so make sure to star and watch the repository to get updates.    
+Also please subscribe and like videos on the Youtube channel to get updates as well as help the algorithm.        
+
+If you want get started quickly go the Python route as its a little easier to setup and free, but if you want a deeper learning experience go the C route or both.     
+
+Supporting LibSGD through Patreon will allow you to get a closer look at its development as well as report bugs, ask questions, and make suggestions directly to the developer (Mark Sibly).  You'll be getting a product worth so much more than the amount required to get involved.  I'll also be spending most of my free time working on these tutorials and videos, as well and other members of the community.   
 
 ![Example Screenshot](https://github.com/Chaduke/libsgd_examples/blob/master/images/example.png)
 
@@ -91,18 +100,8 @@ For more complete games / demos I plan on adding a seperate section for that lat
 
 I'm using Creative Commons 0, so you can do anything you want with the code, but it would be nice if you referenced LibSGD and this repository to help grow the community and the success of LibSGD.     
 	
-## Links: 
- 
-To get started with LibSGD, follow the instructions listed here step by step.   
-Links to Youtube videos will be in each area to provide additional support.        
-Everything here is constantly being worked on so make sure to star and watch the repository to get updates.  
-Also please subscribe and like videos on the Youtube channel to get updates as well as help the algorithm.      
+## Links:  
 
-If you want get started quickly go the Python route as its a little easier to setup and free, but if you want a deeper learning experience go the C route or both.    
-
-Supporting LibSGD through Patreon will allow you to get a closer look at its development as well as report bugs, ask questions, and make suggestions directly to the developer (Mark Sibly).  You'll be getting a product worth so much more than the amount required to get involved.  I'll also be spending most of my free time working on these tutorials and videos, as well and other members of the community.    
-
-Links :   
 - LibSGD Examples Github Repository - https://github.com/chaduke/libsgd_examples  
 - LibSGD Tutorials Playlist - https://www.youtube.com/playlist?list=PLw0fDz0F4FPlvPNZYoop9puAC7sHdJl39  
 - Chaduke's Youtube - https://youtube.com/chaddore    
