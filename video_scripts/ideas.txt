@@ -1,26 +1,28 @@
-Video Script Ideas *
+Video Script Ideas 
 
 Introduction to the series *
+Installing git and running examples from the command line *
 
 Go over MSYS2 / GCC install *
 Demonstrate to edit PATH environment variables *
 Go over Python Install
-
-Installing git and -
-Running examples from the command line
-
-Show how to setup Notepad++
-How to write batch files and then call them with NPP exec 
-How to install plugins
-How to change the theme colors
-
+How to Setup Notepad++
+	How to write batch files and then call them with NPP exec 
+	How to use NPP Exec as a terminal
+	How to install plugins
+	How to change the theme colors
+How to Setup PyCharm
+	How to setup a virtual environment
+	How to use the integrated terminal
+	
 How to install / configure Visual Studio 2022
+How to install / VSCode
+
 How to build LibSGD on different platforms
 
-How to setup VSCode for the examples
 
-How to Install Python
-How to Setup PyCharm
+
+
 
 
 

@@ -162,8 +162,7 @@ int main() {
 		
 		// black text 
 		sgd_Set2DTextColor(0,0,0,1);
-		DisplayTextCentered("Spinning Cubes on a Sunny Day",segoe_script_font,3);
-		DisplayTextCentered("by Chaduke",segoe_font,fh + 15);
+		DisplayTextCentered("Making a Flymode Camera",segoe_script_font,3);
 		
 		// grey text
 		sgd_Set2DTextColor(0.5,0.5,0.5,1); 
@@ -183,9 +182,7 @@ int main() {
 		// red text for the right side 
 		sgd_Set2DTextColor(1,0,0,1);
 		DisplayTextRight("Up and Down Arrows",segoe_font,3);
-		DisplayTextRight("Change Spin Speed",segoe_font,fh);
-		DisplayTextRight("Left and Right Arrows",segoe_font,fh * 2);
-		DisplayTextRight("Steer the Camera",segoe_font,fh * 3);
+		DisplayTextRight("Change Spin Speed",segoe_font,fh);		
 		sgd_Present();
     }
 	sgd_Terminate();

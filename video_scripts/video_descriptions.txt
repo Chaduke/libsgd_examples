@@ -15,5 +15,5 @@ Links :
 - Chaduke's Creative Corner (Discord Invite) - https://discord.gg/Wenrjr8RcZ
 - Get LibSGD (Patreon) - https://patreon.com/libsgd  
 - LibSGD Source Github Repository - https://github.com/blitz-research/libsgd
-- Blitz World forums - https://skirmish-dev.net/forum/  
+- LibSGD Forums - https://libsgd.org/forum/  
 - LibSGD Documentation - https://skirmish-dev.net/libsgd/help/html/index.html    

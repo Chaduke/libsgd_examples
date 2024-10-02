@@ -8,7 +8,7 @@ Links to Youtube videos will be in each area to provide additional support.
 Everything here is constantly being worked on so make sure to star and watch the repository to get updates.    
 Also please subscribe and like videos on the Youtube channel to get updates as well as help the algorithm.        
 
-If you want get started quickly go the Python route as its a little easier to setup and free, but if you want a deeper learning experience go the C route or both.     
+If you want get started quickly go the Python route as it is a little easier to setup and free, but if you want a deeper learning experience go the C route or both.   
 
 Supporting LibSGD through Patreon will allow you to get a closer look at its development as well as report bugs, ask questions, and make suggestions directly to the developer (Mark Sibly).  You'll be getting a product worth so much more than the amount required to get involved.  I'll also be spending most of my free time working on these tutorials and videos.  Let's grow this community and make this project a success for all involved!    
 

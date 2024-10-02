@@ -1,13 +1,12 @@
 
-#**************************************************
-#*** LibSGD Examples 
-#*** for the Python Programming Language
-#*** https://patreon.com/libsgd
-#*** https://github.com/blitz-research/libsgd/ 
-#*** https://skirmish-dev.net/forum/
-#*** https://skirmish-dev.net/libsgd/help/html/sgd_8h.html
-
-#**************************************************/
+############################################################################
+#### LibSGD Examples
+#### for the Python Programming Language
+#### Get LibSGD here - https://patreon.com/libsgd
+#### LibSGD Github Repository - https://github.com/blitz-research/libsgd/
+#### LibSGD Forums - https://libsgd.org/forum/
+#### API Docs - https://skirmish-dev.net/libsgd/help/html/index.html 
+###########################################################################
 
 ## Example 002 - A Spinning Cube
 ## ex002.py

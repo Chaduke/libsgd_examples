@@ -24,14 +24,14 @@
 #                |_|                                                                     |_|
 #
 
-################################################
+############################################################################
 #### LibSGD Examples
 #### for the Python Programming Language
-#### https://patreon.com/libsgd
-#### https://github.com/blitz-research/libsgd/
-#### https://skirmish-dev.net/forum/
-#### https://skirmish-dev.net/libsgd/help/html/sgd_8h.html
-################################################
+#### Get LibSGD here - https://patreon.com/libsgd
+#### LibSGD Github Repository - https://github.com/blitz-research/libsgd/
+#### LibSGD Forums - https://libsgd.org/forum/
+#### API Docs - https://skirmish-dev.net/libsgd/help/html/index.html 
+###########################################################################
 
 # Example 001 - Hello World
 # ex001.py
