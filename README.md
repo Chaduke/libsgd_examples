@@ -25,7 +25,10 @@ I created a basic tutorial here if you are unfamiliar with using git to clone a 
 
 	**For Python: (quickest route to get started)**  
    	
-	Install Python 3.12 or higher. (will probably work with older versions but I've only tested so far with 3.12.5) then do this:  
+	Install Python 3.12 or higher. (will probably work with older versions but I've only tested so far with 3.12.5)  
+	Make sure you check off the option during the install to add Python to your PATH environment variable.   
+	
+	then do this:  
 	```sh
 	pip install libsgd
 	```
