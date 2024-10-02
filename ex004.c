@@ -52,7 +52,8 @@ int main() {
     sgd_CreateWindow(1920, 1080, "Example 004", SGD_WINDOW_FLAGS_FULLSCREEN);
 	
 	// environment setup
-	SGD_Texture environment = sgd_LoadCubeTexture("sgd://envmaps/sunnysky-cube.png",4,18);
+	// load a skybox texture from the assets folder in the libsgd_examples folder
+	SGD_Texture environment = sgd_LoadCubeTexture("assets/textures/skybox/skyboxsun5deg.png",4,18);
 	// sgd_SetEnvTexture(environment);
 	SGD_Skybox skybox = sgd_CreateSkybox(environment);
 	sgd_SetSkyboxRoughness(skybox,0.2);	
@@ -68,11 +69,14 @@ int main() {
 	// I'll demonstrate more later on and also in videos
 	sgd_SetEntityParent(camera,pivot);	
 	// when we want to move the camera globally we move the pivot now
-	sgd_MoveEntity(pivot,0,0.5,-2);
+	sgd_MoveEntity(pivot,0,0.5,10);
+	sgd_SetEntityRotation(pivot,0,-60,0);
 	
 	SGD_Light sun = sgd_CreateDirectionalLight();
 	sgd_SetLightShadowsEnabled(sun,SGD_TRUE);
-	sgd_TurnEntity(sun,-20,-45,0);
+	
+	// turn the sun to match the skybox
+	sgd_TurnEntity(sun,-5,45,0);
 	sgd_SetAmbientLightColor(1,1,1,0.1); 	
 
 	// cube setup
@@ -166,6 +170,7 @@ int main() {
 		
 		// grey text
 		sgd_Set2DTextColor(0.5,0.5,0.5,1); 
+		sgd_Set2DFont(segoe_font);
 		snprintf(buffer, sizeof buffer, "Spin Speed : %f", spin_speed);		
 		sgd_Draw2DText(buffer,5,5);
 		

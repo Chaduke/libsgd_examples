@@ -1,7 +1,7 @@
 Video Descriptions 
 
 To get started with LibSGD, go to the LibsGD Examples Github Repository linked below.  
-Scroll down to the README area and follow the instructions step by step.  
+Scroll down to the README area and follow the instructions step-by-step.  
 Links to each one of these videos will be in each area.  
 
 If you want get started quickly go the Python route as its a little easier to setup and free, but if you want a deeper learning experience go the C route or both.
