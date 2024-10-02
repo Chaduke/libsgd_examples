@@ -14,11 +14,11 @@ camera = sgd.createPerspectiveCamera()
 pivot = sgd.createModel(0)
 sgd.setEntityParent(camera,pivot)
 light = sgd.createDirectionalLight()
-sgd.setLightColor(light,1,1,1,0.2)
+sgd.setLightColor(light,1,1,1,0.8)
 sgd.setLightShadowsEnabled(light,True)
 sgd.turnEntity(light,-20,-225,0)
 sgd.moveEntity(pivot,0,1,-10)
-sgd.setAmbientLightColor(0.5,0.5,0.5,0.1)
+sgd.setAmbientLightColor(0.5,0.5,0.5,0.2)
 skybox = sgd.loadSkybox("sgd://envmaps/stormy-cube.jpg",0)
 
 # GROUND
@@ -76,11 +76,11 @@ for bone in bones:
 
 for i in range(ground_size):
     r = random.random()  
-    if r > 0.66 : 
+    if r > 0.66: 
         bone = sgd.createModel(bones[0])
-    elif r > 0.33 : 
+    elif r > 0.33: 
         bone = sgd.createModel(bones[1])
-    else : 
+    else: 
         bone = sgd.createModel(bones[2])
     sgd.moveEntity(bone, random.random() * ground_size * 2 - ground_size, 0, random.random() * ground_size * 2 - ground_size)
     sc = random.random() * 0.5 + 0.5
@@ -151,18 +151,42 @@ for i in range(-ground_size+2,ground_size,4):
 
 fence_pillar = sgd.loadModel("assets/gltf/fence_pillar.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(fence_pillar),True)
-sgd.moveEntity(fence_pillar,-10,0,15)    
+sgd.moveEntity(fence_pillar,-10,0,15)  
+
+fence_pillar_broken = sgd.loadModel("assets/gltf/fence_pillar_broken.gltf")
+sgd.setMeshShadowsEnabled(sgd.getModelMesh(fence_pillar_broken),True)
+sgd.moveEntity(fence_pillar_broken,-12,0,15)   
 
 fence_gate = sgd.loadModel("assets/gltf/fence_gate.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(fence_gate),True)
 sgd.moveEntity(fence_gate,10,0,15) 
+
+fence_seperate = sgd.loadModel("assets/gltf/fence_seperate.gltf")
+sgd.setMeshShadowsEnabled(sgd.getModelMesh(fence_seperate),True)
+sgd.moveEntity(fence_seperate,-10,0,17)  
+
+fence_seperate_broken = sgd.loadModel("assets/gltf/fence_seperate_broken.gltf")
+sgd.setMeshShadowsEnabled(sgd.getModelMesh(fence_seperate_broken),True)
+sgd.moveEntity(fence_seperate_broken,-12,0,17)
+
+floor_dirt = sgd.loadModel("assets/gltf/floor_dirt.gltf")
+sgd.setMeshShadowsEnabled(sgd.getModelMesh(floor_dirt),True)
+sgd.moveEntity(floor_dirt,12,0.02,18)  
+
+floor_dirt_grave = sgd.loadModel("assets/gltf/floor_dirt_grave.gltf")
+sgd.setMeshShadowsEnabled(sgd.getModelMesh(floor_dirt_grave),True)
+sgd.moveEntity(floor_dirt_grave,14,0.02,20)
+
+floor_dirt_small = sgd.loadModel("assets/gltf/floor_dirt_small.gltf")
+sgd.setMeshShadowsEnabled(sgd.getModelMesh(floor_dirt_small),True)
+sgd.moveEntity(floor_dirt_small,16,0.02,22)
 
 rock_font = sgd.loadFont("assets/fonts/rock.ttf",80)
 rock_font_small = sgd.loadFont("assets/fonts/rock.ttf",26)
 
 loop = True
 cam_speed = 0.15
-cam_turn = 0.12
+cam_turn = 0.15
 cam_bob_angle = 0.0
 jumping = False
 jump_strength = 0.3

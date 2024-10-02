@@ -4,8 +4,8 @@
 /*** for the C Programming Language
 /*** https://patreon.com/libsgd
 /*** https://github.com/blitz-research/libsgd/ 
-/*** https://skirmish-dev.net/forum/
-/*** https://skirmish-dev.net/libsgd/help/html/sgd_8h.html
+/*** https://libsgd.org/forum/
+/*** https://skirmish-dev.net/libsgd/help/html/index.html
 
 /**************************************************/
 
@@ -32,13 +32,9 @@
 
 void DisplayTextCentered(const char* text,SGD_Font font,float yoffset)
 {	
-	sgd_Set2DFont(font);
-	// get our X-axis window center in pixels	
-	float center = sgd_GetWindowWidth() / 2;
-	// get the width of the text we are displaying and divide by two
-	float tw = sgd_GetTextWidth(font,text) / 2;
-	// draw the text at the center of screen X-axis
-	// and take into the yoffset value for Y-axis positioning
+	sgd_Set2DFont(font);	
+	float center = sgd_GetWindowWidth() / 2;	
+	float tw = sgd_GetTextWidth(font,text) / 2;	
 	sgd_Draw2DText(text,center - tw,yoffset);	
 }
 
@@ -52,84 +48,64 @@ void DisplayTextRight(const char* text,SGD_Font font,float yoffset)
 
 int main() {
 	
-	sgd_Init(); 
-	// let's do this in fullscreen HD mode now 
+	sgd_Init(); 	
     sgd_CreateWindow(1920, 1080, "Example 004", SGD_WINDOW_FLAGS_FULLSCREEN);
 	
-	// we no longer need to set a clear color because our skybox will cover it
-    // sgd_SetClearColor(0.2, 0.5, 0.9, 1.0);
+	// environment setup
 	SGD_Texture environment = sgd_LoadCubeTexture("sgd://envmaps/sunnysky-cube.png",4,18);
-	
-	// enable the line below to see the difference an "environment texture" makes on our scene
-	// for this scene I think it looks better with out it
 	// sgd_SetEnvTexture(environment);
-	
-	// create a skybox from the environment cube texture
 	SGD_Skybox skybox = sgd_CreateSkybox(environment);
+	sgd_SetSkyboxRoughness(skybox,0.2);	
 	
-	// blur the texture a little for better appearance
-	// test different values here to see what you like
-	sgd_SetSkyboxRoughness(skybox,0.2);
+	SGD_Camera camera = sgd_CreatePerspectiveCamera();	
+	// create an "empty" model called pivot to help out our camera "rig"
+	SGD_Model pivot = sgd_CreateModel(0);
 	
-	SGD_Camera camera = sgd_CreatePerspectiveCamera();
+	// parent the camera to this pivot and now use the pivot to control the camera
+	// this gives us the flexibilty of being able to move and rotate the camera
+	// from the pivot but then do the same to the camera independently 
+	// on different axes, allowing us to make corrections for certain situations
+	// I'll demonstrate more later on and also in videos
+	sgd_SetEntityParent(camera,pivot);	
+	// when we want to move the camera globally we move the pivot now
+	sgd_MoveEntity(pivot,0,0.5,-2);
 	
-	// move our camera back a little to see all 3 cubes
-	sgd_MoveEntity(camera,0,0.5,-2);
-	
-	// create our sun as a directional light
-	// the location of directional lights don't matter
-	// only the rotation, specifically on the X and Y axes
-	// will change how the light affects the scene
 	SGD_Light sun = sgd_CreateDirectionalLight();
-	
-	// we need to do this to enable the light to cast shadows 
 	sgd_SetLightShadowsEnabled(sun,SGD_TRUE);
-	// we turn the light -20 degrees on X and -45 on Y
-	// this will cause shadows to appear in the back right of objects
-	// if we are looking at them straight-on from a non rotated camera	
 	sgd_TurnEntity(sun,-20,-45,0);
-	
-	// I'm going to change the ambient light alpha to 0.1 
-	// so we'll only have a very dim ambience and will be able to 
-	// better see the shading provided by our directional light	
 	sgd_SetAmbientLightColor(1,1,1,0.1); 	
-	
+
+	// cube setup
     SGD_Material cube_material = sgd_LoadPBRMaterial("sgd://materials/Bricks076C_1K-JPG");    
 	SGD_Mesh cube_mesh = sgd_CreateBoxMesh(-0.5,-0.5,-0.5,0.5,0.5,0.5,cube_material);	
-	// enable the cube mesh to cast shadows on other objects
 	sgd_SetMeshShadowsEnabled(cube_mesh,SGD_TRUE);
 	SGD_Model cube = sgd_CreateModel(cube_mesh);	
-	sgd_MoveEntity(cube,0,0.5,3);
-	
-	// we can now easily create other cubes using the same mesh
+	sgd_MoveEntity(cube,0,0.5,3);	
+
 	SGD_Model cube_left = sgd_CreateModel(cube_mesh);
 	sgd_MoveEntity(cube_left,-2,0.5,3);
 	SGD_Model cube_right = sgd_CreateModel(cube_mesh);
 	sgd_MoveEntity(cube_right,2,0.5,3);
-	
-	// our next object, the ground, will consist of a cube mesh
-	// but scaled outwards 20 units in the X and Y directions
-	// on only 0.1 units on the Y axis 
-	// before we do this however, we need a ground material
-	// again we will consult the LibSGD asset libary and load one up
+
+	// ground setup 
 	SGD_Material ground_material = sgd_LoadPBRMaterial("sgd://materials/PavingStones119_1K-JPG"); 	
 	SGD_Mesh ground_mesh = sgd_CreateBoxMesh(-20,-0.1,-20,20,0,20,ground_material);	
-	
-	// this will reduce the scale of the ground material and make it look more realistic in our scene
-	// feel free to experiment with the values to see what happens
 	sgd_TransformTexCoords(ground_mesh,20,20,0,0);
-	SGD_Model ground = sgd_CreateModel(ground_mesh);	
-	
-	float spin_speed = 1.1;	
-	
-	// let's load some fonts from our Windows folder
-	// if for some reason this doesn't work for you check your 
-	// windows fonts folder and replace with something else 
-	// you have to right-click on the font and choose properties from 
-	// windows explorer in order to see the ".ttf" filename
-	// you can always fine a lot of .ttf font files on the net too
+	SGD_Model ground = sgd_CreateModel(ground_mesh);
+		
+	// load fonts
 	SGD_Font segoe_font = sgd_LoadFont("c:/Windows/Fonts/seguihis.ttf",22);
 	SGD_Font segoe_script_font = sgd_LoadFont("c:/Windows/Fonts/segoescb.ttf",30);
+	
+	float spin_speed = 1.1;
+	
+	// make some variables to adjust camera move and rotation speed
+	float cam_move_speed = 0.1;
+	float cam_turn_speed = 0.2;
+	
+	// hide and lock the mouse cursor so we can have more freedom with out mouselook
+	// comment out the line below to see the difference
+	sgd_SetMouseCursorMode(3);
 	
 	// start main loop
     SGD_Bool loop = SGD_TRUE;	
@@ -145,16 +121,28 @@ int main() {
 		if (sgd_IsKeyDown(SGD_KEY_DOWN)) spin_speed-=0.1;
 		if (sgd_IsKeyDown(SGD_KEY_UP)) spin_speed+=0.1;		
 		
-		// move the camera around with WASD
-		// or you can alter this to your preferred keyboard layout
-		if (sgd_IsKeyDown(SGD_KEY_A)) sgd_MoveEntity(camera,-0.1,0,0);
-		if (sgd_IsKeyDown(SGD_KEY_D)) sgd_MoveEntity(camera,0.1,0,0);
-		if (sgd_IsKeyDown(SGD_KEY_W)) sgd_MoveEntity(camera,0,0,0.1);
-		if (sgd_IsKeyDown(SGD_KEY_S)) sgd_MoveEntity(camera,0,0,-0.1);	
+		// move the camera with the keyboard by moving the pivot		
+		if (sgd_IsKeyDown(SGD_KEY_A)) sgd_MoveEntity(pivot,-cam_move_speed,0,0);
+		if (sgd_IsKeyDown(SGD_KEY_D)) sgd_MoveEntity(pivot,cam_move_speed,0,0);
+		if (sgd_IsKeyDown(SGD_KEY_W)) sgd_MoveEntity(pivot,0,0,cam_move_speed);
+		if (sgd_IsKeyDown(SGD_KEY_S)) sgd_MoveEntity(pivot,0,0,-cam_move_speed);	
 
-		// we'll use left and right arrows to steer our camera now
-		if (sgd_IsKeyDown(SGD_KEY_LEFT)) sgd_TurnEntity(camera,0,2,0);
-		if (sgd_IsKeyDown(SGD_KEY_RIGHT)) sgd_TurnEntity(camera,0,-2,0);
+		// we'll use mouse to control our camera now
+		// turning the pivot like this will cause the camera to "roll"
+		// basically it will twist on the Z-axis, but we'll correct it afterwards		
+		sgd_TurnEntity(pivot,-sgd_GetMouseVY() * cam_turn_speed,-sgd_GetMouseVX() * cam_turn_speed,0);	
+		
+		// correct Z-axis roll
+		// comment out the line below to see what happens without it
+		sgd_SetEntityRotation(pivot,sgd_GetEntityRX(pivot),sgd_GetEntityRY(pivot),0);
+		
+		// let's limit our cameras X-axis rotation to prevent gimbal lock
+		// comment out the following two lines to see what happens when you face "straight up" or "straight down"
+		if (sgd_GetEntityRX(pivot) > 70) sgd_SetEntityRotation(pivot,70,sgd_GetEntityRY(pivot),0);
+		if (sgd_GetEntityRX(pivot) < -70) sgd_SetEntityRotation(pivot,-70,sgd_GetEntityRY(pivot),0);
+		
+		// prevent our camera from going below the ground 
+		if (sgd_GetEntityY(pivot) < 0.5) sgd_SetEntityPosition( pivot,sgd_GetEntityX(pivot),0.5,sgd_GetEntityZ(pivot) );
 		
 		sgd_TurnEntity(cube,0,spin_speed,0);
 		// turn the left and right cubes at different speeds

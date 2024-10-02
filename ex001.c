@@ -30,8 +30,8 @@ _\ \ | | | | | | |_) | |  __/ / /_\\ (_| | | | | | |  __/  / /_//  __/\ V /  __/
 /*** for the C Programming Language
 /*** https://patreon.com/libsgd
 /*** https://github.com/blitz-research/libsgd/ 
-/*** https://skirmish-dev.net/forum/
-/*** https://skirmish-dev.net/libsgd/help/html/sgd_8h.html
+/*** https://libsgd.org/forum/
+/*** https://skirmish-dev.net/libsgd/help/html/index.html
 /**************************************************/
 
 // Example 001 - Hello World!

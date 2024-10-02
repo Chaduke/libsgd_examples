@@ -75,8 +75,8 @@ I created a basic tutorial here if you are unfamiliar with using git to clone a 
 ## Contributing:  
 
 If you would like to contribute to this project find me (Chaduke) at the forums here :  
-- https://skirmish-dev.net/forum/ 
-- You can also email me at chaduke@gmail.com  
+- https://libsgd.org/forum  
+- You can also email me at chaduke@gmail.com    
 
 I'd be more than happy to add examples or take suggestions, as long as they adhere to the format I'm using here.  I want to make the examples short and self-contained, and individually covering one primary feature/function of LibSGD.    
    	
@@ -90,11 +90,12 @@ I'm using Creative Commons 0, so you can do anything you want with the code, but
 	
 ## Links: 
  
-To get started with LibSGD, go to the LibsGD Examples Github Repository linked below.    
-Scroll down to the README area and follow the instructions step by step.    
-Links to each one of these videos will be in each area.    
+To get started with LibSGD, follow the instructions listed here step by step.   
+Links to Youtube videos will be in each area to provide additional support.        
+Everything here is constantly being worked on so make sure to star and watch the repository to get updates.  
+Also please subscribe and like videos on the Youtube channel to get updates as well as help the algorithm.      
 
-If you want get started quickly go the Python route as its a little easier to setup and free, but if you want a deeper learning experience go the C route or both.  
+If you want get started quickly go the Python route as its a little easier to setup and free, but if you want a deeper learning experience go the C route or both.    
 
 Supporting LibSGD through Patreon will allow you to get a closer look at its development as well as report bugs, ask questions, and make suggestions directly to the developer (Mark Sibly).  You'll be getting a product worth so much more than the amount required to get involved.  I'll also be spending most of my free time working on these tutorials and videos, as well and other members of the community.    
 
@@ -105,5 +106,5 @@ Links :
 - Chaduke's Creative Corner (Discord Invite) - https://discord.gg/Wenrjr8RcZ  
 - Get LibSGD (Patreon) - https://patreon.com/libsgd    
 - LibSGD Source Github Repository - https://github.com/blitz-research/libsgd  
-- Blitz World forums - https://skirmish-dev.net/forum/    
+- Blitz World forums - https://libsgd.org/forum 
 - LibSGD Documentation - https://skirmish-dev.net/libsgd/help/html/index.html   
