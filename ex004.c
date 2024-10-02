@@ -80,17 +80,26 @@ int main() {
 	sgd_SetAmbientLightColor(1,1,1,0.1); 	
 
 	// cube setup
-    SGD_Material cube_material = sgd_LoadPBRMaterial("sgd://materials/Bricks076C_1K-JPG");    
+    SGD_Material cube_material = sgd_LoadPBRMaterial("../assets/materials/Marble021_1K-JPG");    
 	SGD_Mesh cube_mesh = sgd_CreateBoxMesh(-0.5,-0.5,-0.5,0.5,0.5,0.5,cube_material);	
 	sgd_SetMeshShadowsEnabled(cube_mesh,SGD_TRUE);
 	SGD_Model cube = sgd_CreateModel(cube_mesh);	
 	sgd_MoveEntity(cube,0,0.5,3);	
-
-	SGD_Model cube_left = sgd_CreateModel(cube_mesh);
-	sgd_MoveEntity(cube_left,-2,0.5,3);
-	SGD_Model cube_right = sgd_CreateModel(cube_mesh);
-	sgd_MoveEntity(cube_right,2,0.5,3);
-
+	
+	// sphere setup
+    SGD_Material sphere_material = sgd_LoadPBRMaterial("../assets/materials/Metal061A_1K-JPG");    
+	SGD_Mesh sphere_mesh = sgd_CreateSphereMesh(0.5,32,32,sphere_material);	
+	sgd_SetMeshShadowsEnabled(sphere_mesh,SGD_TRUE);
+	SGD_Model sphere = sgd_CreateModel(sphere_mesh);	
+	sgd_MoveEntity(sphere,-2,0.5,3);
+	
+	// cylinder setup
+    SGD_Material cylinder_material = sgd_LoadPBRMaterial("../assets/materials/Wood067_1K-JPG");    
+	SGD_Mesh cylinder_mesh = sgd_CreateCylinderMesh(1,0.5,32,cylinder_material);	
+	sgd_SetMeshShadowsEnabled(cylinder_mesh,SGD_TRUE);
+	SGD_Model cylinder = sgd_CreateModel(cylinder_mesh);	
+	sgd_MoveEntity(cylinder,2,0.5,3);
+	
 	// ground setup 
 	SGD_Material ground_material = sgd_LoadPBRMaterial("sgd://materials/PavingStones119_1K-JPG"); 	
 	SGD_Mesh ground_mesh = sgd_CreateBoxMesh(-20,-0.1,-20,20,0,20,ground_material);	
@@ -148,10 +157,9 @@ int main() {
 		// prevent our camera from going below the ground 
 		if (sgd_GetEntityY(pivot) < 0.5) sgd_SetEntityPosition( pivot,sgd_GetEntityX(pivot),0.5,sgd_GetEntityZ(pivot) );
 		
-		sgd_TurnEntity(cube,0,spin_speed,0);
-		// turn the left and right cubes at different speeds
-		sgd_TurnEntity(cube_left,0,spin_speed / 2,0);
-		sgd_TurnEntity(cube_right,0,spin_speed * 2,0);
+		sgd_TurnEntity(cube,0,spin_speed,0);		
+		sgd_TurnEntity(sphere,0,spin_speed / 2,0);
+		sgd_TurnEntity(cylinder,0,spin_speed * 2,0);
 		
 		sgd_RenderScene();
 		
