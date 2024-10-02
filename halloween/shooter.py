@@ -30,7 +30,7 @@ sgd.setMeshShadowsEnabled(ground_mesh,True)
 ground = sgd.createModel(ground_mesh)
 
 # GRASS / WEEDS
-weeds_image = sgd.loadImage("assets/textures/weeds.png")
+weeds_image = sgd.loadImage("../assets/textures/weeds.png")
 
 for i in range(ground_size * 60):   
     w = sgd.createSprite(weeds_image) 
@@ -39,37 +39,37 @@ for i in range(ground_size * 60):
     sgd.setEntityScale(w,sc,sc,1)
 
 # HALLOWEEN 3D PACK MODELS 
-arch_gate = sgd.loadModel("assets/gltf/arch_gate.gltf")
+arch_gate = sgd.loadModel("../assets/gltf/arch_gate.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(arch_gate),True)
 
-tree_dead_large = sgd.loadModel("assets/gltf/tree_dead_large.gltf")
+tree_dead_large = sgd.loadModel("../assets/gltf/tree_dead_large.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(tree_dead_large),True)
 sgd.moveEntity(tree_dead_large,-10,0,0)
 
-tree_dead_medium = sgd.loadModel("assets/gltf/tree_dead_medium.gltf")
+tree_dead_medium = sgd.loadModel("../assets/gltf/tree_dead_medium.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(tree_dead_medium),True)
 sgd.moveEntity(tree_dead_medium,-8,0,5)
 
-tree_dead_small = sgd.loadModel("assets/gltf/tree_dead_small.gltf")
+tree_dead_small = sgd.loadModel("../assets/gltf/tree_dead_small.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(tree_dead_small),True)
 sgd.moveEntity(tree_dead_small,8,0,5)
 
-tree_dead_large_decorated = sgd.loadModel("assets/gltf/tree_dead_large_decorated.gltf")
+tree_dead_large_decorated = sgd.loadModel("../assets/gltf/tree_dead_large_decorated.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(tree_dead_large_decorated),True)
 sgd.moveEntity(tree_dead_large_decorated,10,0,0)
 
-bench = sgd.loadModel("assets/gltf/bench.gltf")
+bench = sgd.loadModel("../assets/gltf/bench.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(bench),True)
 sgd.moveEntity(bench,2,0,-3)
 
-bench_decorated = sgd.loadModel("assets/gltf/bench_decorated.gltf")
+bench_decorated = sgd.loadModel("../assets/gltf/bench_decorated.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(bench_decorated),True)
 sgd.moveEntity(bench_decorated,-2,0,-3)
 
 # BONES
-bones = [sgd.loadMesh("assets/gltf/bone_A.gltf"),
-sgd.loadMesh("assets/gltf/bone_B.gltf"),
-sgd.loadMesh("assets/gltf/bone_C.gltf")]
+bones = [sgd.loadMesh("../assets/gltf/bone_A.gltf"),
+sgd.loadMesh("../assets/gltf/bone_B.gltf"),
+sgd.loadMesh("../assets/gltf/bone_C.gltf")]
 
 for bone in bones:
     sgd.setMeshShadowsEnabled(bone,True)   
@@ -87,39 +87,39 @@ for i in range(ground_size):
     sgd.scaleEntity(bone, sc,sc,sc)
     sgd.turnEntity(bone,0,random.random() * 360,0)
 
-candle = sgd.loadModel("assets/gltf/candle.gltf")
+candle = sgd.loadModel("../assets/gltf/candle.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(candle),True)
 sgd.moveEntity(candle,-3,0,-5)
 
-candle_melted = sgd.loadModel("assets/gltf/candle_melted.gltf")
+candle_melted = sgd.loadModel("../assets/gltf/candle_melted.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(candle_melted),True)
 sgd.moveEntity(candle_melted,-1,0,-5)
 
-candle_thin = sgd.loadModel("assets/gltf/candle_thin.gltf")
+candle_thin = sgd.loadModel("../assets/gltf/candle_thin.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(candle_thin),True)
 sgd.moveEntity(candle_thin,1,0,-5)
 
-candle_triple = sgd.loadModel("assets/gltf/candle_triple.gltf")
+candle_triple = sgd.loadModel("../assets/gltf/candle_triple.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(candle_triple),True)
 sgd.moveEntity(candle_triple,3,0,-5)
 
-coffin = sgd.loadModel("assets/gltf/coffin.gltf")
+coffin = sgd.loadModel("../assets/gltf/coffin.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(coffin),True)
 sgd.moveEntity(coffin,-5,0,10)
 
-coffin_decorated = sgd.loadModel("assets/gltf/coffin_decorated.gltf")
+coffin_decorated = sgd.loadModel("../assets/gltf/coffin_decorated.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(coffin_decorated),True)
 sgd.moveEntity(coffin_decorated,5,0,10)
 
-crypt = sgd.loadModel("assets/gltf/crypt.gltf")
+crypt = sgd.loadModel("../assets/gltf/crypt.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(crypt),True)
 sgd.moveEntity(crypt,0,0,10)
 
 # FENCE
-fence_mesh = sgd.loadMesh("assets/gltf/fence.gltf")
+fence_mesh = sgd.loadMesh("../assets/gltf/fence.gltf")
 sgd.setMeshShadowsEnabled(fence_mesh,True)
 
-fence_broken_mesh = sgd.loadMesh("assets/gltf/fence_broken.gltf")
+fence_broken_mesh = sgd.loadMesh("../assets/gltf/fence_broken.gltf")
 sgd.setMeshShadowsEnabled(fence_broken_mesh,True)
 
 for i in range(-ground_size+2,ground_size,4):
@@ -149,40 +149,40 @@ for i in range(-ground_size+2,ground_size,4):
     sgd.setEntityPosition(fence,ground_size,0,i)
     sgd.setEntityRotation(fence,0,90,0)   
 
-fence_pillar = sgd.loadModel("assets/gltf/fence_pillar.gltf")
+fence_pillar = sgd.loadModel("../assets/gltf/fence_pillar.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(fence_pillar),True)
 sgd.moveEntity(fence_pillar,-10,0,15)  
 
-fence_pillar_broken = sgd.loadModel("assets/gltf/fence_pillar_broken.gltf")
+fence_pillar_broken = sgd.loadModel("../assets/gltf/fence_pillar_broken.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(fence_pillar_broken),True)
 sgd.moveEntity(fence_pillar_broken,-12,0,15)   
 
-fence_gate = sgd.loadModel("assets/gltf/fence_gate.gltf")
+fence_gate = sgd.loadModel("../assets/gltf/fence_gate.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(fence_gate),True)
 sgd.moveEntity(fence_gate,10,0,15) 
 
-fence_seperate = sgd.loadModel("assets/gltf/fence_seperate.gltf")
+fence_seperate = sgd.loadModel("../assets/gltf/fence_seperate.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(fence_seperate),True)
 sgd.moveEntity(fence_seperate,-10,0,17)  
 
-fence_seperate_broken = sgd.loadModel("assets/gltf/fence_seperate_broken.gltf")
+fence_seperate_broken = sgd.loadModel("../assets/gltf/fence_seperate_broken.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(fence_seperate_broken),True)
 sgd.moveEntity(fence_seperate_broken,-12,0,17)
 
-floor_dirt = sgd.loadModel("assets/gltf/floor_dirt.gltf")
+floor_dirt = sgd.loadModel("../assets/gltf/floor_dirt.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(floor_dirt),True)
 sgd.moveEntity(floor_dirt,12,0.02,18)  
 
-floor_dirt_grave = sgd.loadModel("assets/gltf/floor_dirt_grave.gltf")
+floor_dirt_grave = sgd.loadModel("../assets/gltf/floor_dirt_grave.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(floor_dirt_grave),True)
 sgd.moveEntity(floor_dirt_grave,14,0.02,20)
 
-floor_dirt_small = sgd.loadModel("assets/gltf/floor_dirt_small.gltf")
+floor_dirt_small = sgd.loadModel("../assets/gltf/floor_dirt_small.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(floor_dirt_small),True)
 sgd.moveEntity(floor_dirt_small,16,0.02,22)
 
-rock_font = sgd.loadFont("assets/fonts/rock.ttf",80)
-rock_font_small = sgd.loadFont("assets/fonts/rock.ttf",26)
+rock_font = sgd.loadFont("../assets/fonts/rock.ttf",80)
+rock_font_small = sgd.loadFont("../assets/fonts/rock.ttf",26)
 
 loop = True
 cam_speed = 0.15
