@@ -14,8 +14,11 @@
 
 // In this example we'll start from a skeleton of example 003
 // We will add mouse input to enable us to steer and look around
-// and even go into a sort of "Fly Mode"
-// we also demonstrate how to use basic collisions
+// while we go into "Fly Mode"
+// we'll demonstrate how to use basic collisions
+// we'll replace two of the cubes with a sphere and a cylinder
+// we'll place the materials on all three of our primitives
+// we'll load a different skybox and align our sunlight to it
 
 // Notes :
 // As before, if you see anything that is overly confusing,
@@ -54,7 +57,7 @@ int main() {
 	// environment setup
 	// load a skybox texture from the assets folder in the libsgd_examples folder
 	SGD_Texture environment = sgd_LoadCubeTexture("assets/textures/skybox/skyboxsun5deg.png",4,18);
-	// sgd_SetEnvTexture(environment);
+	sgd_SetEnvTexture(environment);
 	SGD_Skybox skybox = sgd_CreateSkybox(environment);
 	sgd_SetSkyboxRoughness(skybox,0.2);	
 	
@@ -80,21 +83,21 @@ int main() {
 	sgd_SetAmbientLightColor(1,1,1,0.1); 	
 
 	// cube setup
-    SGD_Material cube_material = sgd_LoadPBRMaterial("../assets/materials/Marble021_1K-JPG");    
+    SGD_Material cube_material = sgd_LoadPBRMaterial("assets/materials/Marble021_1K-JPG");    
 	SGD_Mesh cube_mesh = sgd_CreateBoxMesh(-0.5,-0.5,-0.5,0.5,0.5,0.5,cube_material);	
 	sgd_SetMeshShadowsEnabled(cube_mesh,SGD_TRUE);
 	SGD_Model cube = sgd_CreateModel(cube_mesh);	
 	sgd_MoveEntity(cube,0,0.5,3);	
 	
 	// sphere setup
-    SGD_Material sphere_material = sgd_LoadPBRMaterial("../assets/materials/Metal061A_1K-JPG");    
+    SGD_Material sphere_material = sgd_LoadPBRMaterial("assets/materials/Metal061A_1K-JPG");    
 	SGD_Mesh sphere_mesh = sgd_CreateSphereMesh(0.5,32,32,sphere_material);	
 	sgd_SetMeshShadowsEnabled(sphere_mesh,SGD_TRUE);
 	SGD_Model sphere = sgd_CreateModel(sphere_mesh);	
 	sgd_MoveEntity(sphere,-2,0.5,3);
 	
 	// cylinder setup
-    SGD_Material cylinder_material = sgd_LoadPBRMaterial("../assets/materials/Wood067_1K-JPG");    
+    SGD_Material cylinder_material = sgd_LoadPBRMaterial("assets/materials/Wood067_1K-JPG");    
 	SGD_Mesh cylinder_mesh = sgd_CreateCylinderMesh(1,0.5,32,cylinder_material);	
 	sgd_SetMeshShadowsEnabled(cylinder_mesh,SGD_TRUE);
 	SGD_Model cylinder = sgd_CreateModel(cylinder_mesh);	
