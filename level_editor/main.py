@@ -5,6 +5,7 @@
 
 from libsgd import sgd
 import os 
+from actor import get_collider_material,Vec3,Actor
 
 def display_text_centered(text,font,yoffset): 
 	sgd.set2DFont(font)	
@@ -19,14 +20,19 @@ def mouse_in_rect(x1,y1,x2,y2):
     
 sgd.init()
 sgd.createWindow(1920,1080,"Level Editor",sgd.WINDOW_FLAGS_FULLSCREEN)
-skybox = sgd.loadSkybox("sgd://envmaps/nightsky-cube.png",0.1)
+env = sgd.loadCubeTexture("sgd://envmaps/nightsky-cube.png",4,18)
+sgd.setEnvTexture(env)
+skybox = sgd.createSkybox(env)
+
 camera = sgd.createPerspectiveCamera()
 pivot = sgd.createModel(0)
+camera_collider = sgd.createSphereCollider(pivot,0,0.5)
 sgd.setEntityParent(camera,pivot)
-sgd.moveEntity(pivot,0,0.5,0)
+sgd.moveEntity(pivot,0,1,0)
 
 light = sgd.createDirectionalLight()
 sgd.setLightColor(light,0.6,0.8,1.0,0.4)
+sgd.setAmbientLightColor(0.6,0.8,1.0,0.4)
 sgd.setLightShadowsEnabled(light,True)
 sgd.turnEntity(light,-20,-225,0)
 
@@ -46,6 +52,11 @@ cam_turn = 0.15
 model_browser = False
 models_folder = "../assets/gltf/"
 model_entries = []
+actors=[]
+collider_mesh = sgd.createSphereMesh(1,16,16,get_collider_material())
+sgd.enableCollisions(0,1,1)
+collisions_on = True
+colliders_visible = True
 
 loop = True
 while loop:
@@ -54,7 +65,7 @@ while loop:
     if sgd.isKeyHit(sgd.KEY_ESCAPE): loop = False
     
     # show / hide the model browser
-    if sgd.isKeyHit(sgd.KEY_F2): 
+    if sgd.isKeyHit(sgd.KEY_TAB): 
         if model_browser:
             model_browser = False
         else:
@@ -74,18 +85,38 @@ while loop:
     elif sgd.isKeyDown(sgd.KEY_D) or sgd.isKeyDown(sgd.KEY_RIGHT): 
         sgd.moveEntity(pivot,cam_speed,0,0)
     
+    # toggle collider visiblity
+    if sgd.isKeyHit(sgd.KEY_V):
+        if colliders_visible:
+            colliders_visible = False
+            for actor in actors:
+                sgd.setEntityVisible(actor.collider_model,False)
+        else:
+            colliders_visible = True
+            for actor in actors:
+                sgd.setEntityVisible(actor.collider_model,True)
+                
+    # toggle collisions_on
+    if sgd.isKeyHit(sgd.KEY_C):
+        if collisions_on:
+            collisions_on = False
+        else:
+            collisions_on = True
+            
     # mouse input   
     if not model_browser:
         sgd.turnEntity(pivot,0,-sgd.getMouseVX() * cam_turn,0)
         sgd.turnEntity(camera,-sgd.getMouseVY() * cam_turn,0,0)
     else:
         if sgd.isMouseButtonHit(0):
-            current_model = sgd.loadModel(models_folder + current_model_string)
-            sgd.setMeshShadowsEnabled(sgd.getModelMesh(current_model),True)
-            sgd.setEntityPosition(current_model,sgd.getEntityX(pivot),0,sgd.getEntityZ(pivot))
-            sgd.setEntityRotation(current_model,0,sgd.getEntityRY(pivot),0)
-            sgd.setEntityRotation(pivot,0,sgd.getEntityRY(pivot),0)
-            sgd.moveEntity(current_model,0,0,3)
+            current_mesh = sgd.loadMesh(models_folder + current_model_string)            
+            sgd.setMeshShadowsEnabled(current_mesh,True)
+            current_actor = Actor(current_model_string,current_mesh,collider_mesh,sgd.getEntityX(pivot),sgd.getEntityZ(pivot))
+            if not colliders_visible: sgd.setEntityVisible(current_actor.collider_model,False)
+            actors.append(current_actor)
+            sgd.setEntityRotation(current_actor.pivot,0,sgd.getEntityRY(pivot),0)
+            sgd.moveEntity(current_actor.pivot,0,0,3)            
+            sgd.setEntityRotation(pivot,0,sgd.getEntityRY(pivot),0)            
             model_browser = False            
     
     if sgd.getEntityRX(camera) < -30 : sgd.setEntityRotation(camera,-30,0,0)
@@ -95,7 +126,9 @@ while loop:
     if sgd.getEntityX(pivot) < -ground_size + 1 : sgd.setEntityPosition(pivot,-ground_size+1,sgd.getEntityY(pivot),sgd.getEntityZ(pivot))
     if sgd.getEntityZ(pivot) > ground_size-1 : sgd.setEntityPosition(pivot,sgd.getEntityX(pivot),sgd.getEntityY(pivot),ground_size-1)
     if sgd.getEntityZ(pivot) < -ground_size + 1 : sgd.setEntityPosition(pivot,sgd.getEntityX(pivot),sgd.getEntityY(pivot),-ground_size + 1)
-        
+    if collisions_on: sgd.updateColliders()
+    
+    sgd.renderScene()    
     sgd.clear2D()
     if model_browser:      
         sgd.setMouseCursorMode(1)    
@@ -115,12 +148,18 @@ while loop:
                 sgd.set2DTextColor(1,1,1,1)                
             sgd.draw2DText(s,x,y * 20)
             y+=1
+        display_text_centered("MODEL BROWSER",avenir_font,sgd.getWindowHeight()-25)    
     else:
         sgd.setMouseCursorMode(3)
-        sgd.draw2DText("F2 - Model Browser",5,5)
+        sgd.draw2DText("TAB - Model Browser",5,5)
+        sgd.draw2DText("V - Toggle Collider Visibility",5,25)
+        sgd.draw2DText("C - Toggle Collisions",5,45)
+        
         display_text_centered("Chaduke's Level Editor",avenir_font,0)
-    
-    sgd.renderScene()
+        if collisions_on:
+            display_text_centered("Collisions ON",avenir_font,sgd.getWindowHeight()-25)
+        else:
+            display_text_centered("Collisions OFF",avenir_font,sgd.getWindowHeight()-25)
     sgd.present()
 sgd.terminate()
 
