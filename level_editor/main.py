@@ -44,7 +44,7 @@ sgd.set2DFont(avenir_font)
 cam_speed = 0.15
 cam_turn = 0.15
 model_browser = False
-models_folder = "../assets/gltf"
+models_folder = "../assets/gltf/"
 model_entries = []
 
 loop = True
@@ -78,6 +78,15 @@ while loop:
     if not model_browser:
         sgd.turnEntity(pivot,0,-sgd.getMouseVX() * cam_turn,0)
         sgd.turnEntity(camera,-sgd.getMouseVY() * cam_turn,0,0)
+    else:
+        if sgd.isMouseButtonHit(0):
+            current_model = sgd.loadModel(models_folder + current_model_string)
+            sgd.setMeshShadowsEnabled(sgd.getModelMesh(current_model),True)
+            sgd.setEntityPosition(current_model,sgd.getEntityX(pivot),0,sgd.getEntityZ(pivot))
+            sgd.setEntityRotation(current_model,0,sgd.getEntityRY(pivot),0)
+            sgd.setEntityRotation(pivot,0,sgd.getEntityRY(pivot),0)
+            sgd.moveEntity(current_model,0,0,3)
+            model_browser = False            
     
     if sgd.getEntityRX(camera) < -30 : sgd.setEntityRotation(camera,-30,0,0)
     if sgd.getEntityRX(camera) > 30 : sgd.setEntityRotation(camera,30,0,0)
@@ -101,6 +110,7 @@ while loop:
             s = str(entry.name)    
             if mouse_in_rect(x,y*20,x + sgd.getTextWidth(avenir_font,s),y * 20 + sgd.getFontHeight(avenir_font)):
                 sgd.set2DTextColor(1,1,0,1)
+                current_model_string = s
             else:
                 sgd.set2DTextColor(1,1,1,1)                
             sgd.draw2DText(s,x,y * 20)
