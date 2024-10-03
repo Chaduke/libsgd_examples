@@ -14,10 +14,10 @@
 
 // In this example we'll start from a skeleton of example 003
 // We will add mouse input to enable us to steer and look around
-// while we go into "Fly Mode"
+// this enables what we call "Fly Mode"
 // we'll demonstrate how to use basic collisions
 // we'll replace two of the cubes with a sphere and a cylinder
-// we'll place the materials on all three of our primitives
+// we'll place new materials on all three of our primitives
 // we'll load a different skybox and align our sunlight to it
 
 // Notes :
@@ -26,7 +26,7 @@
 // video comments that accompanies this lesson / example.
 
 // Chad Dore' -Chaduke-
-// 20240930
+// 20241002
 // https://www.youtube.com/chaddore
 // https://www.github.com/chaduke/libsgd_examples
 
@@ -65,15 +65,20 @@ int main() {
 	// create an "empty" model called pivot to help out our camera "rig"
 	SGD_Model pivot = sgd_CreateModel(0);
 	
+	// create a basic sphere collider attached to the pivot, type 0
+	SGD_Collider pivot_collider = sgd_CreateSphereCollider(pivot,0,0.5);
+	
 	// parent the camera to this pivot and now use the pivot to control the camera
 	// this gives us the flexibilty of being able to move and rotate the camera
 	// from the pivot but then do the same to the camera independently 
 	// on different axes, allowing us to make corrections for certain situations
 	// I'll demonstrate more later on and also in videos
 	sgd_SetEntityParent(camera,pivot);	
-	// when we want to move the camera globally we move the pivot now
-	sgd_MoveEntity(pivot,0,0.5,10);
-	sgd_SetEntityRotation(pivot,0,-60,0);
+	
+	// when we want to move or turn the camera globally 
+	// we use our pivot now
+	sgd_MoveEntity(pivot,0,0.5,-5);
+	sgd_TurnEntity(pivot,0,-60,0);
 	
 	SGD_Light sun = sgd_CreateDirectionalLight();
 	sgd_SetLightShadowsEnabled(sun,SGD_TRUE);
@@ -89,6 +94,9 @@ int main() {
 	SGD_Model cube = sgd_CreateModel(cube_mesh);	
 	sgd_MoveEntity(cube,0,0.5,3);	
 	
+	// create a basic sphere collider attached to the cube, type 1
+	SGD_Collider cube_collider = sgd_CreateSphereCollider(cube,1,0.5);
+	
 	// sphere setup
     SGD_Material sphere_material = sgd_LoadPBRMaterial("assets/materials/Metal061A_1K-JPG");    
 	SGD_Mesh sphere_mesh = sgd_CreateSphereMesh(0.5,32,32,sphere_material);	
@@ -96,12 +104,22 @@ int main() {
 	SGD_Model sphere = sgd_CreateModel(sphere_mesh);	
 	sgd_MoveEntity(sphere,-2,0.5,3);
 	
+	// create a basic sphere collider attached to the sphere, type 1
+	SGD_Collider sphere_collider = sgd_CreateSphereCollider(sphere,1,0.5);
+	
 	// cylinder setup
     SGD_Material cylinder_material = sgd_LoadPBRMaterial("assets/materials/Wood067_1K-JPG");    
 	SGD_Mesh cylinder_mesh = sgd_CreateCylinderMesh(1,0.5,32,cylinder_material);	
 	sgd_SetMeshShadowsEnabled(cylinder_mesh,SGD_TRUE);
 	SGD_Model cylinder = sgd_CreateModel(cylinder_mesh);	
 	sgd_MoveEntity(cylinder,2,0.5,3);
+	
+	// create a basic sphere collider attached to the cylinder, type 1
+	SGD_Collider cylinder_collider = sgd_CreateSphereCollider(cylinder,1,0.5);
+	
+	// enable collisions between type 0 (the camera pivot) and type 1 (the shape primitives)
+	// we'll also set this as a sliding collision response (2)
+	sgd_EnableCollisions(0,1,2); 
 	
 	// ground setup 
 	SGD_Material ground_material = sgd_LoadPBRMaterial("sgd://materials/PavingStones119_1K-JPG"); 	
@@ -152,7 +170,7 @@ int main() {
 		// comment out the line below to see what happens without it
 		sgd_SetEntityRotation(pivot,sgd_GetEntityRX(pivot),sgd_GetEntityRY(pivot),0);
 		
-		// let's limit our cameras X-axis rotation to prevent gimbal lock
+		// let's limit our cameras X-axis rotation from -70 to 70 to prevent gimbal lock
 		// comment out the following two lines to see what happens when you face "straight up" or "straight down"
 		if (sgd_GetEntityRX(pivot) > 70) sgd_SetEntityRotation(pivot,70,sgd_GetEntityRY(pivot),0);
 		if (sgd_GetEntityRX(pivot) < -70) sgd_SetEntityRotation(pivot,-70,sgd_GetEntityRY(pivot),0);
@@ -164,6 +182,8 @@ int main() {
 		sgd_TurnEntity(sphere,0,spin_speed / 2,0);
 		sgd_TurnEntity(cylinder,0,spin_speed * 2,0);
 		
+		// update the colliders 
+		sgd_UpdateColliders();
 		sgd_RenderScene();
 		
 		// draw our 2D overlay
@@ -175,15 +195,17 @@ int main() {
 		// setup our buffer for snprintf
 		char buffer[30];	
 		
-		// black text 
-		sgd_Set2DTextColor(0,0,0,1);
-		DisplayTextCentered("Making a Flymode Camera",segoe_script_font,3);
+		// green text 
+		sgd_Set2DTextColor(0.1,0.9,0.2,1);
+		DisplayTextCentered("Making a Flymode Camera",segoe_script_font,3);		
 		
-		// grey text
-		sgd_Set2DTextColor(0.5,0.5,0.5,1); 
 		sgd_Set2DFont(segoe_font);
 		snprintf(buffer, sizeof buffer, "Spin Speed : %f", spin_speed);		
 		sgd_Draw2DText(buffer,5,5);
+		snprintf(buffer, sizeof buffer, "CameraRX : %f", sgd_GetEntityRX(camera));		
+		sgd_Draw2DText(buffer,5,25);
+		snprintf(buffer, sizeof buffer, "PivotRX : %f", sgd_GetEntityRX(pivot));		
+		sgd_Draw2DText(buffer,5,45);
 		
 		// yellow text for the bottom of the screen
 		sgd_Set2DTextColor(1,1,0,1); 
@@ -194,7 +216,7 @@ int main() {
 		sgd_Draw2DText(buffer,5,sgd_GetWindowHeight() - fh);
 		// draw bottom right
 		DisplayTextRight("WASD - Move Camera",segoe_font,sgd_GetWindowHeight() - fh);
-
+		DisplayTextRight("Mouse - Steer Camera",segoe_font,sgd_GetWindowHeight() - fh * 2);
 		// red text for the right side 
 		sgd_Set2DTextColor(1,0,0,1);
 		DisplayTextRight("Up and Down Arrows",segoe_font,3);
