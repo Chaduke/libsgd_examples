@@ -41,15 +41,15 @@ def display_text_centered(text,font,yoffset):
 	#get our X-axis window center in pixels	
 	center = sgd.getWindowWidth() / 2
 	# get the width of the text we are displaying and divide by two
-	tw = sgd.getTextWidth(font,text) / 2;
+	tw = sgd.getTextWidth(font,text) / 2
 	# draw the text at the center of screen X-axis
 	# and take into the yoffset value for Y-axis positioning
 	sgd.draw2DText(text,center - tw,yoffset)	
 
 def display_text_right(text,font,yoffset): 
 	sgd.set2DFont(font)
-	tw = sgd.getTextWidth(font,text) + 10;
-	right = sgd.getWindowWidth() - tw;
+	tw = sgd.getTextWidth(font,text) + 10
+	right = sgd.getWindowWidth() - tw
 	sgd.draw2DText(text,right,yoffset)	
 
 sgd.init() 
