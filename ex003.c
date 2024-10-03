@@ -1,13 +1,12 @@
 
 /**************************************************
-/*** LibSGD Examples 
-/*** for the C Programming Language
-/*** https://patreon.com/libsgd
-/*** https://github.com/blitz-research/libsgd/ 
-/*** https://libsgd.org/forum/
-/*** https://skirmish-dev.net/libsgd/help/html/index.html
-
-/**************************************************/
+*** LibSGD Examples 
+*** for the C Programming Language
+*** https://patreon.com/libsgd
+*** https://github.com/blitz-research/libsgd/ 
+*** https://libsgd.org/forum/
+*** https://skirmish-dev.net/libsgd/help/html/index.html
+**************************************************/
 
 // Example 003 - Environment
 // ex003.c

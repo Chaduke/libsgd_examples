@@ -11,6 +11,11 @@ def display_text_centered(text,font,yoffset):
 	center = sgd.getWindowWidth() / 2	
 	tw = sgd.getTextWidth(font,text) / 2;	
 	sgd.draw2DText(text,center - tw,yoffset)
+
+def mouse_in_rect(x1,y1,x2,y2):
+    mx = sgd.getMouseX()
+    my = sgd.getMouseY()
+    return (mx > x1 and mx < x2 and my > y1 and my < y2)
     
 sgd.init()
 sgd.createWindow(1920,1080,"Level Editor",sgd.WINDOW_FLAGS_FULLSCREEN)
@@ -33,7 +38,7 @@ sgd.transformTexCoords(ground_mesh,ground_size,ground_size,0,0)
 # sgd.setMeshShadowsEnabled(ground_mesh,True)
 ground = sgd.createModel(ground_mesh)
 
-avenir_font = sgd.loadFont("../assets/fonts/avenir.ttf",22)
+avenir_font = sgd.loadFont("../assets/fonts/avenir.ttf",20)
 sgd.set2DFont(avenir_font)
 
 cam_speed = 0.15
@@ -41,8 +46,6 @@ cam_turn = 0.15
 model_browser = False
 models_folder = "../assets/gltf"
 model_entries = []
-
-sgd.setMouseCursorMode(3)
 
 loop = True
 while loop:
@@ -72,8 +75,9 @@ while loop:
         sgd.moveEntity(pivot,cam_speed,0,0)
     
     # mouse input   
-    sgd.turnEntity(pivot,0,-sgd.getMouseVX() * cam_turn,0)
-    sgd.turnEntity(camera,-sgd.getMouseVY() * cam_turn,0,0)
+    if not model_browser:
+        sgd.turnEntity(pivot,0,-sgd.getMouseVX() * cam_turn,0)
+        sgd.turnEntity(camera,-sgd.getMouseVY() * cam_turn,0,0)
     
     if sgd.getEntityRX(camera) < -30 : sgd.setEntityRotation(camera,-30,0,0)
     if sgd.getEntityRX(camera) > 30 : sgd.setEntityRotation(camera,30,0,0)
@@ -84,7 +88,8 @@ while loop:
     if sgd.getEntityZ(pivot) < -ground_size + 1 : sgd.setEntityPosition(pivot,sgd.getEntityX(pivot),sgd.getEntityY(pivot),-ground_size + 1)
         
     sgd.clear2D()
-    if model_browser:       
+    if model_browser:      
+        sgd.setMouseCursorMode(1)    
         y = 0
         x = 5
         max_rows = sgd.getWindowHeight() / 20 - 1
@@ -93,11 +98,18 @@ while loop:
             if y>=max_rows:
                 y=0
                 x+=col_width
-            sgd.draw2DText(str(entry.name),x,y * 20)
+            s = str(entry.name)    
+            if mouse_in_rect(x,y*20,x + sgd.getTextWidth(avenir_font,s),y * 20 + sgd.getFontHeight(avenir_font)):
+                sgd.set2DTextColor(1,1,0,1)
+            else:
+                sgd.set2DTextColor(1,1,1,1)                
+            sgd.draw2DText(s,x,y * 20)
             y+=1
     else:
+        sgd.setMouseCursorMode(3)
         sgd.draw2DText("F2 - Model Browser",5,5)
-    display_text_centered("Chaduke's Level Editor",avenir_font,0)
+        display_text_centered("Chaduke's Level Editor",avenir_font,0)
+    
     sgd.renderScene()
     sgd.present()
 sgd.terminate()
