@@ -39,8 +39,7 @@ def save_all_actors(actor_list):
     data = []
     for actor in actor_list:    
         data.append(actor.to_dict())
-    save_to_json(data,"level.json") 
-    
+    save_to_json(data,"level.json")     
 
 def load_all_actors(model_path, collision_mesh):
     data = load_from_json("level.json")
