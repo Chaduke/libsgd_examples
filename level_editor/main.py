@@ -7,6 +7,7 @@ from libsgd import sgd
 import os 
 from actor import *
 import json
+from math import floor
 
 def display_text_centered(text,font,yoffset): 
 	sgd.set2DFont(font)	
@@ -138,8 +139,17 @@ while loop:
             with os.scandir(models_folder) as entries:
                 model_entries = [entry for entry in entries if entry.is_file() and entry.name.endswith('.gltf')]
                 
-    # run forwards / backwards
-    if sgd.isKeyDown(sgd.KEY_W) or sgd.isKeyDown(sgd.KEY_UP): 
+    # move the selected object    
+    if transform_mode and picked_entity and sgd.isKeyDown(sgd.KEY_LEFT_SHIFT):
+        if sgd.isKeyHit(sgd.KEY_A):
+            current_x = sgd.getEntityX(picked_entity)
+            # make sure we're to a 1 unit grid
+            if current_x <> floor(current_x):
+                sgd.setEntityPosition(picked_entity,floor(current_x),sgd.getEntityY(picked_entity),sgd.getEntityZ(picked_entity)
+            sgd.moveEntity(picked_entity,-1,0,0)    
+            
+    # run forwards / backwards    
+    if sgd.isKeyDown(sgd.KEY_W) or sgd.isKeyDown(sgd.KEY_UP):        
         sgd.moveEntity(pivot,0,0,cam_speed)        
     elif sgd.isKeyDown(sgd.KEY_S) or sgd.isKeyDown(sgd.KEY_DOWN): 
         sgd.moveEntity(pivot,0,0,-cam_speed)        
