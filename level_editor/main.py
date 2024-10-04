@@ -46,6 +46,23 @@ def load_all_actors(model_path, collision_mesh):
     actors = [Actor.from_dict(actor_data, model_path, collision_mesh) for actor_data in data]
     return actors
     
+def delete_actor(selected_actor_name):
+    global actors  # Ensure we're modifying the global actors list
+    
+    for actor in actors:
+        if sgd.getEntityName(actor.pivot) == selected_actor_name:
+            # Release LibSGD resources       
+            sgd.releaseHandle(actor.collider)
+            sgd.destroyEntity(actor.collider_model)
+            sgd.destroyEntity(actor.view_model)
+            sgd.destroyEntity(actor.pivot)
+            
+            # Remove from actors list
+            actors.remove(actor)
+            del actor  # Ensure the actor is removed from memory
+            print(f"Deleted : {selected_actor_name}")
+            break 
+            
 sgd.init()
 sgd.createWindow(1920,1080,"Level Editor",sgd.WINDOW_FLAGS_FULLSCREEN)
 env = sgd.loadCubeTexture("sgd://envmaps/nightsky-cube.png",4,18)
@@ -82,18 +99,29 @@ models_folder = "../assets/gltf/"
 model_entries = []
 collider_mesh = sgd.createSphereMesh(1,16,16,get_collider_material())
 actors = []
-sgd.enableCollisions(0,1,1)
 
+load_on_start = True
+colliders_visible = True
+
+if load_on_start:
+    actors = load_all_actors(models_folder, collider_mesh)
+    if not colliders_visible:
+        for actor in actors:
+            sgd.setEntityVisible(actor.collider_model,False)
+                
+sgd.enableCollisions(0,1,1)
 collisions_on = True
-colliders_visible = False
 transform_mode = False
+picked_entity = 0
 
 selected_image = sgd.loadImage("../assets/textures/selected.png")
 sgd.setImageViewMode(selected_image,2)
 selected = sgd.createSprite(selected_image)
-sgd.scaleEntity(selected,5,5,1)
+sgd.scaleEntity(selected,10,10,1)
 sgd.turnEntity(selected,90,0,0)
-sgd.moveEntity(selected,0,0,0.1)
+sgd.moveEntity(selected,0,0,-0.1)
+
+crosshairs = sgd.loadImage("../assets/textures/crosshairs.png")
 
 loop = True
 while loop:
@@ -150,11 +178,9 @@ while loop:
     # toggle transform mode
     if sgd.isKeyHit(sgd.KEY_T):
         if transform_mode:
-            transform_mode = False
-            sgd.setMouseCursorMode(3)
+            transform_mode = False            
         else:
-            transform_mode = True
-            sgd.setMouseCursorMode(1)
+            transform_mode = True            
             collisions_on = True
             
     # mouse input   
@@ -163,11 +189,22 @@ while loop:
         sgd.turnEntity(camera,-sgd.getMouseVY() * cam_turn,0,0)
         if transform_mode:
             if sgd.isMouseButtonHit(0):                
-                picked_collider = sgd.cameraPick(camera,sgd.getMouseX(),sgd.getMouseY(),0)
+                picked_collider = sgd.cameraPick(camera,sgd.getWindowWidth()/2,sgd.getWindowHeight()/2,2)
                 print(f"Picked Collider = {picked_collider}")
                 if picked_collider:                    
                     picked_entity = sgd.getColliderEntity(picked_collider)
                     sgd.setEntityPosition(selected,sgd.getEntityX(picked_entity),0.1,sgd.getEntityZ(picked_entity))
+                else:
+                    sgd.setEntityPosition(selected,sgd.getEntityX(selected),-0.1,sgd.getEntityZ(selected))    
+            if picked_entity:
+                # Check for Delete key press
+                if sgd.isKeyHit(sgd.KEY_DELETE):
+                    selected_actor_name = sgd.getEntityName(picked_entity) 
+                    print(f"Deleting Actor : {selected_actor_name}") 
+                    delete_actor(selected_actor_name)    
+                    picked_entity = 0
+                    picked_collider = 0
+                    sgd.setEntityPosition(selected,sgd.getEntityX(selected),-0.1,sgd.getEntityZ(selected)) 
     else:
         if sgd.isMouseButtonHit(0):            
             try:                
@@ -221,7 +258,7 @@ while loop:
             y+=1
         display_text_centered("MODEL BROWSER",avenir_font,sgd.getWindowHeight()-25)    
     else:
-        if not transform_mode: sgd.setMouseCursorMode(3)
+        sgd.setMouseCursorMode(3)
         sgd.draw2DText("TAB - Model Browser",5,5)
         sgd.draw2DText("V - Toggle Collider Visibility",5,25)
         sgd.draw2DText("C - Toggle Collisions",5,45)
@@ -230,6 +267,7 @@ while loop:
         display_text_centered("Chaduke's Level Editor",avenir_font,0)
         if transform_mode:
             display_text_centered("(TRANSFORM MODE)",avenir_font,25)
+            sgd.draw2DImage(crosshairs,sgd.getWindowWidth()/2,sgd.getWindowHeight()/2,1)
         
         if collisions_on:
             display_text_centered("Collisions ON",avenir_font,sgd.getWindowHeight()-25)

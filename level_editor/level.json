@@ -1,15 +1,15 @@
 [
     {
-        "actor_name": "tree_pine_yellow_large.gltf",
-        "filename": "tree_pine_yellow_large.gltf",
+        "actor_name": "fence_seperate.gltf",
+        "filename": "fence_seperate.gltf",
         "position": [
-            -8.662274001611049,
+            -2.6623801210776343,
             1.0,
-            3.709283731583665
+            -14.15409388893916
         ],
         "rotation": [
             0.0,
-            -139.6500027416353,
+            54.00000469694092,
             -0.0
         ],
         "scale": [
@@ -19,16 +19,73 @@
         ]
     },
     {
-        "actor_name": "fence.gltf",
-        "filename": "fence.gltf",
+        "actor_name": "crypt.gltf",
+        "filename": "crypt.gltf",
         "position": [
-            -5.681318986106783,
+            -10.19587211538972,
             1.0,
-            23.338310553726476
+            5.7630429879115805
         ],
         "rotation": [
             0.0,
-            -124.65000299547948,
+            -34.20000040285238,
+            -0.0
+        ],
+        "scale": [
+            1.0,
+            1.0,
+            1.0
+        ]
+    },
+    {
+        "actor_name": "tree_pine_yellow_small.gltf",
+        "filename": "tree_pine_yellow_small.gltf",
+        "position": [
+            -3.6564687991151485,
+            1.0,
+            -35.04950980229499
+        ],
+        "rotation": [
+            0.0,
+            112.95000088698235,
+            -0.0
+        ],
+        "scale": [
+            1.0,
+            1.0,
+            1.0
+        ]
+    },
+    {
+        "actor_name": "tree_pine_orange_large.gltf",
+        "filename": "tree_pine_orange_large.gltf",
+        "position": [
+            13.760547581563827,
+            1.0,
+            -13.604553505356584
+        ],
+        "rotation": [
+            0.0,
+            142.80000156488182,
+            -0.0
+        ],
+        "scale": [
+            1.0,
+            1.0,
+            1.0
+        ]
+    },
+    {
+        "actor_name": "tree_pine_yellow_large.gltf",
+        "filename": "tree_pine_yellow_large.gltf",
+        "position": [
+            27.1621845780355,
+            1.0,
+            -21.46361838768104
+        ],
+        "rotation": [
+            0.0,
+            149.700002179762,
             -0.0
         ],
         "scale": [
