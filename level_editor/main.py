@@ -163,7 +163,7 @@ while loop:
         sgd.turnEntity(camera,-sgd.getMouseVY() * cam_turn,0,0)
         if transform_mode:
             if sgd.isMouseButtonHit(0):                
-                picked_collider = sgd.cameraPick(camera,sgd.getMouseX(),sgd.getMouseY(),1)
+                picked_collider = sgd.cameraPick(camera,sgd.getMouseX(),sgd.getMouseY(),0)
                 print(f"Picked Collider = {picked_collider}")
                 if picked_collider:                    
                     picked_entity = sgd.getColliderEntity(picked_collider)
