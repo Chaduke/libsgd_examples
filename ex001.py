@@ -42,7 +42,7 @@
 # when the window is closed or Escape key is pressed
 
 # Notes :
-# This file is compatible with LibSGD version 0.14.4
+# This file is compatible with LibSGD version 0.15
 # The latest distribution is available from Patreon link above
 # You only need to pay 2 bucks a month (minimum) to support this awesome project
 # and I think it's well worth it!

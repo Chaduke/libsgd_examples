@@ -81,16 +81,19 @@ model_browser = False
 models_folder = "../assets/gltf/"
 model_entries = []
 collider_mesh = sgd.createSphereMesh(1,16,16,get_collider_material())
-actors = load_all_actors(models_folder, collider_mesh)
-#actors = []
+actors = []
 sgd.enableCollisions(0,1,1)
 
 collisions_on = True
 colliders_visible = False
+transform_mode = False
 
-if not colliders_visible:
-    for actor in actors:
-        sgd.setEntityVisible(actor.collider_model,False)
+selected_image = sgd.loadImage("../assets/textures/selected.png")
+sgd.setImageViewMode(selected_image,2)
+selected = sgd.createSprite(selected_image)
+sgd.scaleEntity(selected,5,5,1)
+sgd.turnEntity(selected,90,0,0)
+sgd.moveEntity(selected,0,0,0.1)
 
 loop = True
 while loop:
@@ -136,11 +139,35 @@ while loop:
             collisions_on = False
         else:
             collisions_on = True
+    
+    # load level.json 
+    if sgd.isKeyHit(sgd.KEY_L):
+        actors = load_all_actors(models_folder, collider_mesh)
+        if not colliders_visible:
+            for actor in actors:
+                sgd.setEntityVisible(actor.collider_model,False)
+                
+    # toggle transform mode
+    if sgd.isKeyHit(sgd.KEY_T):
+        if transform_mode:
+            transform_mode = False
+            sgd.setMouseCursorMode(3)
+        else:
+            transform_mode = True
+            sgd.setMouseCursorMode(1)
+            collisions_on = True
             
     # mouse input   
     if not model_browser:
         sgd.turnEntity(pivot,0,-sgd.getMouseVX() * cam_turn,0)
         sgd.turnEntity(camera,-sgd.getMouseVY() * cam_turn,0,0)
+        if transform_mode:
+            if sgd.isMouseButtonHit(0):                
+                picked_collider = sgd.cameraPick(camera,sgd.getMouseX(),sgd.getMouseY(),1)
+                print(f"Picked Collider = {picked_collider}")
+                if picked_collider:                    
+                    picked_entity = sgd.getColliderEntity(picked_collider)
+                    sgd.setEntityPosition(selected,sgd.getEntityX(picked_entity),0.1,sgd.getEntityZ(picked_entity))
     else:
         if sgd.isMouseButtonHit(0):            
             try:                
@@ -194,12 +221,16 @@ while loop:
             y+=1
         display_text_centered("MODEL BROWSER",avenir_font,sgd.getWindowHeight()-25)    
     else:
-        sgd.setMouseCursorMode(3)
+        if not transform_mode: sgd.setMouseCursorMode(3)
         sgd.draw2DText("TAB - Model Browser",5,5)
         sgd.draw2DText("V - Toggle Collider Visibility",5,25)
         sgd.draw2DText("C - Toggle Collisions",5,45)
+        sgd.draw2DText("T - Toggle Transform Mode",5,65)
         
         display_text_centered("Chaduke's Level Editor",avenir_font,0)
+        if transform_mode:
+            display_text_centered("(TRANSFORM MODE)",avenir_font,25)
+        
         if collisions_on:
             display_text_centered("Collisions ON",avenir_font,sgd.getWindowHeight()-25)
         else:
