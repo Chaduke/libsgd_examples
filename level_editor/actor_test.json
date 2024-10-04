@@ -1,0 +1,20 @@
+{
+    "actor_name": "SampleActor",
+    "view_mesh": "sample_view.gltf",
+    "collider_mesh": "sample_collider.gltf",
+    "position": [
+        0,
+        1,
+        0
+    ],
+    "velocity": [
+        0,
+        0,
+        0
+    ],
+    "acceleration": [
+        0,
+        0,
+        0
+    ]
+}

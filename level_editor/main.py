@@ -5,7 +5,8 @@
 
 from libsgd import sgd
 import os 
-from actor import get_collider_material,Vec3,Actor
+from actor import *
+import json
 
 def display_text_centered(text,font,yoffset): 
 	sgd.set2DFont(font)	
@@ -17,6 +18,34 @@ def mouse_in_rect(x1,y1,x2,y2):
     mx = sgd.getMouseX()
     my = sgd.getMouseY()
     return (mx > x1 and mx < x2 and my > y1 and my < y2)
+
+def generate_unique_name(base_name, existing_names):
+    name = base_name
+    count = 1
+    while name in existing_names:
+        count += 1
+        name = f"{base_name} ({count})"
+    return name  
+    
+def save_to_json(data, filename):
+    with open(filename, 'w') as file:
+        json.dump(data, file, indent=4)
+
+def load_from_json(filename):
+    with open(filename, 'r') as file:
+        return json.load(file)    
+
+def save_all_actors(actor_list):
+    data = []
+    for actor in actor_list:    
+        data.append(actor.to_dict())
+    save_to_json(data,"level.json") 
+    
+
+def load_all_actors(model_path, collision_mesh):
+    data = load_from_json("level.json")
+    actors = [Actor.from_dict(actor_data, model_path, collision_mesh) for actor_data in data]
+    return actors
     
 sgd.init()
 sgd.createWindow(1920,1080,"Level Editor",sgd.WINDOW_FLAGS_FULLSCREEN)
@@ -52,11 +81,17 @@ cam_turn = 0.15
 model_browser = False
 models_folder = "../assets/gltf/"
 model_entries = []
-actors=[]
 collider_mesh = sgd.createSphereMesh(1,16,16,get_collider_material())
+actors = load_all_actors(models_folder, collider_mesh)
+#actors = []
 sgd.enableCollisions(0,1,1)
+
 collisions_on = True
-colliders_visible = True
+colliders_visible = False
+
+if not colliders_visible:
+    for actor in actors:
+        sgd.setEntityVisible(actor.collider_model,False)
 
 loop = True
 while loop:
@@ -108,17 +143,27 @@ while loop:
         sgd.turnEntity(pivot,0,-sgd.getMouseVX() * cam_turn,0)
         sgd.turnEntity(camera,-sgd.getMouseVY() * cam_turn,0,0)
     else:
-        if sgd.isMouseButtonHit(0):
-            current_mesh = sgd.loadMesh(models_folder + current_model_string)            
-            sgd.setMeshShadowsEnabled(current_mesh,True)
-            current_actor = Actor(current_model_string,current_mesh,collider_mesh,sgd.getEntityX(pivot),sgd.getEntityZ(pivot))
-            if not colliders_visible: sgd.setEntityVisible(current_actor.collider_model,False)
-            actors.append(current_actor)
-            sgd.setEntityRotation(current_actor.pivot,0,sgd.getEntityRY(pivot),0)
-            sgd.moveEntity(current_actor.pivot,0,0,3)            
-            sgd.setEntityRotation(pivot,0,sgd.getEntityRY(pivot),0)            
-            model_browser = False            
-    
+        if sgd.isMouseButtonHit(0):            
+            try:                
+                current_mesh = sgd.loadMesh(models_folder + current_model_string)
+                if not current_mesh:
+                    raise Exception("Failed to load mesh")                
+                sgd.setMeshShadowsEnabled(current_mesh,True)
+                # check actors list for existing name
+                existing_strings = []                
+                for actor in actors:
+                    existing_strings.append(sgd.getEntityName(actor.pivot))                    
+                unique_name = generate_unique_name(current_model_string,existing_strings)
+                print (f"Unique Name : {unique_name}")
+                current_actor = Actor(unique_name,current_model_string,current_mesh,collider_mesh,sgd.getEntityX(pivot),sgd.getEntityZ(pivot))
+                if not colliders_visible: sgd.setEntityVisible(current_actor.collider_model,False)
+                actors.append(current_actor)
+                sgd.setEntityRotation(current_actor.pivot,0,sgd.getEntityRY(pivot),0)
+                sgd.moveEntity(current_actor.pivot,0,0,3)            
+                sgd.setEntityRotation(pivot,0,sgd.getEntityRY(pivot),0)            
+                model_browser = False            
+            except Exception as e:
+                print(f"Error: {e}")  # Debug print
     if sgd.getEntityRX(camera) < -30 : sgd.setEntityRotation(camera,-30,0,0)
     if sgd.getEntityRX(camera) > 30 : sgd.setEntityRotation(camera,30,0,0)
     
@@ -161,6 +206,7 @@ while loop:
         else:
             display_text_centered("Collisions OFF",avenir_font,sgd.getWindowHeight()-25)
     sgd.present()
+save_all_actors(actors)    
 sgd.terminate()
 
 

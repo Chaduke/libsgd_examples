@@ -28,9 +28,10 @@ class Vec3:
         self.z+=other.z 
         
 class Actor:
-    def __init__(self,actor_name,view_mesh,collider_mesh,x,z):        
+    def __init__(self,actor_name,base_name,view_mesh,collider_mesh,x,z):        
         self.pivot = sgd.createModel(0)
-        sgd.setEntityName(self.pivot,actor_name)    
+        sgd.setEntityName(self.pivot,actor_name) 
+        self.base_name = base_name    
         self.view_model = sgd.createModel(view_mesh)
         sgd.setEntityParent(self.view_model,self.pivot)
         sgd.moveEntity(self.view_model,0,-1,0)
@@ -40,9 +41,25 @@ class Actor:
         self.collider = sgd.createSphereCollider(self.pivot,1,1)
         self.velocity = Vec3(0,0,0)
         self.acceleration = Vec3(0,0,0)
-    def update_movement():
+        
+    def update_movement(self):
         self.velocity.add(self.acceleration)
         sgd.moveEntity(self.pivot,self.velocity.x,self.velocity.y,self.velocity.z)
-		
-	
-
+        
+    def to_dict(self):
+        return {
+            "actor_name": sgd.getEntityName(self.pivot),
+            "base_name": self.base_name,            
+            "position": [sgd.getEntityX(self.pivot), sgd.getEntityY(self.pivot), sgd.getEntityZ(self.pivot)],
+            "rotation": [sgd.getEntityRX(self.pivot), sgd.getEntityRY(self.pivot), sgd.getEntityRZ(self.pivot)],
+            "scale": [sgd.getEntitySX(self.pivot), sgd.getEntitySY(self.pivot), sgd.getEntitySZ(self.pivot)]
+        }
+        
+    @classmethod
+    def from_dict(cls,data,model_path,collision_mesh):
+        view_mesh = sgd.loadMesh(model_path + data['base_name'])
+        sgd.setMeshShadowsEnabled(view_mesh,True)        
+        actor = cls(data['actor_name'], data['base_name'],view_mesh,collision_mesh,data['position'][0],data['position'][2])
+        sgd.setEntityRotation(actor.pivot,0,data['rotation'][1],0)      
+        sgd.setEntityScale(actor.pivot, data['scale'][0], data['scale'][1], data['scale'][2])
+        return actor
