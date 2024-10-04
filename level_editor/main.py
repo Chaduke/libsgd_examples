@@ -4,9 +4,8 @@
 # 20241001
 
 from libsgd import sgd
-import os 
+import os,json,random
 from actor import *
-import json
 from math import floor
 
 def display_text_centered(text,font,yoffset): 
@@ -78,7 +77,7 @@ sgd.moveEntity(pivot,0,1,0)
 
 light = sgd.createDirectionalLight()
 sgd.setLightColor(light,0.6,0.8,1.0,0.4)
-sgd.setAmbientLightColor(0.6,0.8,1.0,0.4)
+sgd.setAmbientLightColor(0.6,0.8,1.0,0.1)
 sgd.setLightShadowsEnabled(light,True)
 sgd.turnEntity(light,-20,-225,0)
 
@@ -89,6 +88,75 @@ ground_mesh = sgd.createBoxMesh(-ground_size,-0.1,-ground_size,ground_size,0,gro
 sgd.transformTexCoords(ground_mesh,ground_size,ground_size,0,0)
 # sgd.setMeshShadowsEnabled(ground_mesh,True)
 ground = sgd.createModel(ground_mesh)
+
+# GRASS / WEEDS
+add_grass = True
+if add_grass:
+    weeds_image = sgd.loadImage("../assets/textures/weeds.png")
+    for i in range(ground_size * 20):   
+        w = sgd.createSprite(weeds_image) 
+        sc = random.random() + 0.5    
+        sgd.moveEntity(w, random.random() * ground_size * 2 - ground_size, sc / 2, random.random() * ground_size * 2 - ground_size)    
+        sgd.setEntityScale(w,sc,sc,1)
+
+# BONES
+add_bones = True
+if add_bones:
+    bones = [sgd.loadMesh("../assets/gltf/bone_A.gltf"),
+    sgd.loadMesh("../assets/gltf/bone_B.gltf"),
+    sgd.loadMesh("../assets/gltf/bone_C.gltf")]
+
+    for bone in bones:
+        sgd.setMeshShadowsEnabled(bone,True)   
+
+    for i in range(ground_size):
+        r = random.random()  
+        if r > 0.66: 
+            bone = sgd.createModel(bones[0])
+        elif r > 0.33: 
+            bone = sgd.createModel(bones[1])
+        else: 
+            bone = sgd.createModel(bones[2])
+        sgd.moveEntity(bone, random.random() * ground_size * 2 - ground_size, 0, random.random() * ground_size * 2 - ground_size)
+        sc = random.random() * 0.5 + 0.5
+        sgd.scaleEntity(bone, sc,sc,sc)
+        sgd.turnEntity(bone,0,random.random() * 360,0)
+
+# FENCE
+add_fence = True
+if add_fence:
+    fence_mesh = sgd.loadMesh("../assets/gltf/fence.gltf")
+    sgd.setMeshShadowsEnabled(fence_mesh,True)
+
+    fence_broken_mesh = sgd.loadMesh("../assets/gltf/fence_broken.gltf")
+    sgd.setMeshShadowsEnabled(fence_broken_mesh,True)
+
+    for i in range(-ground_size+2,ground_size,4):
+        if random.random() > 0.9:
+            fence = sgd.createModel(fence_broken_mesh)
+        else:
+            fence = sgd.createModel(fence_mesh)   
+        sgd.setEntityPosition(fence,i,0,ground_size)
+        
+        if random.random() > 0.9:
+            fence = sgd.createModel(fence_broken_mesh)
+        else:
+            fence = sgd.createModel(fence_mesh)   
+        sgd.setEntityPosition(fence,i,0,-ground_size)
+        
+        if random.random() > 0.9:
+            fence = sgd.createModel(fence_broken_mesh)
+        else:
+            fence = sgd.createModel(fence_mesh)   
+        sgd.setEntityPosition(fence,-ground_size,0,i)
+        sgd.setEntityRotation(fence,0,90,0)
+        
+        if random.random() > 0.9:
+            fence = sgd.createModel(fence_broken_mesh)
+        else:
+            fence = sgd.createModel(fence_mesh)   
+        sgd.setEntityPosition(fence,ground_size,0,i)
+        sgd.setEntityRotation(fence,0,90,0)       
 
 avenir_font = sgd.loadFont("../assets/fonts/avenir.ttf",20)
 sgd.set2DFont(avenir_font)
@@ -102,7 +170,7 @@ collider_mesh = sgd.createSphereMesh(1,16,16,get_collider_material())
 actors = []
 
 load_on_start = True
-colliders_visible = True
+colliders_visible = False
 
 if load_on_start:
     actors = load_all_actors(models_folder, collider_mesh)
@@ -114,6 +182,7 @@ sgd.enableCollisions(0,1,1)
 collisions_on = True
 transform_mode = False
 picked_entity = 0
+topdown_mode = False
 
 selected_image = sgd.loadImage("../assets/textures/selected.png")
 sgd.setImageViewMode(selected_image,2)
@@ -142,23 +211,62 @@ while loop:
     # move the selected object    
     if transform_mode and picked_entity and sgd.isKeyDown(sgd.KEY_LEFT_SHIFT):
         if sgd.isKeyHit(sgd.KEY_A):
+            sgd.setEntityRotation(picked_entity,0,0,0)
             current_x = sgd.getEntityX(picked_entity)
             # make sure we're to a 1 unit grid
-            if current_x <> floor(current_x):
-                sgd.setEntityPosition(picked_entity,floor(current_x),sgd.getEntityY(picked_entity),sgd.getEntityZ(picked_entity)
-            sgd.moveEntity(picked_entity,-1,0,0)    
-            
-    # run forwards / backwards    
-    if sgd.isKeyDown(sgd.KEY_W) or sgd.isKeyDown(sgd.KEY_UP):        
-        sgd.moveEntity(pivot,0,0,cam_speed)        
-    elif sgd.isKeyDown(sgd.KEY_S) or sgd.isKeyDown(sgd.KEY_DOWN): 
-        sgd.moveEntity(pivot,0,0,-cam_speed)        
-    
-    # strafe left / right    
-    if sgd.isKeyDown(sgd.KEY_A) or sgd.isKeyDown(sgd.KEY_LEFT): 
-        sgd.moveEntity(pivot,-cam_speed,0,0)
-    elif sgd.isKeyDown(sgd.KEY_D) or sgd.isKeyDown(sgd.KEY_RIGHT): 
-        sgd.moveEntity(pivot,cam_speed,0,0)
+            if current_x != floor(current_x):
+                sgd.setEntityPosition(picked_entity,floor(current_x),sgd.getEntityY(picked_entity),sgd.getEntityZ(picked_entity))
+            sgd.moveEntity(picked_entity,-1,0,0)
+            sgd.setEntityPosition(selected,sgd.getEntityX(picked_entity),0.1,sgd.getEntityZ(picked_entity)) 
+        if sgd.isKeyHit(sgd.KEY_D):
+            sgd.setEntityRotation(picked_entity,0,0,0)
+            current_x = sgd.getEntityX(picked_entity)
+            # make sure we're to a 1 unit grid
+            if current_x != floor(current_x):
+                sgd.setEntityPosition(picked_entity,floor(current_x),sgd.getEntityY(picked_entity),sgd.getEntityZ(picked_entity))
+            sgd.moveEntity(picked_entity,1,0,0)
+            sgd.setEntityPosition(selected,sgd.getEntityX(picked_entity),0.1,sgd.getEntityZ(picked_entity)) 
+        if sgd.isKeyHit(sgd.KEY_W):
+            sgd.setEntityRotation(picked_entity,0,0,0)
+            current_z = sgd.getEntityZ(picked_entity)
+            # make sure we're to a 1 unit grid
+            if current_z != floor(current_z):
+                sgd.setEntityPosition(picked_entity,sgd.getEntityX(picked_entity),sgd.getEntityY(picked_entity),floor(current_z))
+            sgd.moveEntity(picked_entity,0,0,1)
+            sgd.setEntityPosition(selected,sgd.getEntityX(picked_entity),0.1,sgd.getEntityZ(picked_entity)) 
+        if sgd.isKeyHit(sgd.KEY_S):
+            sgd.setEntityRotation(picked_entity,0,0,0)
+            current_z = sgd.getEntityZ(picked_entity)
+            # make sure we're to a 1 unit grid
+            if current_z != floor(current_z):
+                sgd.setEntityPosition(picked_entity,sgd.getEntityX(picked_entity),sgd.getEntityY(picked_entity),floor(current_z))
+            sgd.moveEntity(picked_entity,0,0,-1)
+            sgd.setEntityPosition(selected,sgd.getEntityX(picked_entity),0.1,sgd.getEntityZ(picked_entity))     
+    else:        
+        # run forwards / backwards           
+        if sgd.isKeyDown(sgd.KEY_W) or sgd.isKeyDown(sgd.KEY_UP): 
+            if topdown_mode:
+                sgd.moveEntity(pivot,0,cam_speed*2,0)
+            else:
+                sgd.moveEntity(pivot,0,0,cam_speed)
+                
+        elif sgd.isKeyDown(sgd.KEY_S) or sgd.isKeyDown(sgd.KEY_DOWN): 
+            if topdown_mode:
+                sgd.moveEntity(pivot,0,-cam_speed*2,0)
+            else:
+                sgd.moveEntity(pivot,0,0,-cam_speed)
+        
+        # strafe left / right    
+        if sgd.isKeyDown(sgd.KEY_A) or sgd.isKeyDown(sgd.KEY_LEFT): 
+            if topdown_mode:
+                sgd.moveEntity(pivot,-cam_speed*2,0,0)
+            else:
+                sgd.moveEntity(pivot,-cam_speed,0,0)
+        elif sgd.isKeyDown(sgd.KEY_D) or sgd.isKeyDown(sgd.KEY_RIGHT):
+            if topdown_mode:
+                sgd.moveEntity(pivot,cam_speed*2,0,0)
+            else:
+                sgd.moveEntity(pivot,cam_speed,0,0)
     
     # toggle collider visiblity
     if sgd.isKeyHit(sgd.KEY_V):
@@ -185,18 +293,35 @@ while loop:
             for actor in actors:
                 sgd.setEntityVisible(actor.collider_model,False)
                 
-    # toggle transform mode
+    # toggle transform mode or topdown mode
     if sgd.isKeyHit(sgd.KEY_T):
-        if transform_mode:
-            transform_mode = False            
-        else:
-            transform_mode = True            
-            collisions_on = True
+        if sgd.isKeyDown(sgd.KEY_LEFT_SHIFT):
+            if topdown_mode:
+                topdown_mode = False
+                sgd.setEntityPosition(pivot,saved_x,saved_y,saved_z)
+                sgd.setEntityRotation(pivot,saved_rx,saved_ry,saved_rz)                
+            else:
+                topdown_mode = True
+                saved_x = sgd.getEntityX(pivot)
+                saved_y = sgd.getEntityY(pivot)
+                saved_z = sgd.getEntityZ(pivot)
+                saved_rx = sgd.getEntityRX(pivot)
+                saved_ry = sgd.getEntityRY(pivot)
+                saved_rz = sgd.getEntityRZ(pivot)
+                sgd.setEntityRotation(pivot,-90,0,0)
+                sgd.setEntityPosition(pivot,saved_x,120,saved_z)
+        else:        
+            if transform_mode:
+                transform_mode = False            
+            else:
+                transform_mode = True            
+                collisions_on = True
             
     # mouse input   
     if not model_browser:
-        sgd.turnEntity(pivot,0,-sgd.getMouseVX() * cam_turn,0)
-        sgd.turnEntity(camera,-sgd.getMouseVY() * cam_turn,0,0)
+        if not topdown_mode:
+            sgd.turnEntity(pivot,0,-sgd.getMouseVX() * cam_turn,0)
+            sgd.turnEntity(camera,-sgd.getMouseVY() * cam_turn,0,0)
         if transform_mode:
             if sgd.isMouseButtonHit(0):                
                 picked_collider = sgd.cameraPick(camera,sgd.getWindowWidth()/2,sgd.getWindowHeight()/2,2)
@@ -236,14 +361,16 @@ while loop:
                 sgd.setEntityRotation(pivot,0,sgd.getEntityRY(pivot),0)            
                 model_browser = False            
             except Exception as e:
-                print(f"Error: {e}")  # Debug print
-    if sgd.getEntityRX(camera) < -30 : sgd.setEntityRotation(camera,-30,0,0)
-    if sgd.getEntityRX(camera) > 30 : sgd.setEntityRotation(camera,30,0,0)
+                print(f"Error: {e}")  # Debug print   
     
-    if sgd.getEntityX(pivot) > ground_size-1 : sgd.setEntityPosition(pivot,ground_size-1,sgd.getEntityY(pivot),sgd.getEntityZ(pivot))
-    if sgd.getEntityX(pivot) < -ground_size + 1 : sgd.setEntityPosition(pivot,-ground_size+1,sgd.getEntityY(pivot),sgd.getEntityZ(pivot))
-    if sgd.getEntityZ(pivot) > ground_size-1 : sgd.setEntityPosition(pivot,sgd.getEntityX(pivot),sgd.getEntityY(pivot),ground_size-1)
-    if sgd.getEntityZ(pivot) < -ground_size + 1 : sgd.setEntityPosition(pivot,sgd.getEntityX(pivot),sgd.getEntityY(pivot),-ground_size + 1)
+    if not topdown_mode:
+        if sgd.getEntityRX(camera) < -30 : sgd.setEntityRotation(camera,-30,0,0)
+        if sgd.getEntityRX(camera) > 30 : sgd.setEntityRotation(camera,30,0,0)
+        if sgd.getEntityX(pivot) > ground_size-1 : sgd.setEntityPosition(pivot,ground_size-1,sgd.getEntityY(pivot),sgd.getEntityZ(pivot))
+        if sgd.getEntityX(pivot) < -ground_size + 1 : sgd.setEntityPosition(pivot,-ground_size+1,sgd.getEntityY(pivot),sgd.getEntityZ(pivot))
+        if sgd.getEntityZ(pivot) > ground_size-1 : sgd.setEntityPosition(pivot,sgd.getEntityX(pivot),sgd.getEntityY(pivot),ground_size-1)
+        if sgd.getEntityZ(pivot) < -ground_size + 1 : sgd.setEntityPosition(pivot,sgd.getEntityX(pivot),sgd.getEntityY(pivot),-ground_size + 1)
+        
     if collisions_on: sgd.updateColliders()
     
     sgd.renderScene()    
@@ -273,6 +400,7 @@ while loop:
         sgd.draw2DText("V - Toggle Collider Visibility",5,25)
         sgd.draw2DText("C - Toggle Collisions",5,45)
         sgd.draw2DText("T - Toggle Transform Mode",5,65)
+        sgd.draw2DText("SHIFT+T - Toggle Topdown Mode",5,85)
         
         display_text_centered("Chaduke's Level Editor",avenir_font,0)
         if transform_mode:
