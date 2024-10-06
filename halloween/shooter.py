@@ -5,9 +5,9 @@ from math import sin
 def display_text_centered(text,font,yoffset): 
 	sgd.set2DFont(font)	
 	center = sgd.getWindowWidth() / 2	
-	tw = sgd.getTextWidth(font,text) / 2;	
+	tw = sgd.getTextWidth(font,text) / 2
 	sgd.draw2DText(text,center - tw,yoffset)
-    
+
 sgd.init()
 sgd.createWindow(1920,1080,"Halloween Shooter",sgd.WINDOW_FLAGS_FULLSCREEN)
 camera = sgd.createPerspectiveCamera()
@@ -32,11 +32,11 @@ ground = sgd.createModel(ground_mesh)
 # GRASS / WEEDS
 weeds_image = sgd.loadImage("../assets/textures/weeds.png")
 
-for i in range(ground_size * 60):   
-    w = sgd.createSprite(weeds_image) 
-    sc = random.random() + 0.5    
-    sgd.moveEntity(w, random.random() * ground_size * 2 - ground_size, sc / 2, random.random() * ground_size * 2 - ground_size)    
-    sgd.setEntityScale(w,sc,sc,1)
+for i in range(ground_size * 60):
+	w = sgd.createSprite(weeds_image)
+	sc = random.random() + 0.5
+	sgd.moveEntity(w, random.random() * ground_size * 2 - ground_size, sc / 2, random.random() * ground_size * 2 - ground_size)
+	sgd.setEntityScale(w,sc,sc,1)
 
 # HALLOWEEN 3D PACK MODELS 
 arch_gate = sgd.loadModel("../assets/gltf/arch_gate.gltf")
@@ -72,20 +72,20 @@ sgd.loadMesh("../assets/gltf/bone_B.gltf"),
 sgd.loadMesh("../assets/gltf/bone_C.gltf")]
 
 for bone in bones:
-    sgd.setMeshShadowsEnabled(bone,True)   
+	sgd.setMeshShadowsEnabled(bone,True)
 
 for i in range(ground_size):
-    r = random.random()  
-    if r > 0.66: 
-        bone = sgd.createModel(bones[0])
-    elif r > 0.33: 
-        bone = sgd.createModel(bones[1])
-    else: 
-        bone = sgd.createModel(bones[2])
-    sgd.moveEntity(bone, random.random() * ground_size * 2 - ground_size, 0, random.random() * ground_size * 2 - ground_size)
-    sc = random.random() * 0.5 + 0.5
-    sgd.scaleEntity(bone, sc,sc,sc)
-    sgd.turnEntity(bone,0,random.random() * 360,0)
+	r = random.random()
+	if r > 0.66:
+		bone = sgd.createModel(bones[0])
+	elif r > 0.33:
+		bone = sgd.createModel(bones[1])
+	else:
+		bone = sgd.createModel(bones[2])
+	sgd.moveEntity(bone, random.random() * ground_size * 2 - ground_size, 0, random.random() * ground_size * 2 - ground_size)
+	sc = random.random() * 0.5 + 0.5
+	sgd.scaleEntity(bone, sc,sc,sc)
+	sgd.turnEntity(bone,0,random.random() * 360,0)
 
 candle = sgd.loadModel("../assets/gltf/candle.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(candle),True)
@@ -123,31 +123,31 @@ fence_broken_mesh = sgd.loadMesh("../assets/gltf/fence_broken.gltf")
 sgd.setMeshShadowsEnabled(fence_broken_mesh,True)
 
 for i in range(-ground_size+2,ground_size,4):
-    if random.random() > 0.9:
-        fence = sgd.createModel(fence_broken_mesh)
-    else:
-        fence = sgd.createModel(fence_mesh)   
-    sgd.setEntityPosition(fence,i,0,ground_size)
-    
-    if random.random() > 0.9:
-        fence = sgd.createModel(fence_broken_mesh)
-    else:
-        fence = sgd.createModel(fence_mesh)   
-    sgd.setEntityPosition(fence,i,0,-ground_size)
-    
-    if random.random() > 0.9:
-        fence = sgd.createModel(fence_broken_mesh)
-    else:
-        fence = sgd.createModel(fence_mesh)   
-    sgd.setEntityPosition(fence,-ground_size,0,i)
-    sgd.setEntityRotation(fence,0,90,0)
-    
-    if random.random() > 0.9:
-        fence = sgd.createModel(fence_broken_mesh)
-    else:
-        fence = sgd.createModel(fence_mesh)   
-    sgd.setEntityPosition(fence,ground_size,0,i)
-    sgd.setEntityRotation(fence,0,90,0)   
+	if random.random() > 0.9:
+		fence = sgd.createModel(fence_broken_mesh)
+	else:
+		fence = sgd.createModel(fence_mesh)
+	sgd.setEntityPosition(fence,i,0,ground_size)
+
+	if random.random() > 0.9:
+		fence = sgd.createModel(fence_broken_mesh)
+	else:
+		fence = sgd.createModel(fence_mesh)
+	sgd.setEntityPosition(fence,i,0,-ground_size)
+
+	if random.random() > 0.9:
+		fence = sgd.createModel(fence_broken_mesh)
+	else:
+		fence = sgd.createModel(fence_mesh)
+	sgd.setEntityPosition(fence,-ground_size,0,i)
+	sgd.setEntityRotation(fence,0,90,0)
+
+	if random.random() > 0.9:
+		fence = sgd.createModel(fence_broken_mesh)
+	else:
+		fence = sgd.createModel(fence_mesh)
+	sgd.setEntityPosition(fence,ground_size,0,i)
+	sgd.setEntityRotation(fence,0,90,0)
 
 fence_pillar = sgd.loadModel("../assets/gltf/fence_pillar.gltf")
 sgd.setMeshShadowsEnabled(sgd.getModelMesh(fence_pillar),True)
@@ -195,60 +195,60 @@ y_vel = 0
 sgd.setMouseCursorMode(3)
 
 while loop:
-    e = sgd.pollEvents()
-    if e == sgd.EVENT_MASK_CLOSE_CLICKED or sgd.isKeyHit(sgd.KEY_ESCAPE) : loop = False
-    
-    # run forwards / backwards
-    if sgd.isKeyDown(sgd.KEY_W) or sgd.isKeyDown(sgd.KEY_UP): 
-        sgd.moveEntity(pivot,0,0,cam_speed)
-        if not jumping : cam_bob_angle+=0.18
-    elif sgd.isKeyDown(sgd.KEY_S) or sgd.isKeyDown(sgd.KEY_DOWN): 
-        sgd.moveEntity(pivot,0,0,-cam_speed)
-        if not jumping : cam_bob_angle-=0.18
-    
-    # strafe left / right    
-    if sgd.isKeyDown(sgd.KEY_A) or sgd.isKeyDown(sgd.KEY_LEFT): 
-        sgd.moveEntity(pivot,-cam_speed,0,0)
-    elif sgd.isKeyDown(sgd.KEY_D) or sgd.isKeyDown(sgd.KEY_RIGHT): 
-        sgd.moveEntity(pivot,cam_speed,0,0)
-    
-    # JUMP
-    if sgd.isKeyHit(sgd.KEY_SPACE) or sgd.isKeyHit(sgd.KEY_RIGHT_CONTROL):
-        if not jumping:
-            jumping = True
-            y_vel+=jump_strength
-            
-    # apply y-velocity and subtract gravity
-    if jumping:
-        sgd.moveEntity(pivot,0,y_vel,0)
-        y_vel -= gravity
-        
-    # hitting the ground    
-    if sgd.getEntityY(pivot) < 1 : 
-        sgd.setEntityPosition(pivot,sgd.getEntityX(pivot),1,sgd.getEntityZ(pivot))
-        jumping = False
-        y_vel = 0
-    
-    # head bobbing
-    sgd.setEntityPosition(camera,0,0.5 + sin(cam_bob_angle) * 0.1,0)
-    
-    sgd.turnEntity(pivot,0,-sgd.getMouseVX() * cam_turn,0)
-    sgd.turnEntity(camera,-sgd.getMouseVY() * cam_turn,0,0)
-    
-    if sgd.getEntityRX(camera) < -10 : sgd.setEntityRotation(camera,-10,0,0)
-    if sgd.getEntityRX(camera) > 20 : sgd.setEntityRotation(camera,20,0,0)
-    
-    if sgd.getEntityX(pivot) > ground_size-1 : sgd.setEntityPosition(pivot,ground_size-1,sgd.getEntityY(pivot),sgd.getEntityZ(pivot))
-    if sgd.getEntityX(pivot) < -ground_size + 1 : sgd.setEntityPosition(pivot,-ground_size+1,sgd.getEntityY(pivot),sgd.getEntityZ(pivot))
-    if sgd.getEntityZ(pivot) > ground_size-1 : sgd.setEntityPosition(pivot,sgd.getEntityX(pivot),sgd.getEntityY(pivot),ground_size-1)
-    if sgd.getEntityZ(pivot) < -ground_size + 1 : sgd.setEntityPosition(pivot,sgd.getEntityX(pivot),sgd.getEntityY(pivot),-ground_size + 1)
-    
-    sgd.renderScene()
-    # render 2D stuff
-    sgd.clear2D()
-    sgd.set2DTextColor(1,0.5,0,1)
-    display_text_centered("Happy Halloween!!",rock_font,0)
-    sgd.set2DFont(rock_font_small)
-    sgd.draw2DText("FPS : " + str(int(sgd.getFPS())), 5, sgd.getWindowHeight() - 30)
-    sgd.present() # swap buffers
+	e = sgd.pollEvents()
+	if e == sgd.EVENT_MASK_CLOSE_CLICKED or sgd.isKeyHit(sgd.KEY_ESCAPE) : loop = False
+
+	# run forwards / backwards
+	if sgd.isKeyDown(sgd.KEY_W) or sgd.isKeyDown(sgd.KEY_UP):
+		sgd.moveEntity(pivot,0,0,cam_speed)
+		if not jumping : cam_bob_angle+=0.18
+	elif sgd.isKeyDown(sgd.KEY_S) or sgd.isKeyDown(sgd.KEY_DOWN):
+		sgd.moveEntity(pivot,0,0,-cam_speed)
+		if not jumping : cam_bob_angle-=0.18
+
+	# strafe left / right
+	if sgd.isKeyDown(sgd.KEY_A) or sgd.isKeyDown(sgd.KEY_LEFT):
+		sgd.moveEntity(pivot,-cam_speed,0,0)
+	elif sgd.isKeyDown(sgd.KEY_D) or sgd.isKeyDown(sgd.KEY_RIGHT):
+		sgd.moveEntity(pivot,cam_speed,0,0)
+
+	# JUMP
+	if sgd.isKeyHit(sgd.KEY_SPACE) or sgd.isKeyHit(sgd.KEY_RIGHT_CONTROL):
+		if not jumping:
+			jumping = True
+			y_vel+=jump_strength
+
+	# apply y-velocity and subtract gravity
+	if jumping:
+		sgd.moveEntity(pivot,0,y_vel,0)
+		y_vel -= gravity
+
+	# hitting the ground
+	if sgd.getEntityY(pivot) < 1 :
+		sgd.setEntityPosition(pivot,sgd.getEntityX(pivot),1,sgd.getEntityZ(pivot))
+		jumping = False
+		y_vel = 0
+
+	# head bobbing
+	sgd.setEntityPosition(camera,0,0.5 + sin(cam_bob_angle) * 0.1,0)
+
+	sgd.turnEntity(pivot,0,-sgd.getMouseVX() * cam_turn,0)
+	sgd.turnEntity(camera,-sgd.getMouseVY() * cam_turn,0,0)
+
+	if sgd.getEntityRX(camera) < -10 : sgd.setEntityRotation(camera,-10,0,0)
+	if sgd.getEntityRX(camera) > 20 : sgd.setEntityRotation(camera,20,0,0)
+
+	if sgd.getEntityX(pivot) > ground_size-1 : sgd.setEntityPosition(pivot,ground_size-1,sgd.getEntityY(pivot),sgd.getEntityZ(pivot))
+	if sgd.getEntityX(pivot) < -ground_size + 1 : sgd.setEntityPosition(pivot,-ground_size+1,sgd.getEntityY(pivot),sgd.getEntityZ(pivot))
+	if sgd.getEntityZ(pivot) > ground_size-1 : sgd.setEntityPosition(pivot,sgd.getEntityX(pivot),sgd.getEntityY(pivot),ground_size-1)
+	if sgd.getEntityZ(pivot) < -ground_size + 1 : sgd.setEntityPosition(pivot,sgd.getEntityX(pivot),sgd.getEntityY(pivot),-ground_size + 1)
+
+	sgd.renderScene()
+	# render 2D stuff
+	sgd.clear2D()
+	sgd.set2DTextColor(1,0.5,0,1)
+	display_text_centered("Happy Halloween!!",rock_font,0)
+	sgd.set2DFont(rock_font_small)
+	sgd.draw2DText("FPS : " + str(int(sgd.getFPS())), 5, sgd.getWindowHeight() - 30)
+	sgd.present() # swap buffers
 sgd.terminate()
