@@ -47,7 +47,7 @@
         ],
         "rotation": [
             0.0,
-            142.80001446087508,
+            142.80003016034655,
             -0.0
         ],
         "scale": [
@@ -60,9 +60,9 @@
         "actor_name": "tree_pine_yellow_large.gltf",
         "filename": "tree_pine_yellow_large.gltf",
         "position": [
-            -10.0,
-            1.0,
-            8.0
+            -12.0,
+            1.1,
+            9.0
         ],
         "rotation": [
             0.0,
@@ -79,9 +79,9 @@
         "actor_name": "tree_pine_orange_medium.gltf",
         "filename": "tree_pine_orange_medium.gltf",
         "position": [
-            8.0,
+            16.0,
             1.0,
-            7.0
+            6.0
         ],
         "rotation": [
             0.0,
@@ -99,7 +99,7 @@
         "filename": "path_A.gltf",
         "position": [
             -10.0,
-            1.0,
+            1.1,
             -23.0
         ],
         "rotation": [
@@ -136,13 +136,13 @@
         "actor_name": "tree_pine_orange_large.gltf (2)",
         "filename": "tree_pine_orange_large.gltf",
         "position": [
-            -20.120890252178086,
-            1.0,
-            -30.928296258962305
+            -20.0,
+            1.3000000000000003,
+            -34.0
         ],
         "rotation": [
             0.0,
-            -114.75000616882652,
+            -0.0,
             -0.0
         ],
         "scale": [
@@ -155,13 +155,13 @@
         "actor_name": "tree_pine_yellow_large.gltf (2)",
         "filename": "tree_pine_yellow_large.gltf",
         "position": [
-            26.56987965224137,
+            24.0,
             1.0,
-            -22.120090783741507
+            -23.0
         ],
         "rotation": [
             0.0,
-            118.20000527124306,
+            -0.0,
             -0.0
         ],
         "scale": [
@@ -176,7 +176,7 @@
         "position": [
             3.0,
             1.0,
-            16.0
+            7.0
         ],
         "rotation": [
             0.0,
@@ -193,9 +193,9 @@
         "actor_name": "lantern_hanging.gltf",
         "filename": "lantern_hanging.gltf",
         "position": [
-            -5.0,
-            1.0,
-            14.0
+            -1.0,
+            5.199999999999998,
+            9.0
         ],
         "rotation": [
             0.0,
@@ -214,7 +214,7 @@
         "position": [
             5.0,
             1.0,
-            2.0
+            3.0
         ],
         "rotation": [
             0.0,
@@ -234,6 +234,177 @@
             -6.0,
             1.0,
             3.0
+        ],
+        "rotation": [
+            0.0,
+            -0.0,
+            -0.0
+        ],
+        "scale": [
+            1.0,
+            1.0,
+            1.0
+        ]
+    },
+    {
+        "actor_name": "post_lantern.gltf",
+        "filename": "post_lantern.gltf",
+        "position": [
+            -8.699999999999998,
+            1.0,
+            -13.888345434152217
+        ],
+        "rotation": [
+            0.0,
+            -0.0,
+            -0.0
+        ],
+        "scale": [
+            1.0,
+            1.0,
+            1.0
+        ]
+    },
+    {
+        "actor_name": "tree_pine_yellow_small.gltf (2)",
+        "filename": "tree_pine_yellow_small.gltf",
+        "position": [
+            -24.806320243921945,
+            1.2000000000000002,
+            -17.61715229010788
+        ],
+        "rotation": [
+            0.0,
+            48.300006197625805,
+            -0.0
+        ],
+        "scale": [
+            1.0,
+            1.0,
+            1.0
+        ]
+    },
+    {
+        "actor_name": "tree_dead_large.gltf",
+        "filename": "tree_dead_large.gltf",
+        "position": [
+            -38.89464773682125,
+            1.0,
+            -9.83043725473927
+        ],
+        "rotation": [
+            0.0,
+            39.45000576179123,
+            -0.0
+        ],
+        "scale": [
+            1.0,
+            1.0,
+            1.0
+        ]
+    },
+    {
+        "actor_name": "tree_dead_large_decorated.gltf",
+        "filename": "tree_dead_large_decorated.gltf",
+        "position": [
+            -30.0,
+            1.0,
+            -6.0
+        ],
+        "rotation": [
+            0.0,
+            -0.0,
+            -0.0
+        ],
+        "scale": [
+            1.0,
+            1.0,
+            1.0
+        ]
+    },
+    {
+        "actor_name": "plaque_candles.gltf",
+        "filename": "plaque_candles.gltf",
+        "position": [
+            -13.0,
+            1.0,
+            0.0
+        ],
+        "rotation": [
+            0.0,
+            -0.0,
+            -0.0
+        ],
+        "scale": [
+            1.0,
+            1.0,
+            1.0
+        ]
+    },
+    {
+        "actor_name": "fence_pillar.gltf",
+        "filename": "fence_pillar.gltf",
+        "position": [
+            0.023288336778552354,
+            1.0,
+            36.09111515781639
+        ],
+        "rotation": [
+            0.0,
+            144.15001608335484,
+            -0.0
+        ],
+        "scale": [
+            1.0,
+            1.0,
+            1.0
+        ]
+    },
+    {
+        "actor_name": "Skeleton_Blade.gltf",
+        "filename": "Skeleton_Blade.gltf",
+        "position": [
+            -1.0,
+            4.8,
+            1.0
+        ],
+        "rotation": [
+            0.0,
+            -0.0,
+            -0.0
+        ],
+        "scale": [
+            1.0,
+            1.0,
+            1.0
+        ]
+    },
+    {
+        "actor_name": "tree_pine_orange_medium.gltf (2)",
+        "filename": "tree_pine_orange_medium.gltf",
+        "position": [
+            25.9,
+            1.2000000000000002,
+            4.0
+        ],
+        "rotation": [
+            0.0,
+            -0.0,
+            -0.0
+        ],
+        "scale": [
+            1.0,
+            1.0,
+            1.0
+        ]
+    },
+    {
+        "actor_name": "fence_seperate_broken.gltf",
+        "filename": "fence_seperate_broken.gltf",
+        "position": [
+            22.0,
+            1.0,
+            5.0
         ],
         "rotation": [
             0.0,
