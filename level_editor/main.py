@@ -358,7 +358,13 @@ while loop:
             transform_edit = False            
         else:
             transform_edit = True
-    
+            
+    # save scene to the monster shooter folder         
+    if sgd.isKeyHit(sgd.KEY_I):
+        sgd.destroyEntity(camera)        
+        sgd.saveScene("../halloween/build/Release/level.json")
+        loop = False
+        
     # mouse input   
     if not model_browser:
         if not topdown_mode and not transform_edit:

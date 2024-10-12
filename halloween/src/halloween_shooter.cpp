@@ -1,0 +1,75 @@
+// halloween_shooter.cpp
+// by Chaduke
+// 20241012
+
+// a Halloween themed shooter game demo
+// mainly to test LibSGD scene serialization and my level editor 
+// (check level_editor folder in this repo)
+
+#define SGD_DYNAMIC 1
+#include "sgd/sgd.h"
+#include "misc_functions.h"
+#define IMGUI_IMPL_SGD_IMPLEMENTATION 1
+#include "sgd/imgui_impl_sgd.h"
+
+int main()
+{	
+	sgd_Init();
+	sgd_CreateWindow(1280,720,"Halloween Shooter",SGD_WINDOW_FLAGS_CENTERED);	
+	
+	// imgui init 
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	auto& io = ImGui::GetIO();
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;  // Enable Gamepad Controls
+
+	// Setup Dear ImGui style
+	// ImGui::StyleColorsDark();
+	ImGui::StyleColorsLight();
+
+	ImGui_ImplSGD_Init();
+	
+	SGD_Camera camera = sgd_CreatePerspectiveCamera();
+	sgd_MoveEntity(camera,0,1,0);
+	SGD_Light light = sgd_CreateDirectionalLight();
+	sgd_TurnEntity(light,-45,-45,0);
+	
+	// create an environment so we can see all the material properties
+	SGD_Texture env = sgd_LoadCubeTexture("sgd://envmaps/sunnysky-cube.png",SGD_TEXTURE_FORMAT_SRGBA8,SGD_TEXTURE_FLAGS_DEFAULT);
+	SGD_Skybox skybox = sgd_CreateSkybox(env);
+	sgd_SetEnvTexture(env);	
+	
+	// ground 
+	SGD_Material ground_material = sgd_LoadPBRMaterial("sgd://misc/brownish-grass.jpg");
+	SGD_Mesh ground_mesh = sgd_CreateBoxMesh(-20,-0.1,-20,20,0,20,ground_material);	
+	sgd_TransformTexCoords(ground_mesh,20,20,0,0);
+	SGD_Model ground = sgd_CreateModel(ground_mesh);
+	float roughness_factor = 0.5;
+	std::ostringstream oss;
+	bool loop = true;
+	bool show_demo_window = true;
+	while (loop) 
+	{
+		int e = sgd_PollEvents();
+		if (e == SGD_EVENT_MASK_CLOSE_CLICKED) loop = false; 
+		if (sgd_IsKeyHit(SGD_KEY_ESCAPE)) loop = false;
+		
+		UnrealMouseInput(camera);
+		sgd_RenderScene();
+		
+		// imgui stuff
+		ImGui_ImplSGD_NewFrame();
+		ImGui::NewFrame();
+		if (show_demo_window) ImGui::ShowDemoWindow(&show_demo_window);
+		ImGui::Render();
+		ImGui_ImplSGD_RenderDrawData(ImGui::GetDrawData());
+		
+		sgd_Present();	
+	}
+	// Cleanup
+	ImGui_ImplSGD_Shutdown();
+	ImGui::DestroyContext();
+	
+	sgd_Terminate();
+}

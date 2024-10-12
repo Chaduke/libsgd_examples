@@ -16,3 +16,20 @@ reference
 # Exclude ga.bat
 ga.bat
 
+# Exclude level_editor __pycache__
+level_editor/__pycache__ 
+
+# Exclude various files and folders from halloween
+halloween/CMakeCache.txt
+halloween/build
+halloween/CMakeFiles
+halloween/imgui
+halloween/include
+halloween/lib
+halloween/src/python_example.py
+
+
+
+
+
+
