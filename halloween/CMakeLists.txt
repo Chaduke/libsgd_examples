@@ -1,3 +1,10 @@
+# TO BUILD  on your machine with Visual Studio 2022 installed do the follwing - 
+# "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Auxiliary/Build/vcvarsall.bat" x64
+# cd [path to this folder]
+# cmake -G "Visual Studio 17 2022" -S . -B build
+# cmake --build build --config Release
+# ./build/Release/HalloweenShooter.exe
+
 cmake_minimum_required(VERSION 3.10)
 
 # Project name
