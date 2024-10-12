@@ -24,8 +24,6 @@ halloween/CMakeCache.txt
 halloween/build
 halloween/CMakeFiles
 halloween/imgui
-halloween/include
-halloween/lib
 halloween/src/python_example.py
 
 

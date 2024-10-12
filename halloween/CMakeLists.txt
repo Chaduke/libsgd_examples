@@ -5,6 +5,8 @@
 # cmake --build build --config Release
 # ./build/Release/HalloweenShooter.exe
 
+# make sure you have sgd_dynamic.dll version 0.16 in the build/Release folder
+
 cmake_minimum_required(VERSION 3.10)
 
 # Project name
