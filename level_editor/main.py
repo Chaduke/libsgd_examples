@@ -97,7 +97,7 @@ sgd.transformTexCoords(ground_mesh,ground_size,ground_size,0,0)
 ground = sgd.createModel(ground_mesh)
 
 # GRASS / WEEDS
-add_grass = True
+add_grass = False
 if add_grass:
     weeds_image = sgd.loadImage("../assets/textures/weeds.png")
     for i in range(ground_size * 40):   
@@ -361,7 +361,8 @@ while loop:
             
     # save scene to the monster shooter folder         
     if sgd.isKeyHit(sgd.KEY_I):
-        sgd.destroyEntity(camera)        
+        sgd.destroyEntity(camera)    
+        sgd.destroyEntity(selected)
         sgd.saveScene("../halloween/build/Release/level.json")
         loop = False
         

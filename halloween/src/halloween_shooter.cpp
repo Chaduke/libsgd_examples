@@ -11,6 +11,7 @@
 #include "misc_functions.h"
 #define IMGUI_IMPL_SGD_IMPLEMENTATION 1
 #include "sgd/imgui_impl_sgd.h"
+#include <iostream>
 
 int main()
 {	
@@ -29,26 +30,24 @@ int main()
 	ImGui::StyleColorsLight();
 
 	ImGui_ImplSGD_Init();
+	std::cout << "Loading Scene ..." << std::endl;
+	sgd_LoadScene("level.json");
+	std::cout << "Scene Loaded ..." << std::endl;
 	
 	SGD_Camera camera = sgd_CreatePerspectiveCamera();
-	sgd_MoveEntity(camera,0,1,0);
-	SGD_Light light = sgd_CreateDirectionalLight();
-	sgd_TurnEntity(light,-45,-45,0);
-	
-	// create an environment so we can see all the material properties
-	SGD_Texture env = sgd_LoadCubeTexture("sgd://envmaps/sunnysky-cube.png",SGD_TEXTURE_FORMAT_SRGBA8,SGD_TEXTURE_FLAGS_DEFAULT);
-	SGD_Skybox skybox = sgd_CreateSkybox(env);
-	sgd_SetEnvTexture(env);	
+	sgd_MoveEntity(camera,0,1,0);	
 	
 	// ground 
 	SGD_Material ground_material = sgd_LoadPBRMaterial("sgd://misc/brownish-grass.jpg");
-	SGD_Mesh ground_mesh = sgd_CreateBoxMesh(-20,-0.1,-20,20,0,20,ground_material);	
+	SGD_Mesh ground_mesh = sgd_CreateBoxMesh(-40,-0.1,-40,40,0,40,ground_material);	
 	sgd_TransformTexCoords(ground_mesh,20,20,0,0);
 	SGD_Model ground = sgd_CreateModel(ground_mesh);
 	float roughness_factor = 0.5;
 	std::ostringstream oss;
 	bool loop = true;
 	bool show_demo_window = true;
+	
+	std::cout << "Init Finished..." << std::endl;
 	while (loop) 
 	{
 		int e = sgd_PollEvents();
