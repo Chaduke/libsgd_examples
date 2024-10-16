@@ -1,4 +1,5 @@
 #include "player.h"
+#include "imgui.h"
 
 Player::Player() {
     pivot = sgd_CreateModel(0);
@@ -13,7 +14,7 @@ Player::Player() {
     sgd_MoveEntity(view_model, 0, -0.5, 0);
     collider = sgd_CreateSphereCollider(pivot, 1, 0.5);
     acceleration = Utils::Vec3(0, -0.006f, 0); // Y value is gravity
-    velocity = Utils::Vec3(0, 0, -0.0095f); // Z value is run speed
+    velocity = Utils::Vec3(0, 0, -0.095f); // Z value is run speed
     nseq = 2; // idle
     time0 = 0.0;
     time1 = 0.0;
@@ -69,6 +70,14 @@ void Player::Run()
     }
 }
 
+void Player::Update()
+{
+	if (running) GenshinInput();
+	Move();
+	HandleCollision();
+	ProcessAnimation();
+}
+
 void Player::Move()
 {
     if (running || jumping)
@@ -77,6 +86,17 @@ void Player::Move()
         Utils::MoveEntityVec3(pivot, velocity); 
     }
 }
+
+void Player::HandleCollision()
+{
+	int c = sgd_GetCollisionCount(collider);
+	
+	if (c > 0) 
+	{
+		jumping = false;
+		velocity.y = 0;		
+	}
+}	
 
 void Player::ProcessAnimation() {
     // Change to new anim
@@ -106,13 +126,53 @@ void Player::ProcessAnimation() {
 
     // Apply blend
     time1 += time1Step;
-    sgd_AnimateModel(view_model, seq1, time1, SGD_ANIMATION_MODE_LOOP, blend);
-
-    Move();
+    sgd_AnimateModel(view_model, seq1, time1, SGD_ANIMATION_MODE_LOOP, blend);   
 }
 
 void Player::ReportStats()
 {
-	ImGUI::Begin();
+    if (ImGui::Begin("Player Info"))
+    {
+        ImGui::Text("Position X,Y,Z: %.1f,%.1f,%.1f", sgd_GetEntityX(pivot), sgd_GetEntityY(pivot), sgd_GetEntityZ(pivot));
+        ImGui::Text("Rotation X,Y,Z: %.1f,%.1f,%.1f", sgd_GetEntityRX(pivot), sgd_GetEntityRY(pivot), sgd_GetEntityRZ(pivot));
+        ImGui::Text("Velocity: %.3f,%.3f,%.3f",velocity.x, velocity.y, velocity.z);
+        ImGui::Text("Acceleration: %.3f,%.3f,%.3f", acceleration.x, acceleration.y, acceleration.z);		
+    }
 	ImGui::End();
+}
+
+void Player::GenshinInput() 
+{	
+	if (sgd_IsKeyDown(SGD_KEY_W) || sgd_IsKeyDown(SGD_KEY_UP))
+	{
+		velocity.z = 0.095f;
+		velocity.x = 0.0f;
+		sgd_SetEntityRotation(view_model,0,180,0);		
+	}
+	else 
+	{
+		if (sgd_IsKeyDown(SGD_KEY_S) || sgd_IsKeyDown(SGD_KEY_DOWN))
+		{
+			velocity.z = -0.095f;
+			velocity.x = 0.0f;
+			sgd_SetEntityRotation(view_model,0,0,0);			
+		}
+	}
+	
+	if (sgd_IsKeyDown(SGD_KEY_A) || sgd_IsKeyDown(SGD_KEY_LEFT))
+	{
+		velocity.x = -0.095f;
+		velocity.z = 0.0f;
+		sgd_SetEntityRotation(view_model,0,270,0);		
+	}
+	else 
+	{
+		if (sgd_IsKeyDown(SGD_KEY_D) || sgd_IsKeyDown(SGD_KEY_RIGHT))
+		{
+			velocity.x = 0.095f;
+			velocity.z = 0.0f;
+			sgd_SetEntityRotation(view_model,0,90,0);			
+		}
+	}
+	
 }

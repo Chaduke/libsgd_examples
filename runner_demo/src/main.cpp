@@ -55,53 +55,71 @@ int main()
 		sgd_MoveEntity(grounds[i], 0, 0, 256 * (i-1));
 	}	
 
-	sgd_EnableCollisions(1, 0, SGD_COLLISION_RESPONSE_SLIDEXZ);
+	sgd_EnableCollisions(1, 0, SGD_COLLISION_RESPONSE_SLIDE);
 	sgd_SetMouseZ(-10);
 
 	bool loop = true;
 	bool show_demo_window = false;	
-	bool show_environment_window = true;
-
+	bool show_environment_window = false;
+	bool show_player_window = false;
+	bool show_camera_window = false;
+	
 	while (loop) 
 	{
 		int e = sgd_PollEvents();
 		if (e == SGD_EVENT_MASK_CLOSE_CLICKED) loop = false; 
 		if (sgd_IsKeyHit(SGD_KEY_ESCAPE)) loop = false;
-
-		// player input 		
-		if (sgd_IsKeyHit(SGD_KEY_D))
+		if (sgd_IsKeyHit(SGD_KEY_F1)) 
 		{
-			player.Dance(); 			
-		}	
-		if (sgd_IsKeyHit(SGD_KEY_R))
-		{
-			player.Run();
+			if (show_environment_window) show_environment_window = false; else show_environment_window = true;
 		}
-
-		if (player.idle)
+		if (sgd_IsKeyHit(SGD_KEY_F2)) 
 		{
-			Utils::UnrealMouseInput(pivot);
-			sgd_SetEntityPosition(camera, 0, 0, 0);			
+			if (show_player_window) show_player_window = false; else show_player_window = true;
 		}
-		else
+		if (sgd_IsKeyHit(SGD_KEY_F3)) 
 		{
+			if (show_camera_window) show_camera_window = false; else show_camera_window = true;
+		}		
+		
+		if (!show_environment_window) 
+		{			
+			if (sgd_IsKeyHit(SGD_KEY_R)) player.Run();		
+			player.Update();
 			sgd_SetMouseCursorMode(SGD_MOUSE_CURSOR_MODE_DISABLED);
+			sgd_SetEntityPosition(camera, 0, 0, sgd_GetMouseZ());
 			// camera positioning
 			sgd_SetEntityPosition(pivot,
-				sgd_GetEntityX(player.view_model),
-				sgd_GetEntityY(player.view_model),
-				sgd_GetEntityZ(player.view_model)
+			sgd_GetEntityX(player.pivot),
+			sgd_GetEntityY(player.pivot) + 0.5,
+			sgd_GetEntityZ(player.pivot)
 			);
-			sgd_SetEntityPosition(camera, 0, 0, sgd_GetMouseZ());
-
+			
+			if (sgd_GetMouseZ() > 0) sgd_SetMouseZ(0);
+			
 			// camera rotatation
-			sgd_TurnEntity(pivot, -sgd_GetMouseVY() * 0.2, -sgd_GetMouseVX() * 0.2, 0);
+			sgd_TurnEntity(pivot, -sgd_GetMouseVY() * 0.1, -sgd_GetMouseVX() * 0.1, 0);
 			sgd_SetEntityRotation(pivot,sgd_GetEntityRX(pivot),	sgd_GetEntityRY(pivot),	0);
+			if (sgd_GetEntityRX(pivot) > 5) sgd_SetEntityRotation(pivot,5,sgd_GetEntityRY(pivot),0);
+			if (sgd_GetEntityRX(pivot) < -80) sgd_SetEntityRotation(pivot,-80,sgd_GetEntityRY(pivot),0);
+		
+			// update our players rotation to match
+			if (player.running)	sgd_SetEntityRotation(player.pivot,0,sgd_GetEntityRY(pivot),0);				
+			sgd_UpdateColliders();
 		}
-				
-		player.ProcessAnimation();	
-
-		sgd_UpdateColliders();
+		else sgd_SetMouseCursorMode(SGD_MOUSE_CURSOR_MODE_NORMAL);		
+		
+		// in order to create an endless ground to run on	
+		// test the distance of player z location with ground 1,2 and 3
+		// if > 384 or < -384 move the ground 768 units
+		
+		for (int i=0;i<3;i++)
+		{
+			float distance = float(sgd_GetEntityZ(player.pivot) - sgd_GetEntityZ(grounds[i]));
+			if (distance < -384) sgd_MoveEntity(grounds[i],0,0,-768);
+			if (distance > 384) sgd_MoveEntity(grounds[i],0,0,768);
+		}
+		
 		sgd_RenderScene();
 		
 		// imgui stuff
@@ -110,6 +128,23 @@ int main()
 
 		if (show_demo_window) ImGui::ShowDemoWindow(&show_demo_window);
 		if (show_environment_window) environment.RenderGUI();
+		if (show_player_window) player.ReportStats();
+		
+		if (show_camera_window) 
+		{
+			if (ImGui::Begin("Camera Info"))
+			{	
+				ImGui::Text("Pivot X,Y,Z: %.1f,%.1f,%.1f", sgd_GetEntityX(pivot), sgd_GetEntityY(pivot), sgd_GetEntityZ(pivot));
+				ImGui::Text("Pivot RX,RY,RZ: %.1f,%.1f,%.1f", sgd_GetEntityRX(pivot), 
+															sgd_GetEntityRY(pivot), 
+															sgd_GetEntityRZ(pivot));
+				ImGui::Text("Camera X,Y,Z: %.1f,%.1f,%.1f", sgd_GetEntityX(camera), sgd_GetEntityY(camera), sgd_GetEntityZ(camera));
+				ImGui::Text("Camera RX,RY,RZ: %.1f,%.1f,%.1f", sgd_GetEntityRX(camera), 
+															sgd_GetEntityRY(camera), 
+															sgd_GetEntityRZ(camera));
+			}
+			ImGui::End();
+		}
 
 		ImGui::Render();
 		ImGui_ImplSGD_RenderDrawData(ImGui::GetDrawData());

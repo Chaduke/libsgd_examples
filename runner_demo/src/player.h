@@ -15,21 +15,24 @@ const int ANIM_SLIDING = 5;
 class Player {
 public:
     Player();
-    void ProcessAnimation();
+	void Update();
+	void GenshinInput();	
     void Dance();
     void Run();
-    bool dancing, falling, idle, jumping, running, sliding;
-    SGD_Model view_model;
+    bool dancing, falling, idle, jumping, running, sliding;    
+	SGD_Model pivot;
 	void ReportStats();
 private:    
-    SGD_Model pivot;
+    SGD_Model view_model;
     SGD_Model collision_model;
     SGD_Collider collider;
     Utils::Vec3 acceleration;
     Utils::Vec3 velocity;    
     int nseq, seq0, seq1;
-    float time0, time0Step, time1, time1Step, blend, blendStep;    
+    float time0, time0Step, time1, time1Step, blend, blendStep;
+	void ProcessAnimation();	
     void Move();
+	void HandleCollision();	
 };
 
 #endif // PLAYER_H

@@ -10,9 +10,9 @@ namespace fs = std::filesystem;
 using json = nlohmann::json;
 
 Environment::Environment() 
-    : sky_roughness(0.0f), dl_rotation_x(-107.0f), dl_rotation_y(-60.0f),
-      ambient_r(0.38f), ambient_g(0.33f), ambient_b(0.46f), ambient_a(0.50f),
-      sky_texture_path("assets/textures/skybox/skybox_sunny.png") 
+    : sky_roughness(0.0f), dl_rotation_x(-20.0f), dl_rotation_y(25.0f),
+      ambient_r(0.38f), ambient_g(0.33f), ambient_b(0.46f), ambient_a(0.20f),
+      sky_texture_path("assets/textures/skybox/stormy.jpg") 
 {
     SGD_Texture sky_texture = sgd_LoadCubeTexture(sky_texture_path.c_str(), SGD_TEXTURE_FORMAT_SRGBA8, SGD_TEXTURE_FLAGS_DEFAULT);
     sgd_SetEnvTexture(sky_texture);
@@ -21,6 +21,15 @@ Environment::Environment()
     sgd_TurnEntity(directional_light, dl_rotation_x, dl_rotation_y, 0);
     sgd_SetAmbientLightColor(ambient_r, ambient_g, ambient_b, ambient_a);
     sgd_SetLightShadowsEnabled(directional_light, true); 
+	
+	// Create fog
+	int fog = sgd_CreateFogEffect();
+	sgd_SetFogEffectColor(fog,0.3f,0.6f,1,1);
+	sgd_SetFogEffectPower(fog,10);
+	
+	sgd_SetConfigVar("csm.clipRange", "200");
+	sgd_SetConfigVar("csm.depthBias", "0.0003");
+	sgd_UpdateShadowMappingConfig();
 
     // Load foliage textures
     foliage_textures.push_back(sgd_LoadImage("assets/textures/foliage/grass1.png"));
@@ -125,12 +134,22 @@ void Environment::AddTurtles(SGD_Model ground)
 
 void Environment::AddGrass(SGD_Model ground) {
     
-    for (int i = 0; i < 2000; ++i) {
+    for (int i = 0; i < 1000; ++i) {
         int rand_index = rand() % 3;
         SGD_Model sprite = sgd_CreateSprite(foliage_textures[rand_index]);
         sgd_SetEntityParent(sprite, ground);
         float scale = static_cast<float>(rand() % 2 + 0.2) / 2;
-        float x_pos = static_cast<float>(rand() % 256 - 128); // Rnd(-64, 64)
+        float x_pos = static_cast<float>(rand() % 148 - 128); // Rnd(-128, -20)
+        float z_pos = static_cast<float>(rand() % 256 - 128); // Rnd(-128, 128)
+        sgd_SetEntityPosition(sprite, x_pos, scale / 2, z_pos);
+        sgd_SetEntityScale(sprite, scale, scale, scale);
+    }
+    for (int i = 0; i < 1000; ++i) {
+        int rand_index = rand() % 3;
+        SGD_Model sprite = sgd_CreateSprite(foliage_textures[rand_index]);
+        sgd_SetEntityParent(sprite, ground);
+        float scale = static_cast<float>(rand() % 2 + 0.2) / 2;
+        float x_pos = static_cast<float>(rand() % 108 + 20); // Rnd(20, 128)
         float z_pos = static_cast<float>(rand() % 256 - 128); // Rnd(-128, 128)
         sgd_SetEntityPosition(sprite, x_pos, scale / 2, z_pos);
         sgd_SetEntityScale(sprite, scale, scale, scale);
@@ -168,7 +187,7 @@ void Environment::RenderGUI() {
         // Skybox Selector Popup
         if (ImGui::BeginPopup("Skybox Selector")) {
             for (const auto& entry : fs::directory_iterator("assets/textures/skybox/")) {
-                if (entry.path().extension() == ".png") {
+                if (entry.path().extension() == ".png" || entry.path().extension() == ".jpg") {
                     if (ImGui::Selectable(entry.path().filename().string().c_str())) {
                         sky_texture_path = entry.path().string();
                         SGD_Texture sky_texture = sgd_LoadCubeTexture(sky_texture_path.c_str(), SGD_TEXTURE_FORMAT_SRGBA8, SGD_TEXTURE_FLAGS_DEFAULT);
