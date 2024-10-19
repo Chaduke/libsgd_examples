@@ -1,5 +1,6 @@
 #include "player.h"
 #include "imgui.h"
+#include <cmath>
 
 Player::Player() {
     pivot = sgd_CreateModel(0);
@@ -24,12 +25,14 @@ Player::Player() {
     blend = 0.0;
     seq0 = 2;
     seq1 = 2;
+	animation_speed = 1.0f;
     falling = false;
     running = false;
     sliding = false;
     dancing = false;
     jumping = false;
     idle = true;
+	if (sgd_IsGamepadConnected(0)) gamepad = true; else gamepad = false;	
 }
 
 
@@ -57,6 +60,7 @@ void Player::Run()
         running = false;
         idle = true;
         nseq = ANIM_IDLE;
+		animation_speed = 1.0f;		
     }
     else
     {
@@ -65,16 +69,16 @@ void Player::Run()
             idle = false;
             dancing = false;
             running = true;
-            nseq = ANIM_RUNNING;
+            nseq = ANIM_RUNNING;			
         }
     }
 }
 
 void Player::Update()
 {
-	if (running) GenshinInput();
+	if (running || gamepad) GenshinInput();
 	Move();
-	HandleCollision();
+	HandleCollision();	
 	ProcessAnimation();
 }
 
@@ -121,11 +125,11 @@ void Player::ProcessAnimation() {
     }
 
     // Set base animation
-    time0 += time0Step;
+    time0 += time0Step * animation_speed;
     sgd_AnimateModel(view_model, seq0, time0, SGD_ANIMATION_MODE_LOOP, 1);
 
     // Apply blend
-    time1 += time1Step;
+    time1 += time1Step * animation_speed;
     sgd_AnimateModel(view_model, seq1, time1, SGD_ANIMATION_MODE_LOOP, blend);   
 }
 
@@ -136,43 +140,83 @@ void Player::ReportStats()
         ImGui::Text("Position X,Y,Z: %.1f,%.1f,%.1f", sgd_GetEntityX(pivot), sgd_GetEntityY(pivot), sgd_GetEntityZ(pivot));
         ImGui::Text("Rotation X,Y,Z: %.1f,%.1f,%.1f", sgd_GetEntityRX(pivot), sgd_GetEntityRY(pivot), sgd_GetEntityRZ(pivot));
         ImGui::Text("Velocity: %.3f,%.3f,%.3f",velocity.x, velocity.y, velocity.z);
-        ImGui::Text("Acceleration: %.3f,%.3f,%.3f", acceleration.x, acceleration.y, acceleration.z);		
+        ImGui::Text("Acceleration: %.3f,%.3f,%.3f", acceleration.x, acceleration.y, acceleration.z);
+		ImGui::Text("Animation Speed: %f",animation_speed);
+		ImGui::Text("Gamepad Connected : %d",gamepad);
     }
 	ImGui::End();
 }
 
 void Player::GenshinInput() 
 {	
-	if (sgd_IsKeyDown(SGD_KEY_W) || sgd_IsKeyDown(SGD_KEY_UP))
+	if (sgd_IsKeyHit(SGD_KEY_G))
 	{
-		velocity.z = 0.095f;
-		velocity.x = 0.0f;
-		sgd_SetEntityRotation(view_model,0,180,0);		
-	}
-	else 
-	{
-		if (sgd_IsKeyDown(SGD_KEY_S) || sgd_IsKeyDown(SGD_KEY_DOWN))
+		if (gamepad) 
 		{
-			velocity.z = -0.095f;
-			velocity.x = 0.0f;
-			sgd_SetEntityRotation(view_model,0,0,0);			
+			gamepad = false;
+		}
+		else 
+		{				
+			if (sgd_IsGamepadConnected(0)) gamepad = true;
 		}
 	}
 	
-	if (sgd_IsKeyDown(SGD_KEY_A) || sgd_IsKeyDown(SGD_KEY_LEFT))
-	{
-		velocity.x = -0.095f;
-		velocity.z = 0.0f;
-		sgd_SetEntityRotation(view_model,0,270,0);		
-	}
-	else 
-	{
-		if (sgd_IsKeyDown(SGD_KEY_D) || sgd_IsKeyDown(SGD_KEY_RIGHT))
+	if (!gamepad) 
+	{		
+		if (sgd_IsKeyDown(SGD_KEY_W) || sgd_IsKeyDown(SGD_KEY_UP))
 		{
-			velocity.x = 0.095f;
+			velocity.z = 0.095f;
+			if(!running) Run();					
+		}
+		else 
+		{
+			// toggle running off
+			if(running)
+			{
+				velocity.z = 0;
+				Run();
+			}
+		}
+	} 
+	else // process gamepad input instead of keyboard input
+	{
+		float move_x = sgd_GetGamepadAxis(0,SGD_GAMEPAD_AXIS_LEFT_X);
+		float move_z = sgd_GetGamepadAxis(0,SGD_GAMEPAD_AXIS_LEFT_Y);
+		
+		sgd_SetEntityRotation(pivot,0,Utils::GetRotationAngle(move_x,move_z),0);		
+		
+		float move_speed = std::max(std::abs(move_x), std::abs(move_z));
+		if (move_speed > 0) 
+		{			
+			velocity.z = -0.095f * move_speed; // this is for movement 
+			animation_speed = std::abs(move_speed); // this is for animation speed
+		}
+		else 
+		{
 			velocity.z = 0.0f;
-			sgd_SetEntityRotation(view_model,0,90,0);			
+			animation_speed = 1.0f;
+		}	
+		
+		// nothing on the gamepad
+		if (move_speed < 0.2f) 
+		{
+			// toggle running off
+			if(running) Run();			
 		}
-	}
-	
+		else 
+		{
+			// toggle running on
+			if(!running) Run();			
+		}
+		
+		// Right stick assists with turning
+        float right_x = sgd_GetGamepadAxis(0, SGD_GAMEPAD_AXIS_RIGHT_X);
+        float right_y = sgd_GetGamepadAxis(0, SGD_GAMEPAD_AXIS_RIGHT_Y);
+        if (running) {
+            float right_angle = Utils::GetRotationAngle(right_x, right_y);
+			float rotation_angle = float(sgd_GetEntityRY(pivot));
+            float blended_angle = (rotation_angle + right_angle) / 2.0f; // Blend rotation angles
+            sgd_SetEntityRotation(pivot, 0, blended_angle, 0);
+        }
+	}	
 }

@@ -70,8 +70,8 @@ def delete_actor(selected_actor_name):
             break 
             
 sgd.init()
-sgd.createWindow(1920,1080,"Chaduke's Level Editor",sgd.WINDOW_FLAGS_FULLSCREEN)
-env = sgd.loadCubeTexture("sgd://envmaps/nightsky-cube.png",4,18)
+sgd.createWindow(1920,1080,"LibSGD Level Editor",sgd.WINDOW_FLAGS_FULLSCREEN)
+env = sgd.loadCubeTexture("../assets/textures/skybox/grimm_night.jpg",4,18)
 sgd.setEnvTexture(env)
 skybox = sgd.createSkybox(env)
 
@@ -97,7 +97,7 @@ sgd.transformTexCoords(ground_mesh,ground_size,ground_size,0,0)
 ground = sgd.createModel(ground_mesh)
 
 # GRASS / WEEDS
-add_grass = False
+add_grass = True
 if add_grass:
     weeds_image = sgd.loadImage("../assets/textures/weeds.png")
     for i in range(ground_size * 40):   
@@ -178,7 +178,7 @@ model_entries = []
 collider_mesh = sgd.createSphereMesh(1,16,16,get_collider_material())
 actors = []
 
-load_on_start = True
+load_on_start = False
 colliders_visible = False
 
 if load_on_start:
@@ -363,7 +363,7 @@ while loop:
     if sgd.isKeyHit(sgd.KEY_I):
         sgd.destroyEntity(camera)    
         sgd.destroyEntity(selected)
-        sgd.saveScene("../halloween/build/Release/level.json")
+        sgd.saveScene("../assets/levels/spooky_shooter_1.json")
         loop = False
         
     # mouse input   
@@ -456,7 +456,7 @@ while loop:
         sgd.draw2DText("T - Toggle Transform Mode",5,65)
         sgd.draw2DText("SHIFT+T - Toggle Topdown Mode",5,85)
         
-        display_text_centered("Chaduke's Level Editor",year_font,0)
+        display_text_centered("LibSGD Level Editor",year_font,0)
         if transform_mode:
             if transform_edit:
                 display_text_centered("(TRANSFORM MODE - EDIT)",avenir_font,25)
@@ -499,7 +499,8 @@ while loop:
                 sgd.set2DTextColor(1,1,1,1)  
             display_text_right(f"Enabled : {sgd.isEntityEnabled(picked_actor.pivot)}",avenir_font,105)
     sgd.present()
-save_all_actors(actors)    
+# save_all_actors(actors)    
+sgd.saveScene("../assets/levels/spooky_shooter_1.json")
 sgd.terminate()
 
 

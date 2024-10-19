@@ -1,6 +1,12 @@
 #include "misc_functions.h"
 #include <sstream>
+#include <cmath>
 #include "sgd/sgd.h"
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
 
 namespace Utils {
 
@@ -57,5 +63,20 @@ namespace Utils {
     {
         sgd_MoveEntity(entity, velocity.x, velocity.y, velocity.z);
     }
-    // Implement additional utility functions as needed
+    #include <cmath>
+
+	float GetRotationAngle(float x, float y) {
+		// Calculate the angle in radians
+		float radians = std::atan2(x, y); // Note the negation of y to match your description
+
+		// Convert radians to degrees
+		float degrees = radians * (180.0f / M_PI);
+
+		// Normalize angle to be within 0 to 360 degrees
+		if (degrees < 0) {
+			degrees += 360.0;
+		}
+		return degrees;
+	}
+
 }

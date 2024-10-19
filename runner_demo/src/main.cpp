@@ -56,12 +56,12 @@ int main()
 	}	
 
 	sgd_EnableCollisions(1, 0, SGD_COLLISION_RESPONSE_SLIDE);
-	sgd_SetMouseZ(-10);
+	sgd_SetMouseZ(-5);
 
 	bool loop = true;
 	bool show_demo_window = false;	
 	bool show_environment_window = false;
-	bool show_player_window = false;
+	bool show_player_window = true;
 	bool show_camera_window = false;
 	
 	while (loop) 
@@ -80,14 +80,14 @@ int main()
 		if (sgd_IsKeyHit(SGD_KEY_F3)) 
 		{
 			if (show_camera_window) show_camera_window = false; else show_camera_window = true;
-		}		
+		}	
 		
 		if (!show_environment_window) 
-		{			
-			if (sgd_IsKeyHit(SGD_KEY_R)) player.Run();		
+		{
 			player.Update();
 			sgd_SetMouseCursorMode(SGD_MOUSE_CURSOR_MODE_DISABLED);
 			sgd_SetEntityPosition(camera, 0, 0, sgd_GetMouseZ());
+			
 			// camera positioning
 			sgd_SetEntityPosition(pivot,
 			sgd_GetEntityX(player.pivot),
@@ -95,16 +95,35 @@ int main()
 			sgd_GetEntityZ(player.pivot)
 			);
 			
-			if (sgd_GetMouseZ() > 0) sgd_SetMouseZ(0);
+			if (sgd_GetMouseZ() > 0) sgd_SetMouseZ(0);	
+
+			if (!player.gamepad)
+			{				
+				if (sgd_IsKeyHit(SGD_KEY_R)) player.Run();	
+				// camera rotatation with mouse
+				sgd_TurnEntity(pivot, -sgd_GetMouseVY() * 0.1, -sgd_GetMouseVX() * 0.1, 0);				
+			}		
+			else 
+			{			
+				float right_x = sgd_GetGamepadAxis(0, SGD_GAMEPAD_AXIS_RIGHT_X);
+				float right_y = sgd_GetGamepadAxis(0, SGD_GAMEPAD_AXIS_RIGHT_Y);
+				if (!player.running) 
+				{
+					sgd_TurnEntity(pivot, -right_y * 0.5, -right_x, 0);
+				} 
+				else 
+				{					
+					sgd_TurnEntity(player.pivot, -right_y * 0.1, -right_x * 0.1, 0);
+					sgd_SetEntityRotation(pivot,sgd_GetEntityRX(pivot),	sgd_GetEntityRY(player.pivot) -180,0);
+				}
+			}
+			// correct roll
+			if (sgd_GetEntityRZ(pivot) > 0 || sgd_GetEntityRZ(pivot) < 0) 
+				sgd_SetEntityRotation(pivot,sgd_GetEntityRX(pivot),	sgd_GetEntityRY(pivot),	0);
 			
-			// camera rotatation
-			sgd_TurnEntity(pivot, -sgd_GetMouseVY() * 0.1, -sgd_GetMouseVX() * 0.1, 0);
-			sgd_SetEntityRotation(pivot,sgd_GetEntityRX(pivot),	sgd_GetEntityRY(pivot),	0);
 			if (sgd_GetEntityRX(pivot) > 5) sgd_SetEntityRotation(pivot,5,sgd_GetEntityRY(pivot),0);
-			if (sgd_GetEntityRX(pivot) < -80) sgd_SetEntityRotation(pivot,-80,sgd_GetEntityRY(pivot),0);
-		
-			// update our players rotation to match
-			if (player.running)	sgd_SetEntityRotation(player.pivot,0,sgd_GetEntityRY(pivot),0);				
+			if (sgd_GetEntityRX(pivot) < -80) sgd_SetEntityRotation(pivot,-80,sgd_GetEntityRY(pivot),0);			
+			
 			sgd_UpdateColliders();
 		}
 		else sgd_SetMouseCursorMode(SGD_MOUSE_CURSOR_MODE_NORMAL);		

@@ -19,7 +19,7 @@ public:
 	void GenshinInput();	
     void Dance();
     void Run();
-    bool dancing, falling, idle, jumping, running, sliding;    
+    bool dancing, falling, idle, jumping, running, sliding, gamepad;    
 	SGD_Model pivot;
 	void ReportStats();
 private:    
@@ -29,7 +29,7 @@ private:
     Utils::Vec3 acceleration;
     Utils::Vec3 velocity;    
     int nseq, seq0, seq1;
-    float time0, time0Step, time1, time1Step, blend, blendStep;
+    float time0, time0Step, time1, time1Step, blend, blendStep, animation_speed;
 	void ProcessAnimation();	
     void Move();
 	void HandleCollision();	

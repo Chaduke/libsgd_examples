@@ -10,6 +10,7 @@ namespace Utils {
     void UnrealMouseInput(SGD_Entity entity, float move_speed = 0.02f, float turn_speed = 0.2f);
     void DrawTextFloat(const char* prefix, float num, float x, float y);
     void DisplayLoadingMessage(const char* msg);
+	float GetRotationAngle(float x, float y);
     
     struct Vec3 {
         float x, y, z;

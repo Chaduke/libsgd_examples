@@ -1,0 +1,8 @@
+{
+  "OutputFoldersPerTargetSystem": {
+    "Local Machine": [
+      "..\\..\\..\\..\\..\\dev\\runner_demo_build",
+      "runner_demo\\out\\install\\x64-Release"
+    ]
+  }
+}
