@@ -1,6 +1,6 @@
 # LibSGD Examples
 
-This repository contains C and Python code examples demonstrating the functionality of the LibSGD game library which is currently in development.    
+This repository contains C/C++ and Python code examples demonstrating the functionality of the LibSGD game library which is currently in development.    
  
 To get started with LibSGD, follow the instructions listed here step-by-step.     
 Links to Youtube videos will be in each area to provide additional support.  

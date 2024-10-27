@@ -1,3 +1,6 @@
+#exclude Visual Studio stuff
+.vs
+
 # Exclude compiled executable files
 *.exe
 
@@ -16,8 +19,9 @@ reference
 # Exclude ga.bat
 ga.bat
 
-# Exclude level_editor __pycache__
-level_editor/__pycache__ 
+# Exclude __pycache__
+spooky_shooter/level_editor_python/__pycache__ 
+__pycache__
 
 # Exclude various files and folders from halloween
 spooky_shooter/CMakeCache.txt
@@ -26,9 +30,3 @@ spooky_shooter/CMakeFiles
 spooky_shooter/imgui
 spooky_shooter/src/python_example.py
 runner_demo/imgui
-
-
-
-
-
-

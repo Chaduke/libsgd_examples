@@ -30,10 +30,15 @@ int main()
 	ImGui::StyleColorsLight();
 
 	ImGui_ImplSGD_Init();
+	
 	std::cout << "Loading Scene ..." << std::endl;
-	sgd_LoadScene("level.json");
+	sgd_LoadScene("assets/levels/spooky_shooter_1.json");
 	std::cout << "Scene Loaded ..." << std::endl;
 	
+	SGD_Model pivot = sgd_FindEntityChild(0,"CameraPivot");
+	SGD_Model camera = sgd_GetEntityChild(pivot,0);	
+	
+	/* 
 	SGD_Camera camera = sgd_CreatePerspectiveCamera();
 	sgd_MoveEntity(camera,0,1,0);	
 	
@@ -41,10 +46,11 @@ int main()
 	SGD_Material ground_material = sgd_LoadPBRMaterial("sgd://misc/brownish-grass.jpg");
 	SGD_Mesh ground_mesh = sgd_CreateBoxMesh(-40,-0.1f,-40,40,0,40,ground_material);	
 	sgd_TransformTexCoords(ground_mesh,20,20,0,0);
-	SGD_Model ground = sgd_CreateModel(ground_mesh);
-	float roughness_factor = 0.5;	
+	SGD_Model ground = sgd_CreateModel(ground_mesh);	
+	*/
+	
 	bool loop = true;
-	bool show_demo_window = true;
+	bool show_demo_window = false;
 	
 	std::cout << "Init Finished..." << std::endl;
 	while (loop) 
@@ -53,7 +59,7 @@ int main()
 		if (e == SGD_EVENT_MASK_CLOSE_CLICKED) loop = false; 
 		if (sgd_IsKeyHit(SGD_KEY_ESCAPE)) loop = false;
 		
-		Utils::UnrealMouseInput(camera);
+		Utils::UnrealMouseInput(pivot);
 		sgd_RenderScene();
 		
 		// imgui stuff
