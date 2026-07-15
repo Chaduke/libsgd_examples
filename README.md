@@ -1,5 +1,8 @@
 # LibSGD Examples
 
+Update July 15th 2026 - 
+I've started back working on LibSGD and should have a working fork uploaded soon with some updated examples.  
+
 Update Dec 12, 2024 - 
 I'm very sad to report that the developer of LibSGD Mark Sibly has passed away.  I would love to fork LibSGD and continue working on it but I'm in the middle of working on a game project using the Godot engine, and have committments to fulfill there.  Perhaps in the future I'll have more time to dedicate to this repository and maybe someone else will pickup the reigns and continue working on LibSGD.  I wish I didn't have to sleep, I'd never stop working!  
 
